@@ -1,0 +1,75 @@
+//This to-do file was created to help me study for the lab #5 instruction quiz
+//Nick Abel
+//2/26/2014
+
+Peer Design Review Due: Sunday, March 2, 11 PM
+Peer Design Feedback Due: Wednesday, March 5, 5 PM
+Code Due: Wednesday, March 12, 5 PM
+
+//What to do:
+
+Create a Threaded Binary Search Tree (TBST) data structure. It is threaded because, for each node, any Null left child pointer will point back to its inorder predecessor, and any Null right child pointer
+will point to its inorder successor. These special pointers are called threads.
+
+//Files needed:
+
+//Based on Carrano's original BST code
+
+TBST Class:
+    tbst.h
+    tbst.cpp
+
+Data Class (<KeyType>):
+    nodeData.h
+    nodeData.cpp
+
+//may use <KeyType> of int for development
+
+Test Main:
+    lab5test.cpp
+
+Main:
+    lab5main.cpp
+
+//Design Notes:
+
+Code should traverse:
+    Iteratively - for in-order traversals; using only thread and associated pointers
+    Recursivly - pre-order and post-order traversal
+
+//Code Design:
+    Using doxygen comments and pseudo code (based on style in Carrano), design all classes and major modules.
+    Specify unit tests with example data.
+    Can use diagrams or drawings.
+
+    Submit (online and printed) code design docs for peer review (see above due date)
+
+    Submit peer review feedback online (+1 week later from design doc submit)
+
+//Test and Main Notes
+
+    lab5test.cpp Command Line Arguments:
+        arg 1): Integer: n (<= 52) for number of nodes in TBST, default to n=13
+
+        lab5test should randomly insert number-letter pairs, up to n, into TBST
+
+        lab5test should then make a copy of that tree, and delete all even numbers in copy
+
+        lab5test should then iterativly in-order traverse each tree and display node contents
+        up to seven nodes a line
+
+    lab5main.cpp:
+        lab5main should record in TBST token and token occurrence count from text document
+        tree should be sorted alphabetically left to right
+        Do not store whitespace, tab, newline
+        
+        In increasing frequency order:
+        Display 21 most frequently occurring pairs, 7 per line
+        Display 21 lest frequently occurring pairs, 7 per line
+
+        Display file name and time required to process file
+
+        Command Line Args:
+            accept up to 50 file name, default to hamlet.txt, print cerr if file open error
+            last arg, if DEBUG, print debug, else, only print required output
+            second to last arg, if FILE, must print to file lab5out.txt all tokens pairs, alphabetical order, 7 tokens a line
