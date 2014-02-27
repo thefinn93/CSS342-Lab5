@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   nodeData.h
  * Author: Nick
  *
