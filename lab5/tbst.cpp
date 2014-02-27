@@ -7,12 +7,12 @@
 
 #include "tbst.h"
 
-tbst::tbst() {
+ThreadedBST::ThreadedBST() {
 }
 
-tbst::tbst(const tbst& orig) {
+ThreadedBST::ThreadedBST(const ThreadedBST& copyTBST){ 
 }
 
-tbst::~tbst() {
+ThreadedBST::~ThreadedBST() {
 }
 

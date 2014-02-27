@@ -5,17 +5,57 @@
  * Created on February 26, 2014, 8:11 PM
  */
 
-#ifndef TBST_H
-#define	TBST_H
+#ifndef THREADEDBST_H
+#define	THREADEDBST_H
 
-class tbst {
+#include "nodeData.h"
+
+class ThreadedBST {
 public:
-    tbst();
-    tbst(const tbst& orig);
-    virtual ~tbst();
+    
+    /**
+     * 
+     */
+    ThreadedBST();
+    
+    /**
+     * 
+     * @param rootNode
+     */
+    ThreadedBST(const NodeData& rootNode);
+    
+    /**
+     * 
+     * @param rootNode
+     * @param leftTreePtr
+     * @param rightTreePtr
+     */
+    ThreadedBST(const NodeData& rootNode,
+                const ThreadedBST* leftTreePtr,
+                const ThreadedBST* rightTreePtr);
+    
+    /**
+     * 
+     * @param treeToCopy
+     */
+    ThreadedBST(const ThreadedBST& treeToCopy);
+    
+    /**
+     * 
+     */
+    ~ThreadedBST();
+    
+    //-------Public Methods-------//
+    
+    bool
+    
 private:
-
+    
+    /**
+     */
+    ThreadedBST* rootPtr;
+    
 };
 
-#endif	/* TBST_H */
+#endif	/* THREADEDBST_H */
 
