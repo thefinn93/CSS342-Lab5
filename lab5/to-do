@@ -16,7 +16,7 @@ will point to its inorder successor. These special pointers are called threads.
 //Based on Carrano's original BST code
 
 
-TBST ClassOMGMERGEPROBLEMS:
+TBST Class:
     tbst.h
     tbst.cpp
 
