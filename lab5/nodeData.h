@@ -51,6 +51,9 @@ private:
     int frequency;
     char token[];
     
+    nodeData* leftChildPtr;
+    nodeData* rightChildPtr;
+    
 };
 
 #endif	/* NODEDATA_H */
