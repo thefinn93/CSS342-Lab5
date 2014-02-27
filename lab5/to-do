@@ -35,7 +35,7 @@ Main:
 
 Code should traverse:
     Iteratively - for in-order traversals; using only thread and associated pointers
-    Recursivly - pre-order and post-order traversal
+    Recursively - pre-order and post-order traversal
 
 //Code Design:
     Using doxygen comments and pseudo code (based on style in Carrano), design all classes and major modules.
@@ -55,7 +55,7 @@ Code should traverse:
 
         lab5test should then make a copy of that tree, and delete all even numbers in copy
 
-        lab5test should then iterativly in-order traverse each tree and display node contents
+        lab5test should then iteratively in-order traverse each tree and display node contents
         up to seven nodes a line
 
     lab5main.cpp:
