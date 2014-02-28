@@ -5,16 +5,58 @@
 #ifndef NODEDATA_H
 #define	NODEDATA_H
 
+#include <iostream>
+
+using namespace std;
+
 class NodeData {
     
+    /*-------ostream operators------*/
+    
+    /**
+     * The ostream operator<< overload.
+     * @return A ostream with the token followed by its frequency, separated by a space.
+     */
+    friend ostream& operator<< (ostream&, const NodeData&);
+    
+    
 public:
-
+    /*-------Assignment Operator-------*/
+    
+    /**
+     * The assignment operator= overload.
+     * @param Right
+     * @return Reference to a new NodeData that is a copy of the right side NodeData.
+     */
+    NodeData& operator=(const NodeData& rightData);
+    
+    /*-------Comparison Operators-------*/
+    
+    /**
+     * The equality comparison operator==.
+     * @param rightData Nodedata the the left side Nodedata is being compared to.
+     * @return True if the Nodedata objects contain identical data.
+     */
+    bool operator== (const NodeData& rightData) const;
+    
+    /**
+     * The less than comparison operator<.
+     * @param rightData
+     * @return 
+     */
+    bool operator< (const NodeData& rightData) const;
+    
+    /**
+     * The greater than comparison operator>.
+     * @param rightData
+     * @return 
+     */
+    bool operator> (const NodeData& rightData) const;
     
     /*-------Constructors-------*/
     
     /**
-     * The empty constructor, initializes the node with empty data values
-     * and NULL child pointers
+     * The empty constructor, initializes the node token to "" and frequency to 0.
      */
     NodeData();
 
@@ -30,7 +72,7 @@ public:
      * Copy constructor. Copies the data over, leaving the pointers NULL.
      * @param nodeToCopy
      */
-    NodeData(const NodeData& nodeToCopy);
+    NodeData(const NodeData& nodeDataToCopy);
 
     
     /*-------Public Methods-------*/
@@ -52,9 +94,16 @@ public:
      * @return True if successful.
      */
     
-    
+    /**
+     * Increments frequency up by one.
+     * @return True if increment successful.
+     */
     bool increaseFrequency();
     
+    /**
+     * Decrement frequency down by one. Should not be needed.
+     * @return True if decrement successful.
+     */
     bool decreaseFrequency();
     
 

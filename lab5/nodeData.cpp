@@ -2,9 +2,9 @@
  * 
  */
 
-#include "NodeData.h"
+#include "nodeData.h"
 
-NodeData::NodeData() {
+NodeData::NodeData():token(""), frequency(0) {
 }
 
 NodeData::NodeData(const NodeData& orig) {
