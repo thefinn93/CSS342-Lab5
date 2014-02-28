@@ -22,7 +22,7 @@ class Node {
      * @param left          A pointer to this node's left child (may be NULL)
      * @param right         A pointer to this node's right child (may be NULL)
      */
-    Node(NodeData data, char Node* left, Node* right) {
+    Node(NodeData data, Node* left, Node* right) {
     }
 
     /**
