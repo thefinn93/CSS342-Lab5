@@ -1,18 +1,12 @@
-/* 
- * File:   nodeData.cpp
- * Author: Nick
+/**
  * 
- * Created on February 26, 2014, 8:11 PM
  */
 
-#include "nodeData.h"
+#include "NodeData.h"
 
-nodeData::nodeData() {
+NodeData::NodeData() {
 }
 
-nodeData::nodeData(const nodeData& orig) {
-}
-
-nodeData::~nodeData() {
+NodeData::NodeData(const NodeData& orig) {
 }
 
