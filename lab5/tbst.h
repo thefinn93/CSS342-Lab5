@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   tbst.h
  * Author: Nick
  *
@@ -25,7 +25,9 @@ public:
     ThreadedBST(const NodeData& rootNode);
 
     /**
-     * Initializes a TBST
+     * Initializes a TBST. At this point we have not determined the purpose of
+     * this constructor, but it was in the book and we suspect it may come in
+     * hand later
      * @param rootNode
      * @param leftTreePtr
      * @param rightTreePtr
@@ -35,7 +37,7 @@ public:
                 const ThreadedBST* rightTreePtr);
 
     /**
-     * Creates a copy of another TBST
+     * Creates a deep copy of another TBST.
      * @param treeToCopy    The TBST to copy
      */
     ThreadedBST(const ThreadedBST& treeToCopy);
