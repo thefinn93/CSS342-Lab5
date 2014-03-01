@@ -125,7 +125,6 @@ class ThreadedBST {
         bool goright = false;
 
         while(!done) {
-
             /**
              * A couple of times we may need to go right. These are also the
              * times that we need to visit it.
