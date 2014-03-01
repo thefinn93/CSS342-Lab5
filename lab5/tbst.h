@@ -53,6 +53,64 @@ public:
      */
     bool isEmpty();
 
+    /**
+     * Inserts a token into the tree, and optionaly frequency for that token
+     * @param token The token to insert.
+     * @param frequency (optional) The frequency of this token. Assumed 1 if
+     ** not specified
+     * @return True if successful, false otherwise
+     */
+    bool insert(char[] token, int frequency);
+
+    /**
+     * Inserts a token if it is not already there, otherwise incriments the
+     ** frequency count for that token.
+     * @param token The token to insert or incriment
+     * @return True if successful, false otherwise
+     */
+    bool insertOrIncriment(char[] token);
+
+    /**
+     * Sets the frequency of the specified token, or incriments it if no value
+     * is specified
+     * @param token     The token to set the frequency for.
+     * @param frequency (optional) The new frequency for the token. Incriments
+     ** the value by 1 if not specified
+     * @return True if successful, false otherwise
+     */
+    bool setFrequency(char[] token, int frequency);
+
+    /**
+     * Removes a node from the tree by token.
+     * @param token The token to remove
+     * @return True if successful, false otherwise
+     */
+    bool remove(char[] token);
+
+    /**
+     * Retrieves the frequency of a given token
+     * @param token The token to search for
+     * @return The frequency count of the specified token, or 0 if the token
+     ** is not in this tree
+     */
+    int getFrequency(char[] token);
+
+
+    /**
+     * Checks if the specified token is in this tree
+     * @param token The token to search for
+     * @return True if the token is in this tree, false otherwise
+     */
+    bool exists(char[] token);
+
+    /**
+     * Returns the total number of tokens stored in this tree
+     * @return The number of nodes in this tree.
+     */
+    int getSize();
+
+
+
 private:
     /// The root node
     ThreadedBST* rootPtr;
