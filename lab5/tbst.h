@@ -116,6 +116,13 @@ private:
     /// The root node
     ThreadedBST* rootPtr;
 
+    /**
+     * Preforms an in-order traversal of the tree, executing the passed method
+     *  on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
+     */
+    void inorder(void visit(nodeData&));
+
 };
 
 #endif
