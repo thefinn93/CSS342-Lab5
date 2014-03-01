@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 #ifndef NODEDATA_H
 #define	NODEDATA_H
@@ -25,7 +22,7 @@ public:
     
     /**
      * The assignment operator= overload.
-     * @param Right
+     * @param rightData The NodeData containing the variables values the left side NodeData is being assigned.
      * @return Reference to a new NodeData that is a copy of the right side NodeData.
      */
     NodeData& operator=(const NodeData& rightData);
@@ -34,22 +31,22 @@ public:
     
     /**
      * The equality comparison operator==.
-     * @param rightData Nodedata the the left side Nodedata is being compared to.
-     * @return True if the Nodedata objects contain identical data.
+     * @param rightData The NodeDatat the left side is being compared to.
+     * @return True if the NodeData objects contain identical data.
      */
     bool operator== (const NodeData& rightData) const;
     
     /**
      * The less than comparison operator<.
-     * @param rightData
-     * @return 
+     * @param rightData The nodeData the left side is being compared to.
+     * @return True if the leftDeata character value is less that the rightData character value.
      */
     bool operator< (const NodeData& rightData) const;
     
     /**
      * The greater than comparison operator>.
-     * @param rightData
-     * @return 
+     * @param rightData The NodeData the left side is being compared to.
+     * @return True if leftData character value is greater than rightData character value.
      */
     bool operator> (const NodeData& rightData) const;
     
@@ -66,11 +63,11 @@ public:
      * @param newFrequency  The frequency data to store in the node.
      * @param newToken      The token data to store in the node.
      */
-    NodeData(int newFrequency, char newToken[]);
+    NodeData(char newToken[], int newFrequency);
 
     /**
      * Copy constructor. Copies the data over, leaving the pointers NULL.
-     * @param nodeToCopy
+     * @param nodeDataToCopy The NodeData to copy
      */
     NodeData(const NodeData& nodeDataToCopy);
 
@@ -78,14 +75,14 @@ public:
     /*-------Public Methods-------*/
     
     /**
-     * Node frequency access.
-     * @return The frequency data stored in this node.
+     * NodeData frequency getter.
+     * @return The frequency of the token stored in this node.
      */
     const int getFrequency();
 
     /**
-     * 
-     * @return The token data in this node.
+     * NodeData token getter.
+     * @return The token stored in this node.
      */
     const char getToken();
 
