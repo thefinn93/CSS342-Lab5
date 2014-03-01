@@ -10,7 +10,7 @@
 ThreadedBST::ThreadedBST() {
 }
 
-ThreadedBST::ThreadedBST(const ThreadedBST& copyTBST){ 
+ThreadedBST::ThreadedBST(const ThreadedBST& copyTBST){
 }
 
 ThreadedBST::~ThreadedBST() {
