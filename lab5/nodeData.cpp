@@ -1,9 +1,10 @@
+#ifndef NODEDATA_CPP
+#define NODEDATA_CPP
 
 #include "nodeData.h"
 
 using namespace std;
 
-class
 /*-------ostream operators------*/
 
 /**
@@ -22,7 +23,7 @@ ostream& operator<< (ostream&, const NodeData&) {
  * @return Reference to a new NodeData that is a copy of the right side NodeData.
  */
 NodeData& NodeData::operator=(const NodeData& rightData) {
-    
+    //If rightData
 }
 
 /*-------Comparison Operators-------*/
@@ -127,4 +128,6 @@ bool NodeData::decreaseFrequency() {
 bool NodeData::setToken(char newToken[]) {
 
 }
+
+#endif /* NODEDATA_CPP */
 
