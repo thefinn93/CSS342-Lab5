@@ -78,6 +78,19 @@ class Node {
          */
         bool setData(NodeData data);
 
+        /**
+         * Checks if the right pointer is a "thread", ie. points to a node
+         * that is not a child of this node.
+         * @return True if the right pointer is a thread, false otherwise
+         */
+        bool isRightPtrThread();
+
+        /**
+         * Checks if the left pointer is a "thread", ie. points to a node
+         * that is not a child of this node.
+         * @return True if the left pointer is a thread, false otherwise
+         */
+        bool isLeftPtrThread();
     private:
 
         /// The information to store in this node
@@ -88,6 +101,12 @@ class Node {
 
         /// A pointer to this node's right child
         NodeData* rightChildPtr;
+
+        /// Whether nor not the right pointer is a thread
+        bool leftPtrIsThread;
+
+        /// Whether or not the left pointer is a thread
+        bool leftPtrIsThread;
 
 };
 
