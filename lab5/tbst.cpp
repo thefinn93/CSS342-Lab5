@@ -130,10 +130,10 @@ class ThreadedBST {
              * A couple of times we may need to go right. These are also the
              * times that we need to visit it.
              */
-            if(goright || current->isRightLeaf || current->leftChild == NULL) {
+            if(goright || current->isRightPtrThread() || current->leftChild == NULL) {
                 visit(current&);
                 /// If this is a right leaf, the next node needs to be visited
-                goright = current->isRightLeaf;
+                goright = current->isRightPtrThread();
                 current = current->rightChild;
             } else { /// Otherwise go left
                 current = current->leftChild;
