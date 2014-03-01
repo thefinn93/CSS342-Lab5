@@ -10,6 +10,7 @@
 
 #include "nodeData.h"
 
+/// A threaded binary search tree
 class ThreadedBST {
 public:
 
@@ -117,5 +118,5 @@ private:
 
 };
 
-#endif	/* THREADEDBST_H */
+#endif
 
