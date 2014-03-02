@@ -104,11 +104,6 @@ public:
     int getSize();
 
 
-
-private:
-    /// The root node
-    ThreadedBST* rootPtr;
-
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
      *  on each node as it is visited.
@@ -116,6 +111,24 @@ private:
      */
     void inorder(void visit(nodeData&));
 
+    /**
+     * Preforms a pre-order traversal of the tree, executing the passed method
+     *  on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
+     */
+    void preorder(void visit(nodeData&));
+
+    /**
+     * Preforms a post-order traversal of the tree, executing the passed method
+     *  on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
+     */
+    void postorder(void visit(nodeData&));
+
+
+private:
+    /// The root node
+    ThreadedBST* rootPtr;
 };
 
 #endif

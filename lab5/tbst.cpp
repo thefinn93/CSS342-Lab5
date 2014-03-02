@@ -60,7 +60,7 @@ class ThreadedBST {
      */
     bool insert(char[] token, int frequency) {
     }
-    
+
     /**
      * Inserts a token if it is not already there, otherwise incriments the
      ** frequency count for that token.
@@ -124,7 +124,8 @@ class ThreadedBST {
         // instead of left. This keeps track of that for us.
         bool goright = false;
 
-        while(!done) {
+        bool hasSeenAtLeastOne = false;
+        while(done) {
             /**
              * A couple of times we may need to go right. These are also the
              * times that we need to visit it.
@@ -137,7 +138,61 @@ class ThreadedBST {
             } else { /// Otherwise go left
                 current = current->leftChild;
             }
+            if(currnet == rootPtr && hasSeenAtLeastOne) {
+                done = true;
+            } else {
+                hasSeenAtLeastOne = true;
+            }
         }
+    }
+
+
+    /**
+     * Preforms a pre-order traversal of the tree, executing the passed method
+     *  on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
+     */
+    void preorder(void visit(nodeData&)) {
+        Node* current = rootPtr;
+        // Once we've visited every node, this will be set to true
+        bool done = false;
+
+        // Some times (ie. after following a thread) we need to go right
+        // instead of left. This keeps track of that for us.
+        bool goright = false;
+
+        bool hasSeenAtLeastOne = false;
+        while(done) {
+            /**
+             * A couple of times we may need to go right. These are also the
+             * times that we need to visit it.
+             */
+            if(goright || current->isRightPtrThread() || current->leftChild == NULL) {
+                if(current->isLeftPtrThread()) {
+                    visit(current&);
+                }
+                goright = current->isRightPtrThread();
+                current = current->rightChild;
+            } else { /// Otherwise go left
+                visit(current&);
+                current = current->leftChild;
+            }
+            if(currnet == rootPtr && hasSeenAtLeastOne) {
+                done = true;
+            } else {
+                hasSeenAtLeastOne = true;
+            }
+        }
+
+    }
+
+    /**
+     * Preforms a post-order traversal of the tree, executing the passed method
+     *  on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
+     */
+    void postorder(void visit(nodeData&)) {
+        throw 2; /// exception #2: not yet implimented.
     }
 
 };
