@@ -23,7 +23,7 @@ ostream& operator<< (ostream&, const NodeData&) {
  * @return Reference to a new NodeData that is a copy of the right side NodeData.
  */
 NodeData& NodeData::operator=(const NodeData& rightData) {
-    //If rightData
+    //set variable values of leftData to variable values of rightData
 }
 
 /*-------Comparison Operators-------*/

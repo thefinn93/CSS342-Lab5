@@ -60,7 +60,7 @@ class ThreadedBST {
      */
     bool insert(char[] token, int frequency) {
     }
-
+    
     /**
      * Inserts a token if it is not already there, otherwise incriments the
      ** frequency count for that token.

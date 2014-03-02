@@ -1,10 +1,3 @@
-/*
- * File:   tbst.h
- * Author: Nick
- *
- * Created on February 26, 2014, 8:11 PM
- */
-
 #ifndef THREADEDBST_H
 #define	THREADEDBST_H
 
