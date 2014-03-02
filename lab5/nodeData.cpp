@@ -34,7 +34,8 @@ NodeData& NodeData::operator=(const NodeData& rightData) {
  * @return True if the NodeData objects contain identical data.
  */
 bool NodeData::operator== (const NodeData& rightData) const {
-
+    //if (token is == rightData token & quantity == rightData quantity)
+    //return true, else return false
 }
 
 /**
@@ -43,7 +44,8 @@ bool NodeData::operator== (const NodeData& rightData) const {
  * @return True if the leftDeata character value is less that the rightData character value.
  */
 bool NodeData::operator< (const NodeData& rightData) const {
-
+    //if token ascii value is less than rightData token ascii value
+    //return true, else return false
 }
 
 /**
@@ -52,7 +54,8 @@ bool NodeData::operator< (const NodeData& rightData) const {
  * @return True if leftData character value is greater than rightData character value.
  */
 bool NodeData::operator> (const NodeData& rightData) const{
-
+    //if the token ascii value is greater than the rightData token ascii value
+    //return true, else return false
 }
 
 /*-------Constructors-------*/
