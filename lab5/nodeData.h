@@ -1,3 +1,9 @@
+/**
+ * @author Nicholas Abel, Finn Herzfeld
+ * @date 3/02/2014
+ * 
+ */
+
 #ifndef NODEDATA_H
 #define	NODEDATA_H
 

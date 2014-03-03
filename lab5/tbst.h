@@ -1,3 +1,9 @@
+/**
+ * @author Nicholas Abel, Finn Herzfeld
+ * @date 3/02/2014
+ * 
+ */
+
 #ifndef THREADEDBST_H
 #define	THREADEDBST_H
 
