@@ -4,6 +4,6 @@ Things that need to happen
 tbst
 ----------
 
-* Post-order traversal
+* ~~Post-order traversal~~
 * ~~Insertion~~
 * Deletion
