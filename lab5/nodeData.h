@@ -84,12 +84,7 @@ public:
      * @return The token stored in this node.
      */
     const char getToken();
-
-    /**
-     * Sets the frequency data stored in this node.
-     * @return True if successful.
-     */
-    
+   
     /**
      * Increments frequency up by one.
      * @return True if increment successful.
@@ -108,7 +103,16 @@ public:
      * @return True if successful.
      */
     bool setToken(char newToken[]);
-
+    
+protected:
+    
+    /**
+     * Set the NodeData frequency equal to newFreqency.
+     * @param newFrequency The new frequency of the token in the NodeData.
+     * @return True if new frequency set successfully.
+     */
+    bool setFrequency(int newFrequency);
+    
 private:
     
     /// Stores the frequency data
