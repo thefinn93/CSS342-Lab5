@@ -5,6 +5,6 @@ tbst
 ----------
 
 * Post-order traversal
-* Insertion
+* ~~Insertion~~
 * Deletion
 * Find top *n* nodes by frequency
