@@ -136,8 +136,75 @@ class ThreadedBST {
      * the value by 1 if not specified
      * @return True if successful, false otherwise
      */
-    bool setFrequency(char[] token, int frequency) {
+    bool setFrequency(char[] token, int frequency = 1) {
+        current = root;
+        if(findInTree(token, current)) {
+            return current->setFrequency(frequency);
+        } else { // Token is not in tree
+            return false;
+        }
     }
+
+
+    /**
+     * Finds and removes a node from the tree by token. Returns NULL if no
+     * nodes have that token, otherwise returns a pointer to the removed node.
+     * @param token     The token to search for
+     * @param root      The root node in the tree
+     * @return          The pointer to the removed node, or NULL if it was not
+     * found.
+     */
+    Node* removeHelper(char[] token, Node* root) {
+        if(root != NULL) {
+            Node* current = root;
+            Node* parent = NULL;
+
+            /// Used in findInTree to report whether the current was taken from
+            /// the parent's left or right child. It is of course passed by
+            /// reference
+            bool isLeft = false;
+            if(findInTree(token, current, parent, isLeft)) {
+                if(current->rightLeafIsThread() && current->leftLeafIsThread()) {
+                    /// We're a leaf node, no children to worry about!
+                    if(isLeft) {
+                        parent->leftChild = NULL;
+                    } else {
+                        parent->rightChild = NULL;
+                    }
+                    /// Fixes the threads on the parent that now has a NULL
+                    /// child. Knowledge of current's threads will help.
+                    fixThreads(parent, current);
+                    return current;
+                } else {
+                    // Finds the largest leaf given the root of a tree and removes
+                    // it
+                    replacementToken = findLargestTokenInTree(current);
+                    replacement = remove(replacementToken);
+
+                    if(current->leftChild != NULL) {
+                        replacement->leftChild = current->leftChild;
+                        replacement->leftPtrIsThread(current->isLeftPtrThread());
+                    }
+
+                    if(current->rightChild != NULL) {
+                        replacement->rightChild = current->rightChild;
+                        replacement->rightPtrIsThread(current->isRightPtrThread());
+                    }
+
+                    if(isLeft) {
+                        parent->leftChild = replacement;
+                    } else {
+                        parent->rightChild = replacement;
+                    }
+                    return current;
+                }
+            } else { // token is not in this tree
+                return NULL;
+            }
+
+        } else { // Tree is empty, nothing to remove
+            return NULL;
+        }
 
     /**
      * Removes a node from the tree by token.
@@ -145,6 +212,13 @@ class ThreadedBST {
      * @return True if successful, false otherwise
      */
     bool remove(char[] token) {
+        Node* removed = removeHelper(token, rootPtr);
+        if(removed != NULL) { // Token was found and removed
+            delete removed;
+            return true;
+        } else { // Token not found
+            return false;
+        }
     }
 
     /**

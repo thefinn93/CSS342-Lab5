@@ -141,6 +141,8 @@ private:
 
     Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
 
+    Node* removeHelper(char[] token, Node* root);
+
     int getHeightHelper(Node* subTreePtr);
 };
 
