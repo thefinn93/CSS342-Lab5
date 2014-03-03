@@ -198,158 +198,133 @@ bool NodeData::setFrequency(int newFrequency)
 
 /*Node Test*/
 
-        /*-----------Comparison Operators-----------*/
-  
-        Node& operator==(const Node& right) const;
-
-        Node& operator<(const Node& right) const;
-
-        Node& operator>(const Node& right) const;
-
-        Node& operator=(const Node& right);
-
-        Node();
-        
-        /*
-         * Create Node nodeBlankTest
-         * Test getData
-         * Expected
-         */
-
-        Node(NodeData data, Node* left, Node* right);
-
-        Node(const NodeData& nodeToCopy);
-
-        NodeData getData();
-        
-        /*
-         * 
-         */
-        bool setData(NodeData data);
-
-        bool isRightPtrThread();
-
-        bool isLeftPtrThread();
-
-        void setRightPtrIsThread(bool newvalue);
-
-        void setLefttPtrIsThread(bool newvalue);
+//Node& operator==(const Node& right) const;
+//Node& operator<(const Node& right) const;
+//Node& operator>(const Node& right) const;
+//Node& operator=(const Node& right);
+//Node();
+//Node(NodeData data, Node* left, Node* right);
+//Node(const NodeData& nodeToCopy);
+//NodeData getData();
+//bool setData(NodeData data);
+//bool isRightPtrThread();
+//bool isLeftPtrThread();
+//void setRightPtrIsThread(bool newvalue);
+//void setLefttPtrIsThread(bool newvalue);
         
 /*ThreadedBST Test*/
         
-    ThreadedBST();
-    
-    /*
-     * Create emptyBST ThreadedBST()
-     * 
-     * //Test isEmpty()
-     * Check that it is empty using isEmpty()
-     * Return bool
-     * Expected result: True
-     * 
-     * //Test getSize()
-     * Return int
-     * Expected result: 1
-     * 
-     * //Test insert(char)
-     * Use insert("One")
-     * 
-     * //Test getSize()
-     * Return int
-     * Expected result: 2
-     * 
-     * //Test insert(char, int)
-     * Use insert("Ten", 10)
-     * 
-     * //Test insertOrIncriment("Five")
-     * Use insertOrIncrement("Five")
-     * 
-     * //Test exists("Five")
-     * Return bool
-     * Expected result: True
-     * 
-     * //Test getFrequency("Five")
-     * Return int
-     * Expected result: 1
-     * 
-     * Use insertOrIncrement("Five")
-     * //Test getFrequency("Five")
-     * Return int
-     * Expected result: 2
-     * 
-     * //Test setFrequency("Five", 5)
-     * //Test getFrequency("Five")
-     * Return int
-     * Expected result: 5
-     * 
-     * //Test getSize()
-     * Return int
-     * Expected result: 3
-     * 
-     * //Test remove(
-     * 
-     */
+ThreadedBST();
 
-    /**
-     * A constructor that initializes the TBST from a specified root node
-     * @param rootNode  The node to use as the root when initalizing the tree.
-     */
-    ThreadedBST(const NodeData& rootNode);
+/*
+ * Create emptyBST ThreadedBST()
+ * 
+ * //Test isEmpty()
+ * Check that it is empty using isEmpty()
+ * Return bool
+ * Expected result: True
+ * 
+ * //Test getSize()
+ * Return int
+ * Expected result: 1
+ * 
+ * //Test insert(char)
+ * Use insert("One")
+ * 
+ * //Test isEmpty()
+ * Check that it is empty using isEmpty()
+ * Return bool
+ * Expected result: False
+ * 
+ * //Test getSize()
+ * Return int
+ * Expected result: 2
+ * 
+ * //Test insert(char, int)
+ * Use insert("Ten", 10)
+ * 
+ * //Test insertOrIncriment("Five")
+ * Use insertOrIncrement("Five")
+ * 
+ * //Test exists("Five")
+ * Return bool
+ * Expected result: True
+ * 
+ * //Test getFrequency("Five")
+ * Return int
+ * Expected result: 1
+ * 
+ * Use insertOrIncrement("Five")
+ * //Test getFrequency("Five")
+ * Return int
+ * Expected result: 2
+ * 
+ * //Test setFrequency("Five", 5)
+ * //Test getFrequency("Five")
+ * Return int
+ * Expected result: 5
+ * 
+ * //Test getSize()
+ * Return int
+ * Expected result: 3
+ * 
+ * //Test remove("Five")
+ * //Test exists("Five")
+ * Return bool
+ * Expected result: False
+ * 
+ * //Test getSize()
+ * Return int
+ * Expected result: 2
+ */
 
-    /**
-     * Initializes a TBST. At this point we have not determined the purpose of
-     * this constructor, but it was in the book and we suspect it may come in
-     * hand later
-     * @param rootNode
-     * @param leftTreePtr
-     * @param rightTreePtr
-     */
-    ThreadedBST(const NodeData& rootNode,
-                const ThreadedBST* leftTreePtr,
-                const ThreadedBST* rightTreePtr);
+ThreadedBST(const NodeData& rootNode);
 
-    /**
-     * Creates a deep copy of another TBST.
-     * @param treeToCopy    The TBST to copy
-     */
-    ThreadedBST(const ThreadedBST& treeToCopy);
+/*
+ * //Create NodeData newDataRoot("AROOT")
+ * //Create fromRootBST(newDataRoot)
+ * 
+ * Check it is in the BST
+ * Add "BROOT", "CROOT", and so on to "ZROOT"
+ * 
+ * //Check size is = 26
+ * 
+ * //use inorder() to visit "ZROOT"
+ * //use preorder() to visit "ZROOT"
+ * //use postortder() to visit "ZROOT"
+ * 
+ * //remove "AROOT" through "ZROOT"
+ * //Check size after each removal
+ */
 
-    /**
-     * A destructor. Deletes all the nodes in this tree.
-     */
-    ~ThreadedBST();
+ThreadedBST(const NodeData& rootNode,
+            const ThreadedBST* leftTreePtr,
+            const ThreadedBST* rightTreePtr);
 
-    bool isEmpty();
+ThreadedBST(const ThreadedBST& treeToCopy);
 
-    bool insert(char[] token, int frequency);
+~ThreadedBST();
 
-    bool insertOrIncriment(char[] token);
+bool isEmpty();
 
-    bool setFrequency(char[] token, int frequency);
+bool insert(char[] token, int frequency);
 
-    bool remove(char[] token);
+bool insertOrIncriment(char[] token);
 
-    int getFrequency(char[] token);
+bool setFrequency(char[] token, int frequency);
 
-    bool exists(char[] token);
+bool remove(char[] token);
 
-    int getSize();
+int getFrequency(char[] token);
 
-    void iterativeInorder(void visit(nodeData&));
+bool exists(char[] token);
 
-    void inorder(void visit(nodeData&), Node* treePtr);
+int getSize();
 
-    void preorder(void visit(nodeData&), Node* treePtr);
+void iterativeInorder(void visit(nodeData&));
 
-    void postorder(void visit(nodeData&), Node* treePtr);
+void inorder(void visit(nodeData&), Node* treePtr);
 
+void preorder(void visit(nodeData&), Node* treePtr);
 
-private:
-    ThreadedBST* rootPtr;
-
-    Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
-
-    Node* removeHelper(char[] token, Node* root);
-
-    int getHeightHelper(Node* subTreePtr);        
-
+void postorder(void visit(nodeData&), Node* treePtr);
