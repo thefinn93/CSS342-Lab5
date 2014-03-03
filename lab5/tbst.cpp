@@ -276,7 +276,7 @@ class ThreadedBST {
             } else { /// Otherwise go left
                 current = current->leftChild;
             }
-            if(currnet == rootPtr && hasSeenAtLeastOne) {
+            if(current == rootPtr && hasSeenAtLeastOne) {
                 done = true;
             } else {
                 hasSeenAtLeastOne = true;
