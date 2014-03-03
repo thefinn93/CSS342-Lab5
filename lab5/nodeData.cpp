@@ -40,18 +40,29 @@ NodeData& NodeData::operator=(const NodeData& rightData) {
  * @return True if the NodeData objects contain identical data.
  */
 bool NodeData::operator== (const NodeData& rightData) const {
-    //if (token is == rightData token & quantity == rightData quantity)
-    //return true, else return false
+    for(each character in token) {
+        // Compare the ASCII values of the two characters
+        if(token[character] != rightData->token[character]) {
+            return false;
+        }
+    }
+    return true; // All values are equal.
 }
-
 /**
  * The less than comparison operator<.
  * @param rightData The nodeData the left side is being compared to.
  * @return True if the leftDeata character value is less that the rightData character value.
  */
 bool NodeData::operator< (const NodeData& rightData) const {
-    //if token ascii value is less than rightData token ascii value
-    //return true, else return false
+    for(each character in token) {
+        // Compare the ASCII values of the two characters
+        if(token[character] < rightData->token[character]) {
+            return true;
+        } else if(token[character] > rightData->token[character]) {
+            return false;
+        }
+    }
+    return false; // All values are equal.
 }
 
 /**
@@ -59,9 +70,16 @@ bool NodeData::operator< (const NodeData& rightData) const {
  * @param rightData The NodeData the left side is being compared to.
  * @return True if leftData character value is greater than rightData character value.
  */
-bool NodeData::operator> (const NodeData& rightData) const{
-    //if the token ascii value is greater than the rightData token ascii value
-    //return true, else return false
+bool NodeData::operator> (const NodeData& rightData) const {
+    for(each character in token) {
+        // Compare the ASCII values of the two characters
+        if(token[character] > rightData->token[character]) {
+            return true;
+        } else if(token[character] < rightData->token[character]) {
+            return false;
+        }
+    }
+    return false; // All values are equal.
 }
 
 /*-------Constructors-------*/
