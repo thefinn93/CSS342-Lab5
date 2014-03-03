@@ -49,21 +49,69 @@ class ThreadedBST {
      * @returns True if the three is empty, False otherwise.
      */
     bool isEmpty() {
+        return rootPtr == NULL;
+    }
+
+
+    /**
+     * A helper function to determine the height of a binary tree. Based
+     * heavily on Frank Carrano's sample code.
+     * @param subTreePtr A pointer to the root of the tree to measure
+     * @return The height of the specified tree
+     */
+    int getHeightHelper(Node* subTreePtr) const {
+        if (subTreePtr == nullptr) {
+            return 0;
+        } else {
+            return 1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()),
+                     getHeightHelper(subTreePtr->getRightChildPtr()));
+        }
+    }
+    /**
+     * A private function to insert a new node into the tree. Based heavily on
+     * Frank Carrano's sample code
+     * @param subTreePtr    A pointer to the root of the tree the insert is
+     * being preformed on.
+     * @param newNodePtr    A pointer to the new node that's being inserted.
+     * @return The root pointer.
+     */
+    Node* balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail,
+            Node* newNodePtr) {
+        if (subTreePtr == NULL) {
+            newNodePtr->setLeftTail(leftTail);
+            newNodePtr->setRightTail(rightTail);
+            return newNodePtr;
+        } else {
+            Node* leftPtr = subTreePtr->getLeftChildPtr();
+            Node* rightPtr = subTreePtr->getRightChildPtr();
+            if (getHeightHelper(leftPtr) > getHeightHelper(rightPtr)) {
+                rightPtr = balancedAdd(rightPtr , newNodePtr);
+                subTreePtr->setRightChildPtr(rightPtr);
+            } else {
+                leftPtr = balancedAdd(leftPtr, newNodePtr);
+                subTreePtr->setLeftChildPtr(leftPtr);
+            }
+            return subTreePtr;
+        }
     }
 
     /**
      * Inserts a token into the tree, and optionaly frequency for that token
      * @param token The token to insert.
      * @param frequency (optional) The frequency of this token. Assumed 1 if
-     ** not specified
+     * not specified
      * @return True if successful, false otherwise
      */
     bool insert(char[] token, int frequency) {
+        Node* newNode = new Node(token, frequency);
+        rootPtr = balancedAdd(rootPtr, newNode);
+        return true;
     }
+
 
     /**
      * Inserts a token if it is not already there, otherwise incriments the
-     ** frequency count for that token.
+     * frequency count for that token.
      * @param token The token to insert or incriment
      * @return True if successful, false otherwise
      */
@@ -75,7 +123,7 @@ class ThreadedBST {
      * is specified
      * @param token     The token to set the frequency for.
      * @param frequency (optional) The new frequency for the token. Incriments
-     ** the value by 1 if not specified
+     * the value by 1 if not specified
      * @return True if successful, false otherwise
      */
     bool setFrequency(char[] token, int frequency) {

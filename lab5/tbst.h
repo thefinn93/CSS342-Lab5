@@ -129,6 +129,10 @@ public:
 private:
     /// The root node
     ThreadedBST* rootPtr;
+
+    Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
+
+    int getHeightHelper(Node* subTreePtr);
 };
 
 #endif
