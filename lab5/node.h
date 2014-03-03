@@ -91,6 +91,18 @@ class Node {
          * @return True if the left pointer is a thread, false otherwise
          */
         bool isLeftPtrThread();
+
+        /**
+         * Sets whether or not the right child is a "thread"
+         * @param newvalue The new value
+         */
+        void setRightPtrIsThread(bool newvalue);
+
+        /**
+         * Sets whether or not the left child is a "thread"
+         * @param newvalue The new value
+         */
+        void setLefttPtrIsThread(bool newvalue);
     private:
 
         /// The information to store in this node
