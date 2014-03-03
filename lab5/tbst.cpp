@@ -67,6 +67,7 @@ class ThreadedBST {
                      getHeightHelper(subTreePtr->getRightChildPtr()));
         }
     }
+
     /**
      * A private function to insert a new node into the tree. Based heavily on
      * Frank Carrano's sample code
@@ -78,18 +79,27 @@ class ThreadedBST {
     Node* balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail,
             Node* newNodePtr) {
         if (subTreePtr == NULL) {
-            newNodePtr->setLeftTail(leftTail);
-            newNodePtr->setRightTail(rightTail);
+            newNodePtr->setLeftChildPtr(leftTail);
+            newNodePtr->setLeftPtrIsthread(true);
+
+            newNodePtr->setRightChildPtr(rightTail);
+            newNodePtr->setRightPtrIsThread(true);
             return newNodePtr;
         } else {
             Node* leftPtr = subTreePtr->getLeftChildPtr();
             Node* rightPtr = subTreePtr->getRightChildPtr();
             if (getHeightHelper(leftPtr) > getHeightHelper(rightPtr)) {
-                rightPtr = balancedAdd(rightPtr , newNodePtr);
+                // Go right, set the left tail to the current node.
+                rightPtr = balancedAdd(rightPtr, subTreePtr, rightTail,
+                        newNodePtr);
                 subTreePtr->setRightChildPtr(rightPtr);
+                subTreePtr->setRightPtrIsThread(false);
             } else {
-                leftPtr = balancedAdd(leftPtr, newNodePtr);
+                // Go left, set the right tail to the current node.
+                leftPtr = balancedAdd(leftPtr, leftTail, subTreePtr,
+                        newNodePtr);
                 subTreePtr->setLeftChildPtr(leftPtr);
+                subTreePtr->setLeftPtrIsThread(false);
             }
             return subTreePtr;
         }
