@@ -1,8 +1,18 @@
-/* 
- * File:   lab5test.cpp
- * Author: Nick
- *
- * Created on February 26, 2014, 8:21 PM
+/**
+ * @author Nicholas Abel, Finn Herzfeld
+ * @date 3/02/2014
+ * 
+ */
+
+/**
+ * The main test file for Lab 5.
+ * Contains units tests for the following:
+ * 
+ * NodeData
+ * Node
+ * ThreadedBST
+ * 
+ * 
  */
 
 #include <cstdlib>
@@ -72,9 +82,20 @@ NodeData::NodeData(char newToken[], int newFrequency = 1)
  * If token and frequency match these values, return True
  */
 
-NodeData::NodeData(const NodeData& nodeDataToCopy) {
+NodeData::NodeData(const NodeData& nodeDataToCopy)
 
-}
+/*
+ * Test NodeData(const NodeData& nodeDataToCopy)
+ * Returns a boolean.
+ * 
+ * Create new NodeData(testNodeData) //using previous
+ * 
+ * Check that default values are as expected.
+ * Use NodeData() getters.                              //Also test getters
+ * token: "Test"
+ * frequency: 5
+ * If token and frequency match these values, return True
+ */
 
 
 int main(int argc, char** argv) {

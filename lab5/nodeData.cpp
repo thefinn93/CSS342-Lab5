@@ -1,3 +1,9 @@
+/**
+ * @author Nicholas Abel, Finn Herzfeld
+ * @date 3/02/2014
+ * 
+ */
+
 #ifndef NODEDATA_CPP
 #define NODEDATA_CPP
 

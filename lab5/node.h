@@ -1,3 +1,9 @@
+/**
+ * @author Nicholas Abel, Finn Herzfeld
+ * @date 3/02/2014
+ * 
+ */
+
 #ifndef NODE_H
 #define	NODE_H
 
