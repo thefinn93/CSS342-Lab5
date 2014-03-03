@@ -103,27 +103,36 @@ public:
      */
     int getSize();
 
+    /**
+     * Preforms an in-order traversal of the tree, executing the passed method
+     *  on each node as it is visited. This version uses an iterative algorithm
+     * @param visit(nodeData&)  The function to execute on the node.
+     */
+    void iterativeInorder(void visit(nodeData&));
 
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
      *  on each node as it is visited.
      * @param visit(nodeData&)  The function to execute on the node.
+     * @param treePtr           The root of the tree to traverse
      */
-    void inorder(void visit(nodeData&));
+    void inorder(void visit(nodeData&), Node* treePtr);
 
     /**
      * Preforms a pre-order traversal of the tree, executing the passed method
      *  on each node as it is visited.
      * @param visit(nodeData&)  The function to execute on the node.
+     * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void visit(nodeData&));
+    void preorder(void visit(nodeData&), Node* treePtr);
 
     /**
      * Preforms a post-order traversal of the tree, executing the passed method
      *  on each node as it is visited.
      * @param visit(nodeData&)  The function to execute on the node.
+     * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void visit(nodeData&));
+    void postorder(void visit(nodeData&), Node* treePtr);
 
 
 private:

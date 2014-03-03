@@ -173,7 +173,7 @@ class ThreadedBST {
         return 0;
     }
 
-    void inorder(void visit(nodeData&)) {
+    void iterativeInorder(void visit(NodeData&)) {
         Node* current = rootPtr;
         // Once we've visited every node, this will be set to true
         bool done = false;
@@ -207,53 +207,32 @@ class ThreadedBST {
 
     /**
      * Preforms a pre-order traversal of the tree, executing the passed method
-     *  on each node as it is visited.
+     *  on each node as it is visited. This method is recursive
      * @param visit(nodeData&)  The function to execute on the node.
+     * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void visit(nodeData&)) {
-        Node* current = rootPtr;
-        // Once we've visited every node, this will be set to true
-        bool done = false;
-
-        // Some times (ie. after following a thread) we need to go right
-        // instead of left. This keeps track of that for us.
-        bool goright = false;
-
-        bool hasSeenAtLeastOne = false;
-        while(done) {
-            /**
-             * A couple of times we may need to go right. These are also the
-             * times that we need to visit it.
-             */
-            if(goright || current->isRightPtrThread() || current->leftChild == NULL) {
-                if(current->isLeftPtrThread()) {
-                    visit(current&);
-                }
-                goright = current->isRightPtrThread();
-                current = current->rightChild;
-            } else { /// Otherwise go left
-                visit(current&);
-                current = current->leftChild;
-            }
-            if(currnet == rootPtr && hasSeenAtLeastOne) {
-                done = true;
-            } else {
-                hasSeenAtLeastOne = true;
-            }
+    void preorder(void visit(NodeData&), Node* treePtr) const {
+        if (treePtr != nullptr) {
+            ItemType theItem = treePtr->getItem();
+            visit(theItem);
+            preorder(visit, treePtr->getLeftChildPtr());
+            preorder(visit, treePtr->getRightChildPtr());
         }
-
     }
 
     /**
      * Preforms a post-order traversal of the tree, executing the passed method
      *  on each node as it is visited.
      * @param visit(nodeData&)  The function to execute on the node.
+     * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void visit(nodeData&)) {
-        throw 2; /// exception #2: not yet implimented.
+    void postorder(void visit(NodeData&), Node* treePtr) const {
+        if (treePtr != nullptr) {
+            postorder(visit, treePtr->getLeftChildPtr());
+            postorder(visit, treePtr->getRightChildPtr());
+            ItemType theItem = treePtr->getItem();
+            visit(theItem);
+        }
     }
-
-};
-
 #endif
 
