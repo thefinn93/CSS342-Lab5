@@ -30,8 +30,10 @@ ostream& operator<< (ostream &output, const NodeData &thisNode) {
  * @param rightData The NodeData containing the variables values the left side NodeData is being assigned.
  * @return Reference to a new NodeData that is a copy of the right side NodeData.
  */
-NodeData& NodeData::operator=(const NodeData& rightData) {
-    //set variable values of leftData to variable values of rightData
+NodeData& NodeData::operator=(const NodeData& right) {
+    this->token = right.getToken();
+    this->frequency = right.getFrequency();
+    return *this;
 }
 
 /*-------Comparison Operators-------*/
@@ -133,7 +135,7 @@ NodeData::NodeData(const NodeData& nodeDataToCopy) {
  * NodeData frequency getter.
  * @return The frequency of the token stored in this node.
  */
-const int NodeData::getFrequency() {
+const int NodeData::getFrequency() const {
     //return frequency
 }
 
@@ -141,7 +143,7 @@ const int NodeData::getFrequency() {
  * NodeData token getter.
  * @return The token stored in this node.
  */
-const char NodeData::getToken() {
+const char NodeData::getToken() const {
     //return token
     /*token is a char[], will this work*/
 }

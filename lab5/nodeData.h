@@ -76,13 +76,13 @@ public:
      * NodeData frequency getter.
      * @return The frequency of the token stored in this node.
      */
-    const int getFrequency();
+    const int getFrequency() const;
 
     /**
      * NodeData token getter.
      * @return The token stored in this node.
      */
-    const char getToken();
+    const char getToken() const;
 
     /**
      * Increments frequency up by one.
