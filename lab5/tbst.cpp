@@ -118,7 +118,7 @@ class ThreadedBST {
      * not specified
      * @return True if successful, false otherwise
      */
-    bool insert(char[] token, int frequency) {
+    bool insert(string token, int frequency) {
         Node* newNode = new Node(token, frequency);
         rootPtr = balancedAdd(rootPtr, newNode);
         return true;
@@ -131,7 +131,7 @@ class ThreadedBST {
      * @param token The token to insert or incriment
      * @return True if successful, false otherwise
      */
-    bool insertOrIncriment(char[] token) {
+    bool insertOrIncriment(string token) {
     }
 
     /**
@@ -142,7 +142,7 @@ class ThreadedBST {
      * the value by 1 if not specified
      * @return True if successful, false otherwise
      */
-    bool setFrequency(char[] token, int frequency = 1) {
+    bool setFrequency(string token, int frequency = 1) {
         current = root;
         if(findInTree(token, current)) {
             return current->setFrequency(frequency);
@@ -160,7 +160,7 @@ class ThreadedBST {
      * @return          The pointer to the removed node, or NULL if it was not
      * found.
      */
-    Node* removeHelper(char[] token, Node* root) {
+    Node* removeHelper(string token, Node* root) {
         if(root != NULL) {
             Node* current = root;
             Node* parent = NULL;
@@ -217,7 +217,7 @@ class ThreadedBST {
      * @param token The token to remove
      * @return True if successful, false otherwise
      */
-    bool remove(char[] token) {
+    bool remove(string token) {
         Node* removed = removeHelper(token, rootPtr);
         if(removed != NULL) { // Token was found and removed
             delete removed;
@@ -233,7 +233,7 @@ class ThreadedBST {
      * @return The frequency count of the specified token, or 0 if the token
      ** is not in this tree
      */
-    int getFrequency(char[] token) {
+    int getFrequency(string token) {
     }
 
 
@@ -242,7 +242,7 @@ class ThreadedBST {
      * @param token The token to search for
      * @return True if the token is in this tree, false otherwise
      */
-    bool exists(char[] token) {
+    bool exists(string token) {
     }
 
     /**
@@ -253,7 +253,7 @@ class ThreadedBST {
         return 0;
     }
 
-    void iterativeInorder(void visit(NodeData&)) {
+    void iterativeInorder(void (*visit)(NodeData)) {
         Node* current = rootPtr;
         // Once we've visited every node, this will be set to true
         bool done = false;
@@ -269,7 +269,7 @@ class ThreadedBST {
              * times that we need to visit it.
              */
             if(goright || current->isRightPtrThread() || current->leftChild == NULL) {
-                visit(current&);
+                (*visit)(current&);
                 /// If this is a right leaf, the next node needs to be visited
                 goright = current->isRightPtrThread();
                 current = current->rightChild;
@@ -288,13 +288,13 @@ class ThreadedBST {
     /**
      * Preforms a pre-order traversal of the tree, executing the passed method
      *  on each node as it is visited. This method is recursive
-     * @param visit(nodeData&)  The function to execute on the node.
+     * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void visit(NodeData&), Node* treePtr) const {
+    void preorder(void (*visit)(NodeData&), Node* treePtr) const {
         if (treePtr != NULL) {
             ItemType theItem = treePtr->getItem();
-            visit(theItem);
+            (*visit)(theItem);
             preorder(visit, treePtr->getLeftChildPtr());
             preorder(visit, treePtr->getRightChildPtr());
         }
@@ -303,15 +303,15 @@ class ThreadedBST {
     /**
      * Preforms a post-order traversal of the tree, executing the passed method
      *  on each node as it is visited.
-     * @param visit(nodeData&)  The function to execute on the node.
+     * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void visit(NodeData&), Node* treePtr) const {
+    void postorder(void (*visit)(NodeData&), Node* treePtr) const {
         if (treePtr != NULL) {
             postorder(visit, treePtr->getLeftChildPtr());
             postorder(visit, treePtr->getRightChildPtr());
             ItemType theItem = treePtr->getItem();
-            visit(theItem);
+            (*visit)(theItem);
         }
     }
 #endif
