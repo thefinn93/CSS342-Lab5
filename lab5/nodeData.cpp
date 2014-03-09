@@ -52,7 +52,7 @@ bool NodeData::operator==(const NodeData& right) const {
 }
 /**
  * The less than comparison operator<.
- * @param rightData The nodeData the left side is being compared to.
+ * @param right The nodeData the left side is being compared to.
  * @return True if the leftDeata character value is less that the rightData
  * character value.
  */
@@ -73,23 +73,26 @@ bool NodeData::operator< (const NodeData& right) const {
 }
 
 /**
- * The greater than comparison operator>.
- * @param rightData The NodeData the left side is being compared to.
- * @return True if leftData character value is greater than rightData character value.
+ * The greater than comparison operator.
+ * @param right The nodeData the left side is being compared to.
+ * @return True if the leftDeata character value is less that the rightData
+ * character value.
  */
-bool NodeData::operator> (const NodeData& rightData) const {
-
-    for(each character in token) {
+bool NodeData::operator>(const NodeData& right) const {
+    string rightToken = right.getToken();
+    for(int character = 0; character < (int)token.size() &&
+            character < (int)rightToken.size(); character++) {
         // Compare the ASCII values of the two characters
-        if(token[character] > rightData->token[character]) {
-            return true;
-        } else if(token[character] < rightData->token[character]) {
+        if(token[character] < rightToken[character]) {
             return false;
+        } else if(token[character] > rightToken[character]) {
+            return true;
         }
     }
-    return false; // All values are equal.
+    // At this point, the two strings are equal up to the length of the shorter
+    // one. If right is longer, we say it's greater
+    return token.size() > rightToken.size();
 }
-
 /*-------Constructors-------*/
 
 /**
