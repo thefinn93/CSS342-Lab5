@@ -43,26 +43,11 @@ NodeData& NodeData::operator=(const NodeData& right) {
  * @param rightData The NodeDatat the left side is being compared to.
  * @return True if the NodeData objects contain identical data.
  */
-bool NodeData::operator== (const NodeData& rightData) const {
-    if (token.compare(rightData.token) == 0) {
+bool NodeData::operator==(const NodeData& right) const {
+    if (token.compare(right.getToken()) == 0) {
         return true;    // Tokens match.
     } else {
         return false;   // Tokens do not match.
-    }
-    if (token.size() != rightData.token.size()) {
-        return false;   // Tokens do not match
-    }
-    else {
-        for (int counter = 0; counter < token.size(); counter++) {
-            if (token[counter] != rightData.token[counter]) {
-                return false;   // Tokens do not match
-            }
-        }
-        if (frequency != rightData.frequency) {
-            return false;       // Frequency does not match
-        }
-        else {
-        }
     }
 }
 /**
@@ -143,7 +128,7 @@ const int NodeData::getFrequency() const {
  * NodeData token getter.
  * @return The token stored in this node.
  */
-const char NodeData::getToken() const {
+const string NodeData::getToken() const {
     //return token
     /*token is a char[], will this work*/
 }
