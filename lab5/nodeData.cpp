@@ -17,8 +17,12 @@ using namespace std;
  * The ostream operator<< overload.
  * @return A ostream with the token followed by its frequency, separated by a space.
  */
-ostream& operator<< (ostream&, const NodeData&) {
+ostream& NodeData::operator<< (ostream&, const NodeData&) {
     //Print NodeData token, followed by NodeData frequency
+    
+    for (int counter = 0; counter < this->token.size(); counter++) {
+        cout << ;
+    }
 }
 
 /*-------Assignment Operator-------*/
@@ -40,13 +44,29 @@ NodeData& NodeData::operator=(const NodeData& rightData) {
  * @return True if the NodeData objects contain identical data.
  */
 bool NodeData::operator== (const NodeData& rightData) const {
-    for(each character in token) {
-        // Compare the ASCII values of the two characters
-        if(token[character] != rightData->token[character]) {
-            return false;
+    
+    if (token.compare(rightData.token) == 0) {
+        return true;    // Tokens match.
+    } else {
+        return false;   // Tokens do not match.
+    }
+    
+    if (token.size() != rightData.token.size()) {
+        return false;   // Tokens do not match
+    }
+    else {
+        for (int counter = 0; counter < token.size(); counter++) {
+            if (token[counter] != rightData.token[counter]) {
+                return false;   // Tokens do not match
+            }
+        }
+        if (frequency != rightData.frequency) {
+            return false;       // Frequency does not match
+        }
+        else {
+            
         }
     }
-    return true; // All values are equal.
 }
 /**
  * The less than comparison operator<.

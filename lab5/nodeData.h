@@ -68,7 +68,7 @@ public:
      * @param newFrequency  The frequency data to store in the node.
      * @param newToken      The token data to store in the node.
      */
-    NodeData(char newToken[], int newFrequency);
+    NodeData(string newToken, int newFrequency);
 
     /**
      * Copy constructor. Copies the data over, leaving the pointers NULL.
@@ -108,7 +108,7 @@ public:
      * Sets the token data stored in this node.
      * @return True if successful.
      */
-    bool setToken(char newToken[]);
+    bool setToken(string newToken);
     
 protected:
     
@@ -125,7 +125,7 @@ private:
     int frequency;
 
     /// Stores the token data
-    char token[];
+    string token;
     
 };
 
