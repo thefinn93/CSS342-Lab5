@@ -134,7 +134,7 @@ NodeData::NodeData(const NodeData& nodeDataToCopy) {
  * @return The frequency of the token stored in this node.
  */
 int NodeData::getFrequency() const {
-    //return frequency
+    return frequency;
 }
 
 /**
@@ -142,32 +142,41 @@ int NodeData::getFrequency() const {
  * @return The token stored in this node.
  */
 string NodeData::getToken() const {
-    //return token
-    /*token is a char[], will this work*/
+    return token;
 }
 
 /**
- * Increments frequency up by one.
+ * Increments frequency.
+ * @param amount    The amount to increase the frequency by. Defaults to 1.
  * @return True if increment successful.
  */
-bool NodeData::increaseFrequency() {
-    //set frequency equal to frequency + 1
-    //return True
+bool NodeData::increaseFrequency(int amount = 1) {
+    if(amount > 0) {
+        frequency += amount;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
- * Decrement frequency down by one. Should not be needed.
+ * Decrement frequency. Should not be needed.
+ * @param amount    The amonut to decrease the frequency by. Defaults to 1.
  * @pre Assumes frequency >= 1
  * @return True if decrement successful.
  */
-bool NodeData::decreaseFrequency() {
-    //set frequency equal to frequency - 1
-    //return True
-    /* Note
-     * DecreaseFrequency does no error checking.
-     * Error checking should be done during implementation.
-     * (Is this correct thinking? Not sure)
-     */
+bool NodeData::decreaseFrequency(int amount = 1) {
+    // Cannot end up less than zero
+    if(amount > 0){
+        if(frequency-amount >= 0) {
+            frequency -= amount;
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 
 
@@ -176,9 +185,9 @@ bool NodeData::decreaseFrequency() {
  * @pre Assumes newToken is a valid char[]
  * @return True if successful.
  */
-bool NodeData::setToken(char newToken[]) {
-    //set token equal to newToken
-    //return True
+bool NodeData::setToken(string newToken) {
+    token = newToken;
+    return true;
 }
 
 /**
@@ -188,13 +197,12 @@ bool NodeData::setToken(char newToken[]) {
  * @return True if new frequency set successfully.
  */
 bool NodeData::setFrequency(int newFrequency) {
-    //set frequency equal to newFrequency
-    //return True
-    /* Note
-     * setFrequency does no error checking.
-     * Error checking should be done during implementation.
-     * (Is this correct thinking? Not sure)
-     */
+    if(newFrequency >= 0) {
+        frequency = newFrequency;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 #endif /* NODEDATA_CPP */

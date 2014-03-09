@@ -86,16 +86,18 @@ public:
     string getToken() const;
 
     /**
-     * Increments frequency up by one.
+     * Increments frequency.
+     * @param amount    The amount to increase the frequency by. Defaults to 1
      * @return True if increment successful.
      */
-    bool increaseFrequency();
+    bool increaseFrequency(int amount);
 
     /**
-     * Decrement frequency down by one. Should not be needed.
+     * Decrement frequency. Should not be needed.
+     * @param amount    The amount to decrease the frequency by. Defaults to 1.
      * @return True if decrement successful.
      */
-    bool decreaseFrequency();
+    bool decreaseFrequency(int amount);
 
 
     /**
