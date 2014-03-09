@@ -66,7 +66,7 @@ class ThreadedBST {
      * @return The height of the specified tree
      */
     int getHeightHelper(Node* subTreePtr) const {
-        if (subTreePtr == nullptr) {
+        if (subTreePtr == NULL) {
             return 0;
         } else {
             return 1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()),
@@ -292,7 +292,7 @@ class ThreadedBST {
      * @param treePtr           The root of the tree to traverse
      */
     void preorder(void visit(NodeData&), Node* treePtr) const {
-        if (treePtr != nullptr) {
+        if (treePtr != NULL) {
             ItemType theItem = treePtr->getItem();
             visit(theItem);
             preorder(visit, treePtr->getLeftChildPtr());
@@ -307,7 +307,7 @@ class ThreadedBST {
      * @param treePtr           The root of the tree to traverse
      */
     void postorder(void visit(NodeData&), Node* treePtr) const {
-        if (treePtr != nullptr) {
+        if (treePtr != NULL) {
             postorder(visit, treePtr->getLeftChildPtr());
             postorder(visit, treePtr->getRightChildPtr());
             ItemType theItem = treePtr->getItem();
