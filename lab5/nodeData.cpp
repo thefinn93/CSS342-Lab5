@@ -1,7 +1,7 @@
 /**
  * @author Nicholas Abel, Finn Herzfeld
  * @date 3/02/2014
- * 
+ *
  */
 
 #ifndef NODEDATA_CPP
@@ -17,12 +17,10 @@ using namespace std;
  * The ostream operator<< overload.
  * @return A ostream with the token followed by its frequency, separated by a space.
  */
-ostream& NodeData::operator<< (ostream&, const NodeData&) {
+ostream& operator<< (ostream &output, const NodeData &thisNode) {
     //Print NodeData token, followed by NodeData frequency
-    
-    for (int counter = 0; counter < this->token.size(); counter++) {
-        cout << ;
-    }
+    output << thisNode.token << "\t" << thisNode.frequency;
+    return output;
 }
 
 /*-------Assignment Operator-------*/
@@ -44,13 +42,11 @@ NodeData& NodeData::operator=(const NodeData& rightData) {
  * @return True if the NodeData objects contain identical data.
  */
 bool NodeData::operator== (const NodeData& rightData) const {
-    
     if (token.compare(rightData.token) == 0) {
         return true;    // Tokens match.
     } else {
         return false;   // Tokens do not match.
     }
-    
     if (token.size() != rightData.token.size()) {
         return false;   // Tokens do not match
     }
@@ -64,7 +60,6 @@ bool NodeData::operator== (const NodeData& rightData) const {
             return false;       // Frequency does not match
         }
         else {
-            
         }
     }
 }
