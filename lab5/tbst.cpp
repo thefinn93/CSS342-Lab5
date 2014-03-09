@@ -4,24 +4,30 @@
  * 
  */
 
-#ifndef THREADEDBST
-#define	THREADEDBST
+#ifndef THREADEDBST_CPP
+#define	THREADEDBST_CPP
 
 #include "tbst.h"
+
+using namespace std;
 
 /// A threaded binary search tree
 class ThreadedBST {
     /**
      * A standard constructor, initializes an empty TBST.
      */
-    ThreadedBST() {
+    ThreadedBST::ThreadedBST() {
+        rootPtr = NULL;
+    }
     }
 
     /**
      * A constructor that initializes the TBST from a specified root node
      * @param rootNode  The node to use as the root when initalizing the tree.
      */
-    ThreadedBST(const NodeData& rootNode) {
+    ThreadedBST::ThreadedBST(const Node& rootNode) {
+        rootPtr = rootNode;
+    }
     }
 
     /**
@@ -32,7 +38,7 @@ class ThreadedBST {
      * @param leftTreePtr
      * @param rightTreePtr
      */
-    ThreadedBST(const NodeData& rootNode,
+    ThreadedBST::ThreadedBST(const NodeData& rootNode,
                 const ThreadedBST* leftTreePtr,
                 const ThreadedBST* rightTreePtr) {
         /// Why would we use this?
@@ -42,19 +48,19 @@ class ThreadedBST {
      * Creates a deep copy of another TBST.
      * @param treeToCopy    The TBST to copy
      */
-    ThreadedBST(const ThreadedBST& treeToCopy) {
+    ThreadedBST::ThreadedBST(const ThreadedBST& treeToCopy) {
     }
 
     /**
      * A destructor. Deletes all the nodes in this tree.
      */
-    ~ThreadedBST() {
+    ThreadedBST::~ThreadedBST() {
     }
 
     /**
      * @returns True if the three is empty, False otherwise.
      */
-    bool isEmpty() {
+    bool ThreadedBST::ThreadedBST::isEmpty() {
         return rootPtr == NULL;
     }
 
@@ -65,7 +71,7 @@ class ThreadedBST {
      * @param subTreePtr A pointer to the root of the tree to measure
      * @return The height of the specified tree
      */
-    int getHeightHelper(Node* subTreePtr) const {
+    int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
         if (subTreePtr == NULL) {
             return 0;
         } else {
@@ -82,7 +88,7 @@ class ThreadedBST {
      * @param newNodePtr    A pointer to the new node that's being inserted.
      * @return The root pointer.
      */
-    Node* balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail,
+    Node* ThreadedBST::balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail,
             Node* newNodePtr) {
         if (subTreePtr == NULL) {
             newNodePtr->setLeftChildPtr(leftTail);
@@ -118,7 +124,7 @@ class ThreadedBST {
      * not specified
      * @return True if successful, false otherwise
      */
-    bool insert(string token, int frequency) {
+    bool ThreadedBST::insert(string token, int frequency) {
         Node* newNode = new Node(token, frequency);
         rootPtr = balancedAdd(rootPtr, newNode);
         return true;
@@ -131,7 +137,7 @@ class ThreadedBST {
      * @param token The token to insert or incriment
      * @return True if successful, false otherwise
      */
-    bool insertOrIncriment(string token) {
+    bool ThreadedBST::insertOrIncriment(string token) {
     }
 
     /**
@@ -142,7 +148,7 @@ class ThreadedBST {
      * the value by 1 if not specified
      * @return True if successful, false otherwise
      */
-    bool setFrequency(string token, int frequency = 1) {
+    bool ThreadedBST::setFrequency(string token, int frequency = 1) {
         current = root;
         if(findInTree(token, current)) {
             return current->setFrequency(frequency);
@@ -160,7 +166,7 @@ class ThreadedBST {
      * @return          The pointer to the removed node, or NULL if it was not
      * found.
      */
-    Node* removeHelper(string token, Node* root) {
+    Node* ThreadedBST::removeHelper(string token, Node* root) {
         if(root != NULL) {
             Node* current = root;
             Node* parent = NULL;
@@ -217,7 +223,7 @@ class ThreadedBST {
      * @param token The token to remove
      * @return True if successful, false otherwise
      */
-    bool remove(string token) {
+    bool ThreadedBST::remove(string token) {
         Node* removed = removeHelper(token, rootPtr);
         if(removed != NULL) { // Token was found and removed
             delete removed;
@@ -233,7 +239,7 @@ class ThreadedBST {
      * @return The frequency count of the specified token, or 0 if the token
      ** is not in this tree
      */
-    int getFrequency(string token) {
+    int ThreadedBST::getFrequency(string token) {
     }
 
 
@@ -242,7 +248,7 @@ class ThreadedBST {
      * @param token The token to search for
      * @return True if the token is in this tree, false otherwise
      */
-    bool exists(string token) {
+    bool ThreadedBST::exists(string token) {
     }
 
     /**
@@ -253,7 +259,7 @@ class ThreadedBST {
         return 0;
     }
 
-    void iterativeInorder(void (*visit)(NodeData)) {
+    void ThreadedBST::iterativeInorder(void (*visit)(NodeData)) {
         Node* current = rootPtr;
         // Once we've visited every node, this will be set to true
         bool done = false;
@@ -291,7 +297,7 @@ class ThreadedBST {
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void (*visit)(NodeData&), Node* treePtr) const {
+    void ThreadedBST::preorder(void (*visit)(NodeData&), Node* treePtr) const {
         if (treePtr != NULL) {
             ItemType theItem = treePtr->getItem();
             (*visit)(theItem);
@@ -306,7 +312,7 @@ class ThreadedBST {
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void (*visit)(NodeData&), Node* treePtr) const {
+    void ThreadedBST::postorder(void (*visit)(NodeData&), Node* treePtr) const {
         if (treePtr != NULL) {
             postorder(visit, treePtr->getLeftChildPtr());
             postorder(visit, treePtr->getRightChildPtr());

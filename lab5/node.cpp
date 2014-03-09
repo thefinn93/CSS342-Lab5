@@ -4,10 +4,12 @@
  * 
  */
 
-#ifndef NODE
-#define	NODE
+#ifndef NODE_CPP
+#define	NODE_CPP
 
 #include "node.h"
+
+using namespace std;
 
 /**
  * A node in a ThreadedBST

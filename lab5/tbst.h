@@ -11,6 +11,7 @@
 
 /// A threaded binary search tree
 class ThreadedBST {
+    
 public:
 
     /**
@@ -20,9 +21,9 @@ public:
 
     /**
      * A constructor that initializes the TBST from a specified root node
-     * @param rootNode  The node to use as the root when initalizing the tree.
+     * @param rootNode  The node to use as the root when intitializing the tree.
      */
-    ThreadedBST(const NodeData& rootNode);
+    ThreadedBST(const Node& rootNode);
 
     /**
      * Initializes a TBST. At this point we have not determined the purpose of
@@ -32,7 +33,7 @@ public:
      * @param leftTreePtr
      * @param rightTreePtr
      */
-    ThreadedBST(const NodeData& rootNode,
+    ThreadedBST(const Node& rootNode,
                 const ThreadedBST* leftTreePtr,
                 const ThreadedBST* rightTreePtr);
 
@@ -114,7 +115,7 @@ public:
      *  on each node as it is visited. This version uses an iterative algorithm
      * @param (*visit)(nodeData&)  The function to execute on the node.
      */
-    void iterativeInorder(void (*visit) (nodeData));
+    void iterativeInorder(void visit(string&));
 
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
@@ -122,7 +123,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void inorder(void (*visit)(nodeData&), Node* treePtr);
+    void inorder(void visit(string&), Node* newRootPtr);
 
     /**
      * Preforms a pre-order traversal of the tree, executing the passed method
@@ -130,7 +131,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void (*visit)(nodeData&), Node* treePtr);
+    void preorder(void vist(string&), Node* newRootPtr);
 
     /**
      * Preforms a post-order traversal of the tree, executing the passed method
@@ -138,12 +139,15 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void (*visit)(nodeData&), Node* treePtr);
-
+    void postorder(void visit(string&), Node* newRootPtr);
+    
+    void preorderStart(void visit(string&) const);
+    void inorderStart(void visit(string&) const);
+    void postorderStart(void vist(string&) const);
 
 private:
     /// The root node
-    ThreadedBST* rootPtr;
+    Node* rootPtr;
 
     Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
 
