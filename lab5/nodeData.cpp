@@ -9,6 +9,8 @@
 
 #include "nodeData.h"
 
+#include <iostream>
+
 using namespace std;
 
 /*-------ostream operators------*/
@@ -98,7 +100,9 @@ bool NodeData::operator>(const NodeData& right) const {
 /**
  * The empty constructor, initializes the node token to "" and frequency to 0.
  */
-NodeData::NodeData():token(""), frequency(0) {
+NodeData::NodeData() {
+    token = "";
+    frequency = 0;
 }
 
 /**
@@ -107,9 +111,9 @@ NodeData::NodeData():token(""), frequency(0) {
  * @param newFrequency  The frequency data to store in the node.
  * @param newToken      The token data to store in the node.
  */
-NodeData::NodeData(char newToken[], int newFrequency = 1) {
-    //set token to newToken[]
-    //set frequency to newFrequency
+NodeData::NodeData(string newToken, int newFrequency = 1) {
+    token = newToken;
+    frequency = newFrequency;
 }
 
 /**
@@ -129,7 +133,7 @@ NodeData::NodeData(const NodeData& nodeDataToCopy) {
  * NodeData frequency getter.
  * @return The frequency of the token stored in this node.
  */
-const int NodeData::getFrequency() const {
+int NodeData::getFrequency() const {
     //return frequency
 }
 
@@ -137,7 +141,7 @@ const int NodeData::getFrequency() const {
  * NodeData token getter.
  * @return The token stored in this node.
  */
-const string NodeData::getToken() const {
+string NodeData::getToken() const {
     //return token
     /*token is a char[], will this work*/
 }
