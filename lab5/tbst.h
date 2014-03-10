@@ -8,6 +8,9 @@
 #define	THREADEDBST_H
 
 #include "nodeData.h"
+#include "node.h"
+
+using namespace std;
 
 /// A threaded binary search tree
 class ThreadedBST {
@@ -144,16 +147,17 @@ public:
     void preorderStart(void visit(string&) const);
     void inorderStart(void visit(string&) const);
     void postorderStart(void vist(string&) const);
-
+    
+protected:
+    
+    int getHeightHelper(Node* subTreePtr) const;
+    Node* removeHelper(string token, Node* root);
+    Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
+        
 private:
     /// The root node
     Node* rootPtr;
-
-    Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
-
-    Node* removeHelper(string token, Node* root);
-
-    int getHeightHelper(Node* subTreePtr);
+    
 };
 
 #endif

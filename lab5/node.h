@@ -109,6 +109,14 @@ class Node {
          * @param newvalue The new value
          */
         void setLefttPtrIsThread(bool newvalue);
+        
+        Node* getRightChildPtr() {
+            return rightChildPtr;
+        }
+        
+        Node* getLeftChildPtr() {
+            return leftChildPtr;
+        }
     private:
 
         /// The information to store in this node

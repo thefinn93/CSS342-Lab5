@@ -12,14 +12,14 @@
 using namespace std;
 
 /// A threaded binary search tree
-class ThreadedBST {
+
     /**
      * A standard constructor, initializes an empty TBST.
      */
     ThreadedBST::ThreadedBST() {
         rootPtr = NULL;
     }
-    }
+    
 
     /**
      * A constructor that initializes the TBST from a specified root node
@@ -27,9 +27,8 @@ class ThreadedBST {
      */
     ThreadedBST::ThreadedBST(const Node& rootNode) {
         rootPtr = rootNode;
-    }
-    }
-
+    }    
+    
     /**
      * Initializes a TBST. At this point we have not determined the purpose of
      * this constructor, but it was in the book and we suspect it may come in
@@ -38,7 +37,7 @@ class ThreadedBST {
      * @param leftTreePtr
      * @param rightTreePtr
      */
-    ThreadedBST::ThreadedBST(const NodeData& rootNode,
+    ThreadedBST::ThreadedBST(const Node& rootNode,
                 const ThreadedBST* leftTreePtr,
                 const ThreadedBST* rightTreePtr) {
         /// Why would we use this?
@@ -60,7 +59,7 @@ class ThreadedBST {
     /**
      * @returns True if the three is empty, False otherwise.
      */
-    bool ThreadedBST::ThreadedBST::isEmpty() {
+    bool ThreadedBST::isEmpty() {
         return rootPtr == NULL;
     }
 
@@ -73,7 +72,7 @@ class ThreadedBST {
      */
     int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
         if (subTreePtr == NULL) {
-            return 0;
+            return 0;   //Height of zero
         } else {
             return 1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()),
                      getHeightHelper(subTreePtr->getRightChildPtr()));
@@ -88,8 +87,7 @@ class ThreadedBST {
      * @param newNodePtr    A pointer to the new node that's being inserted.
      * @return The root pointer.
      */
-    Node* ThreadedBST::balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail,
-            Node* newNodePtr) {
+    Node* ThreadedBST::balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail,Node* newNodePtr) {
         if (subTreePtr == NULL) {
             newNodePtr->setLeftChildPtr(leftTail);
             newNodePtr->setLeftPtrIsthread(true);
@@ -125,9 +123,12 @@ class ThreadedBST {
      * @return True if successful, false otherwise
      */
     bool ThreadedBST::insert(string token, int frequency) {
+        
+        //Will this newNode be destroyed at end of insert
         Node* newNode = new Node(token, frequency);
         rootPtr = balancedAdd(rootPtr, newNode);
         return true;
+        
     }
 
 
@@ -138,6 +139,7 @@ class ThreadedBST {
      * @return True if successful, false otherwise
      */
     bool ThreadedBST::insertOrIncriment(string token) {
+        
     }
 
     /**
@@ -217,6 +219,7 @@ class ThreadedBST {
         } else { // Tree is empty, nothing to remove
             return NULL;
         }
+    }
 
     /**
      * Removes a node from the tree by token.
@@ -320,5 +323,7 @@ class ThreadedBST {
             (*visit)(theItem);
         }
     }
+
+    
 #endif
 
