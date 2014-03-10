@@ -66,10 +66,17 @@ public:
     NodeData(string newToken, int newFrequency);
 
     /**
+     * A token-only constructor.
+     * @param newToken      The token data to store in the node.
+     */
+    NodeData(string newToken);
+
+    /**
      * Copy constructor. Copies the data over, leaving the pointers NULL.
      * @param nodeDataToCopy The NodeData to copy
      */
-    NodeData(const NodeData& nodeDataToCopy);
+    NodeData(NodeData const &nodeDataToCopy);
+
 
     /*-------Public Methods-------*/
 
@@ -122,5 +129,6 @@ private:
     string token;
 };
 
+#include "nodeData.cpp"
 #endif	/* NODEDATA_H */
 

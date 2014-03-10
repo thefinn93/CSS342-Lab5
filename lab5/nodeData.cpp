@@ -111,19 +111,27 @@ NodeData::NodeData() {
  * @param newFrequency  The frequency data to store in the node.
  * @param newToken      The token data to store in the node.
  */
-NodeData::NodeData(string newToken, int newFrequency = 1) {
+NodeData::NodeData(string newToken, int newFrequency) {
     token = newToken;
     frequency = newFrequency;
 }
 
 /**
- * Copy constructor. Copies the data over, leaving the pointers NULL.
- * @param nodeDataToCopy The NodeData to copy
+ * A token-only constructor, which initializes the freqency to 1.
+ * @param newToken  The token to store in the node
  */
-NodeData::NodeData(const NodeData& nodeDataToCopy) {
-    //using getters
-    //set token to nodeDataToCopy token
-    //set frequency to nodeDataToCopy frequency
+NodeData::NodeData(string newToken) {
+    token = newToken;
+    frequency = 1;
+}
+
+/**
+ * Copy constructor. Copies the data over, leaving the pointers NULL.
+ * @param toCopy The NodeData to copy
+ */
+NodeData::NodeData(NodeData const &toCopy) {
+    frequency = toCopy.getFrequency();
+    token = toCopy.getToken();
 }
 
 
