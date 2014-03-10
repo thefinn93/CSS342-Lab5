@@ -117,6 +117,14 @@ class Node {
         Node* getLeftChildPtr() {
             return leftChildPtr;
         }
+        
+        void setRightPtr(Node* newRightNode) {
+            rightChildPtr = newRightNode;
+        }
+        
+        void setLeftPtr(Node* newRightNode) {
+            leftChildPtr = newRightNode;
+        }        
     private:
 
         /// The information to store in this node
