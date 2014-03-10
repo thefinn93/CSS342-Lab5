@@ -27,7 +27,7 @@ using namespace std;
      */
     ThreadedBST::ThreadedBST(const Node& rootNode) {
         rootPtr = rootNode;
-    }    
+    }
     
     /**
      * Initializes a TBST. At this point we have not determined the purpose of
@@ -48,12 +48,14 @@ using namespace std;
      * @param treeToCopy    The TBST to copy
      */
     ThreadedBST::ThreadedBST(const ThreadedBST& treeToCopy) {
+        rootPtr = copyTree(treeToCopy.rootPtr);
     }
 
     /**
      * A destructor. Deletes all the nodes in this tree.
      */
     ThreadedBST::~ThreadedBST() {
+        destroyTree(rootPtr);
     }
 
     /**
@@ -262,7 +264,7 @@ using namespace std;
         return 0;
     }
 
-    void ThreadedBST::iterativeInorder(void (*visit)(NodeData)) {
+    void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
         Node* current = rootPtr;
         // Once we've visited every node, this will be set to true
         bool done = false;
@@ -300,7 +302,7 @@ using namespace std;
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void ThreadedBST::preorder(void (*visit)(NodeData&), Node* treePtr) const {
+    void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
         if (treePtr != NULL) {
             ItemType theItem = treePtr->getItem();
             (*visit)(theItem);
@@ -315,12 +317,40 @@ using namespace std;
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void ThreadedBST::postorder(void (*visit)(NodeData&), Node* treePtr) const {
+    void ThreadedBST::postorder(void visit(NodeData*), Node* treePtr) const {
         if (treePtr != NULL) {
             postorder(visit, treePtr->getLeftChildPtr());
             postorder(visit, treePtr->getRightChildPtr());
             ItemType theItem = treePtr->getItem();
             (*visit)(theItem);
+        }
+    }
+    
+    Node* copyTree(const Node* treeRootPrt) const{
+        Node* newRootPtr = NULL;
+        if (treeRootPrt != NULL) {
+            
+            ///the top root ptr is a new node with the copied data
+            newRootPtr = new Node(treeRootPrt->getData(), NULL, NULL);
+            
+            ///Recursively call the copy tree for each child ptr
+            newRootPtr.setLeftPtr(copyTree(treeRootPrt->getLeftChildPtr()));
+            newRootPtr.setRightPtr(copyTree(treeRootPrt->getRightChildPtr()));
+        }
+        
+        //
+        return newRootPtr;
+    }
+    
+    void destroyTree(const Node* treeRootPtr) {
+        if (treeRootPtr != NULL) {
+            
+            /// Recursively destroy each sub tree
+            destroyTree(treeRootPtr->getLeftChildPtr());
+            destroyTree(treeRootPtr->getRightChildPtr());
+            
+            /// Delete the root node
+            delete treeRootPtr;
         }
     }
 

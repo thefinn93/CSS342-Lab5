@@ -17,6 +17,9 @@ class ThreadedBST {
     
 public:
 
+    
+    /*---------CONTSTRUCTORS----------*/
+    
     /**
      * A standard constructor, initializes an empty TBST.
      */
@@ -51,6 +54,8 @@ public:
      */
     ~ThreadedBST();
 
+    
+    
     //-------Public Methods-------//
     /**
      * @returns True if the three is empty, False otherwise.
@@ -118,7 +123,7 @@ public:
      *  on each node as it is visited. This version uses an iterative algorithm
      * @param (*visit)(nodeData&)  The function to execute on the node.
      */
-    void iterativeInorder(void visit(string&));
+    void iterativeInorder(void visit(NodeData*));
 
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
@@ -126,7 +131,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void inorder(void visit(string&), Node* newRootPtr);
+    void inorder(void visit(NodeData*), Node* newRootPtr);
 
     /**
      * Preforms a pre-order traversal of the tree, executing the passed method
@@ -134,7 +139,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void vist(string&), Node* newRootPtr);
+    void preorder(void vist(NodeData*), Node* newRootPtr);
 
     /**
      * Preforms a post-order traversal of the tree, executing the passed method
@@ -142,14 +147,16 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void visit(string&), Node* newRootPtr);
+    void postorder(void visit(NodeData*), Node* newRootPtr);
     
-    void preorderStart(void visit(string&) const);
-    void inorderStart(void visit(string&) const);
-    void postorderStart(void vist(string&) const);
+    void preorderStart(void visit(NodeData*) const);
+    void inorderStart(void visit(NodeData*) const);
+    void postorderStart(void vist(NodeData*) const);
     
 protected:
     
+    Node* copyTree(const Node* treeRootPrt) const;
+    void destroyTree(const Node* treeRootPtr);
     int getHeightHelper(Node* subTreePtr) const;
     Node* removeHelper(string token, Node* root);
     Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);

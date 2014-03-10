@@ -14,12 +14,12 @@ using namespace std;
 /**
  * A node in a ThreadedBST
  */
-class Node {
+
     /**
      * The empty constructor, initializes the node with empty data values
      * and NULL child pointers
      */
-    Node() {
+    Node::Node() {
 
     }
 
@@ -30,20 +30,21 @@ class Node {
      * @param left          A pointer to this node's left child (may be NULL)
      * @param right         A pointer to this node's right child (may be NULL)
      */
-    Node(NodeData data, Node* left, Node* right) {
+    Node::Node(NodeData data, Node* left, Node* right) {
     }
 
     /**
      * Copy constructor. Copies the data over, leaving the pointers NULL.
      * @param nodeToCopy
      */
-    Node(const NodeData& nodeToCopy) {
+    Node::Node(const NodeData& nodeToCopy) {
     }
 
     /**
      * @return The data stored in this node.
      */
-    NodeData getData() {
+    NodeData Node::getData() {
+        return data;
     }
 
     /**
@@ -51,8 +52,8 @@ class Node {
      * @param data  The data to store in this node
      * @return True if successful.
      */
-    bool setData(NodeData data) {
+    bool Node::setData(NodeData data) {
     }
-};
+
 
 #endif /* NODE */
