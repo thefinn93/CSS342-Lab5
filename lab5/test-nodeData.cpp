@@ -149,10 +149,26 @@ void testSetters() {
     cout << endl;
 }
 
+void testStreams() {
+    cout << "================= Stream Tests ==================" << endl;
+    NodeData streamMe = NodeData("test", 3);
+    cout.width(WIDTH);
+    cout << left << "Testing ostream:";
+    cout << streamMe << endl;
+    for(int positionOnLine = 0; positionOnLine < WIDTH; positionOnLine++) {
+        /// Print the proper number of spaces to make this line up with
+        /// the line above
+        cout << " ";
+    }
+    cout << "test (3)" << endl;
+}
+
+
 int main(int argc, char** argv) {
     credits();
     testConstructors();
     testGetters();
     testSetters();
+    testStreams();
     return 0;
 }
