@@ -71,7 +71,7 @@ public:
      * Copy constructor. Copies the data over, leaving the pointers NULL.
      * @param nodeToCopy
      */
-    Node(const NodeData& nodeToCopy);
+    Node(const Node& nodeToCopy);
 
     /**
      * Retrieves the data element stored in this Node.
@@ -84,7 +84,7 @@ public:
      * @param data  The data to store in this node
      * @return True if successful.
      */
-    bool setData(NodeData data);
+    bool setData(const NodeData& newData);
 
     /**
      * Checks if the right pointer is a "thread", ie. points to a node

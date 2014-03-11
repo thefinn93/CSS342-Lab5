@@ -113,7 +113,6 @@ public:
      */
     bool setToken(string newToken);
 
-protected:
     /**
      * Set the NodeData frequency equal to newFreqency.
      * @param newFrequency The new frequency of the token in the NodeData.

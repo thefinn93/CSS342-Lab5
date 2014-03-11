@@ -56,7 +56,7 @@ Node& Node::operator>(const Node& right) const {
  * @return This node.
  */
 Node& Node::operator=(const Node& right) {
-    data = 
+    data = right.getData();
 }
 
 
@@ -92,8 +92,12 @@ Node::Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread, bo
  * Copy constructor. Copies the data over, leaving the pointers NULL.
  * @param nodeToCopy
  */
-Node::Node(const NodeData& nodeToCopy) {
-    
+Node::Node(const Node& nodeToCopy) {
+    data = nodeToCopy.getData();
+    leftChildPtr = NULL;
+    rightChildPtr = NULL;
+    leftPtrIsThread = false;
+    rightPtrIsThread = false;    
 }
 
 /**
@@ -108,8 +112,9 @@ NodeData Node::getData() {
  * @param data  The data to store in this node
  * @return True if successful.
  */
-bool Node::setData(NodeData data) {
-    
+bool Node::setData(const NodeData& newData) {
+    data = newData;
+    return true;
 }
 
 /**
