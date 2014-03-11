@@ -122,7 +122,7 @@ NodeData::NodeData(string newToken, int newFrequency) {
 }
 
 /**
- * A token-only constructor, which initializes the freqency to 1.
+ * A token-only constructor, which initializes the frequency to 1.
  * @param newToken  The token to store in the node
  */
 NodeData::NodeData(string newToken) {

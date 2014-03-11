@@ -118,53 +118,56 @@ bool Node::setData(const NodeData& newData) {
 }
 
 /**
- * Checks if the right pointer is a "thread", ie. points to a node
- * that is not a child of this node.
- * @return True if the right pointer is a thread, false otherwise
- */
-bool Node::isRightPtrThread() {
-    
-}
-
-/**
  * Checks if the left pointer is a "thread", ie. points to a node
  * that is not a child of this node.
  * @return True if the left pointer is a thread, false otherwise
  */
 bool Node::isLeftPtrThread() {
-    
+    if (leftPtrIsThread) {
+        return true;
+    }
 }
 
 /**
- * Sets whether or not the right child is a "thread"
- * @param newvalue The new value
+ * Checks if the right pointer is a "thread", ie. points to a node
+ * that is not a child of this node.
+ * @return True if the right pointer is a thread, false otherwise
  */
-void Node::setRightPtrIsThread(bool newvalue) {
-    
+bool Node::isRightPtrThread() {
+    if (rightPtrIsThread) {
+        return true;
+    }
 }
 
 /**
  * Sets whether or not the left child is a "thread"
  * @param newvalue The new value
  */
-void Node::setLefttPtrIsThread(bool newvalue) {
-    
+void Node::setLefttPtrIsThread(bool newValue) {
+    leftPtrIsThread = newValue;
 }
 
-Node* Node::getRightChildPtr() {
-    return rightChildPtr;
+/**
+ * Sets whether or not the right child is a "thread"
+ * @param newvalue The new value
+ */
+void Node::setRightPtrIsThread(bool newValue) {
+    rightPtrIsThread = newValue;
 }
 
 Node* Node::getLeftChildPtr() {
     return leftChildPtr;
 }
 
-void Node::setRightPtr(Node* newRightNode) {
-    rightChildPtr = newRightNode;
+Node* Node::getRightChildPtr() {
+    return rightChildPtr;
 }
 
 void Node::setLeftPtr(Node* newRightNode) {
     leftChildPtr = newRightNode;
 }
 
+void Node::setRightPtr(Node* newRightNode) {
+    rightChildPtr = newRightNode;
+}
 #endif /* NODE */

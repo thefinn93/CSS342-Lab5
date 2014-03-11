@@ -85,7 +85,14 @@ public:
      * @return True if successful.
      */
     bool setData(const NodeData& newData);
-
+    
+    /**
+     * Checks if the left pointer is a "thread", ie. points to a node
+     * that is not a child of this node.
+     * @return True if the left pointer is a thread, false otherwise
+     */
+    bool isLeftPtrThread();
+    
     /**
      * Checks if the right pointer is a "thread", ie. points to a node
      * that is not a child of this node.
@@ -94,31 +101,21 @@ public:
     bool isRightPtrThread();
 
     /**
-     * Checks if the left pointer is a "thread", ie. points to a node
-     * that is not a child of this node.
-     * @return True if the left pointer is a thread, false otherwise
+     * Sets whether or not the left child is a "thread"
+     * @param newValue The new value
      */
-    bool isLeftPtrThread();
-
+    void setLefttPtrIsThread(bool newValue);
+    
     /**
      * Sets whether or not the right child is a "thread"
-     * @param newvalue The new value
+     * @param newValue The new value
      */
-    void setRightPtrIsThread(bool newvalue);
-
-    /**
-     * Sets whether or not the left child is a "thread"
-     * @param newvalue The new value
-     */
-    void setLefttPtrIsThread(bool newvalue);
-
-    Node* getRightChildPtr();
-
+    void setRightPtrIsThread(bool newValue);
+    
     Node* getLeftChildPtr();
-
-    void setRightPtr(Node* newRightNode);
-
+    Node* getRightChildPtr();
     void setLeftPtr(Node* newRightNode);
+    void setRightPtr(Node* newRightNode);
 
 private:
 
@@ -139,5 +136,5 @@ private:
 
 };
 
-#include "node.cpp"
+//#include "node.cpp"
 #endif /* NODEDATA_H */
