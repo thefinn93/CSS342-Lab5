@@ -67,9 +67,35 @@ void testConstructors() {
 
 }
 
+void testGetters() {
+    cout << "================= Getters Tests ==================" << endl;
+    NodeData getMyData = NodeData("omgtoken", 3);
+
+    cout.width(WIDTH);
+    cout << "getToken():";
+    string token = getMyData.getToken();
+    if(token.compare("omgtoken") == 0) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL (" << getMyData.getToken() << ")";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "getFrequency():";
+    if(getMyData.getFrequency() == 3) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL (" << getMyData.getFrequency() << ")";
+    }
+    cout << endl;
+
+}
+
 
 int main(int argc, char** argv) {
     credits();
     testConstructors();
+    testGetters();
     return 0;
 }
