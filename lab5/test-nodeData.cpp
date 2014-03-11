@@ -163,6 +163,67 @@ void testStreams() {
     cout << "test (3)" << endl;
 }
 
+void testOperators() {
+    cout << "================= Operators Tests ==================" << endl;
+    NodeData apples = NodeData("apples");
+    NodeData bananas = NodeData("bananas");
+    NodeData bananas2 = NodeData("bananas");
+
+    cout.width(WIDTH);
+    cout << "Less than (<) positve:";
+    if(apples < bananas) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Less than (<) negative:";
+    if(bananas < apples) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Greater than (>) positive:";
+    if(bananas > apples) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Greater than (>) negative:";
+    if(apples > bananas) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+
+    cout.width(WIDTH);
+    cout << "Equal to (==) positive:";
+    if(bananas == bananas2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Equal to (==) negative:";
+    if(apples == bananas) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+}
 
 int main(int argc, char** argv) {
     credits();
@@ -170,5 +231,6 @@ int main(int argc, char** argv) {
     testGetters();
     testSetters();
     testStreams();
+    testOperators();
     return 0;
 }
