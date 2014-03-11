@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+sudo apt-get install valgrind
 cd lab5
 for testFile in test-*.cpp; do
     echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
