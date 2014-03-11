@@ -67,9 +67,276 @@ void testConstructors() {
 
 }
 
+void testGetters() {
+    cout << "================= Getters Tests ==================" << endl;
+    NodeData getMyData = NodeData("omgtoken", 3);
+
+    cout.width(WIDTH);
+    cout << "getToken():";
+    string token = getMyData.getToken();
+    if(token.compare("omgtoken") == 0) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL (" << getMyData.getToken() << ")";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "getFrequency():";
+    if(getMyData.getFrequency() == 3) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL (" << getMyData.getFrequency() << ")";
+    }
+    cout << endl;
+
+}
+
+void testSetters() {
+    cout << "================= Setters Tests ==================" << endl;
+    NodeData setMyData = NodeData();
+
+    cout.width(WIDTH);
+    cout << "setToken():";
+    setMyData.setToken("loltoken");
+    if(setMyData.getToken().compare("loltoken") == 0) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "setFrequency():";
+    setMyData.setFrequency(5);
+    if(setMyData.getFrequency() == 5) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "setFrequency() invalid:";
+    try {
+        if(setMyData.setFrequency(-3)) {
+            if(setMyData.getFrequency() == -3) {
+                cout << "FAIL (returned true, set invalid frequency)";
+            } else if(setMyData.getFrequency() == 5) {
+                cout << "FAIL (returned true but did not set)";
+            } else {
+                cout << "FAIL (returned true, set frequency to " <<
+                    setMyData.getFrequency();
+            }
+        } else {
+            if(setMyData.getFrequency() == -3) {
+                cout << "FAIL (returned false, but set invalid frequency)";
+            } else if(setMyData.getFrequency() == 5) {
+                cout << "PASS (returned false)";
+            } else {
+                cout << "FAIL (returned false, set frequency to " <<
+                    setMyData.getFrequency();
+            }
+        }
+    } catch (const char* error) {
+        if(strcmp(error, "Invalid frequency") == 0) {
+            cout << "PASS";
+        } else {
+            cout << "FAIL";
+        }
+        cout << "(threw error " << error << ")";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "increaseFrequency default:";
+    setMyData.setFrequency(1);
+    setMyData.increaseFrequency();
+    if(setMyData.getFrequency() == 2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "increaseFrequency non-default:";
+    setMyData.setFrequency(1);
+    setMyData.increaseFrequency(3);
+    if(setMyData.getFrequency() == 4) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "increaseFrequency invalid:";
+    setMyData.setFrequency(3);
+    try {
+        setMyData.increaseFrequency(-1);
+        if(setMyData.getFrequency() == 3) {
+            cout << "PASS (didn't throw anything)";
+        } else if(setMyData.getFrequency() == 2) {
+            cout << "FAIL (decreased frequency when fed negative)";
+        } else {
+            cout << "FAIL (set frequency to " << setMyData.getFrequency()
+                << ")";
+        }
+    } catch(const char* error) {
+        if(strcmp(error, "Cannot increase frequency negatively") == 0) {
+            cout << "PASS";
+        } else {
+            cout << "FAIL";
+        }
+        cout << " (threw " << error << ")";
+    } catch(...) {
+        cout << "FAIL (Threw something other than a const char)";
+    }
+    cout << endl;
+
+    setMyData.setFrequency(3);
+    cout.width(WIDTH);
+    cout << "Decrease frequency:";
+    setMyData.decreaseFrequency();
+    if(setMyData.getFrequency() == 2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    setMyData.setFrequency(3);
+    cout.width(WIDTH);
+    cout << "Decrease frequency (non-default):";
+    setMyData.decreaseFrequency(2);
+    if(setMyData.getFrequency() == 1) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    setMyData.setFrequency(3);
+    cout.width(WIDTH);
+    cout << "Decrease frequency (invalid):";
+    try {
+        setMyData.decreaseFrequency(-1);
+        if(setMyData.getFrequency() == 3) {
+            cout << "PASS (didn't throw anything)";
+        } else if(setMyData.getFrequency() == 2) {
+            cout << "FAIL (decreased frequency when fed negative)";
+        } else if(setMyData.getFrequency() == 4) {
+            cout << "FAIL (increased frequency when fed negative)";
+        } else {
+            cout << "FAIL (set frequency to " << setMyData.getFrequency()
+                << ")";
+        }
+    } catch(const char* error) {
+        if(strcmp(error, "Cannot decrease frequency negatively") == 0) {
+            cout << "PASS";
+        } else {
+            cout << "FAIL";
+        }
+        cout << " (threw " << error << ")";
+    } catch(...) {
+        cout << "FAIL (Threw something other than a const char)";
+    }
+    cout << endl;
+}
+
+void testStreams() {
+    cout << "================= Stream Tests ==================" << endl;
+    NodeData streamMe = NodeData("test", 3);
+    cout.width(WIDTH);
+    cout << left << "Testing ostream:";
+    cout << streamMe << endl;
+    for(int positionOnLine = 0; positionOnLine < WIDTH; positionOnLine++) {
+        /// Print the proper number of spaces to make this line up with
+        /// the line above
+        cout << " ";
+    }
+    cout << "test (3)" << endl;
+}
+
+void testOperators() {
+    cout << "================= Operators Tests ==================" << endl;
+    NodeData apples = NodeData("apples");
+    NodeData bananas = NodeData("bananas");
+    NodeData bananas2 = NodeData("bananas");
+
+    cout.width(WIDTH);
+    cout << "Less than (<) positve:";
+    if(apples < bananas) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Less than (<) negative:";
+    if(bananas < apples) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Greater than (>) positive:";
+    if(bananas > apples) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Greater than (>) negative:";
+    if(apples > bananas) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+
+    cout.width(WIDTH);
+    cout << "Equal to (==) positive:";
+    if(bananas == bananas2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Equal to (==) negative:";
+    if(apples == bananas) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Assignment (=) operator:";
+    NodeData applesCopy = apples;
+    if(applesCopy == apples) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+}
 
 int main(int argc, char** argv) {
     credits();
     testConstructors();
+    testGetters();
+    testSetters();
+    testStreams();
+    testOperators();
     return 0;
 }

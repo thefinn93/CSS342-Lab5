@@ -187,7 +187,8 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
          * A couple of times we may need to go right. These are also the
          * times that we need to visit it.
          */
-        if (goright || current->isRightPtrThread() || current->leftChild == NULL) {
+        if (goright || current->isRightPtrThread() ||
+                current->leftChild == NULL) {
             (*visit)(current&);
             /// If this is a right leaf, the next node needs to be visited
             goright = current->isRightPtrThread();
@@ -372,7 +373,8 @@ Node* ThreadedBST::removeHelper(string token, Node* root) {
  * @param newNodePtr    A pointer to the new node that's being inserted.
  * @return The root pointer.
  */
-Node* ThreadedBST::balancedAdd(Node* subTreePtr, Node* leftTail, Node* rightTail, Node* newNodePtr) {
+Node* ThreadedBST::balancedAdd(Node* subTreePtr, Node* leftTail,
+        Node* rightTail, Node* newNodePtr) {
     if (subTreePtr == NULL) {
         newNodePtr->setLeftChildPtr(leftTail);
         newNodePtr->setLeftPtrIsthread(true);

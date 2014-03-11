@@ -16,7 +16,7 @@ class NodeData {
     /*-------ostream operators------*/
     /**
      * The ostream operator<< overload.
-     * @return A ostream with the token followed by its frequency, separated by a space.
+     * @return An ostream with the token followed by its frequency
      */
     friend ostream& operator<< (ostream&, const NodeData&);
 
@@ -24,8 +24,10 @@ public:
     /*-------Assignment Operator-------*/
     /**
      * The assignment operator= overload.
-     * @param rightData The NodeData containing the variables values the left side NodeData is being assigned.
-     * @return Reference to a new NodeData that is a copy of the right side NodeData.
+     * @param rightData The NodeData containing the variables values the left
+     * side NodeData is being assigned.
+     * @return Reference to a new NodeData that is a copy of the right side
+     * NodeData.
      */
     NodeData& operator=(const NodeData& rightData);
 
@@ -40,20 +42,23 @@ public:
     /**
      * The less than comparison operator<.
      * @param rightData The nodeData the left side is being compared to.
-     * @return True if the leftDeata character value is less that the rightData character value.
+     * @return True if the leftData character value is less that the rightData
+     * character value.
      */
     bool operator< (const NodeData& rightData) const;
     /**
      * The greater than comparison operator>.
      * @param rightData The NodeData the left side is being compared to.
-     * @return True if leftData character value is greater than rightData character value.
+     * @return True if leftData character value is greater than rightData
+     * character value.
      */
     bool operator> (const NodeData& rightData) const;
 
     /*-------Constructors-------*/
 
     /**
-     * The empty constructor, initializes the node token to "" and frequency to 0.
+     * The empty constructor, initializes the node token to "" and frequency
+     * to 0.
      */
     NodeData();
 
