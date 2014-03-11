@@ -1,9 +1,14 @@
 #!/bin/bash
 set -e
 cd lab5
-echo "=== test-nodeData.cpp ==="
-g++ -Wall test-nodeData.cpp -o test-nodeData
-./test-nodeData
+for testFile in test-*.cpp; do
+    echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
+    echo $testFile
+    echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
+    g++ -Werror $testFile
+    valgrind ./a.out
+    rm a.out
+done
 
 echo "=== Big lines ==="
 
