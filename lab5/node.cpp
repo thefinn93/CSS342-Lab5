@@ -15,45 +15,151 @@ using namespace std;
  * A node in a ThreadedBST
  */
 
-    /**
-     * The empty constructor, initializes the node with empty data values
-     * and NULL child pointers
-     */
-    Node::Node() {
 
-    }
+/*-----------Comparison Operators-----------*/
 
-    /**
-     * A full constructor, which accepts the full array of data that the node
-     * can hold, which are subsequently stored in the node.
-     * @param data          The NodeData to store in the node.
-     * @param left          A pointer to this node's left child (may be NULL)
-     * @param right         A pointer to this node's right child (may be NULL)
-     */
-    Node::Node(NodeData data, Node* left, Node* right) {
-    }
+/**
+ * Checks if the value of this Node's data is equal to that of right Node's data
+ * @param right The node to compare to.
+ * @return True if the two Node's data are equal, False otherwise.
+ */
+Node& Node::operator==(const Node& right) const {
+    return (this->getData() == right.getData());
+}
 
-    /**
-     * Copy constructor. Copies the data over, leaving the pointers NULL.
-     * @param nodeToCopy
-     */
-    Node::Node(const NodeData& nodeToCopy) {
-    }
+/**
+ * Checks if the value of this Node's data is less than that of another
+ ** Node's.
+ * @param right The node to compare to.
+ * @return  True if this Node's data is less than that of the right
+ ** Node's, False otherwise
+ */
+Node& Node::operator<(const Node& right) const {
+    return (this->getData() < right.getData());
+}
 
-    /**
-     * @return The data stored in this node.
-     */
-    NodeData Node::getData() {
-        return data;
-    }
+/**
+ * Checks if the value of this Node's data is greater than that of
+ ** another Node's.
+ * @param right The node to compare to.
+ * @return  True if this Node's data is greater than that of the right
+ ** Node's, False otherwise
+ */
+Node& Node::operator>(const Node& right) const {
+    return (this->getData() > right.getData());
+}
 
-    /**
-     * Sets the data stored in this node.
-     * @param data  The data to store in this node
-     * @return True if successful.
-     */
-    bool Node::setData(NodeData data) {
-    }
+/**
+ * Sets the data in this Node to the same values of the data of another
+ ** Node.
+ * @param right The node to copy the data from.
+ * @return This node.
+ */
+Node& Node::operator=(const Node& right) {
+    data = 
+}
 
+
+/**
+ * The empty constructor, initializes the node with empty data values
+ * and NULL child pointers
+ */
+Node::Node() {
+    data = new NodeData();
+    leftChildPtr = NULL;
+    rightChildPtr = NULL;
+    leftPtrIsThread = false;
+    rightPtrIsThread = false;
+}
+
+/**
+ * A full constructor, which accepts the full array of data that the node
+ * can hold, which are subsequently stored in the node.
+ * @param data          The NodeData to store in the node.
+ * @param left          A pointer to this node's left child (may be NULL)
+ * @param right         A pointer to this node's right child (may be NULL)
+ */
+Node::Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread, bool rightIsThread) {
+    data = newNodeData;
+    leftChildPtr = left;
+    rightChildPtr = right;
+    leftPtrIsThread = leftIsThread;
+    rightPtrIsThread = rightIsThread;
+
+}
+
+/**
+ * Copy constructor. Copies the data over, leaving the pointers NULL.
+ * @param nodeToCopy
+ */
+Node::Node(const NodeData& nodeToCopy) {
+    
+}
+
+/**
+ * @return The data stored in this node.
+ */
+NodeData Node::getData() {
+    return data;
+}
+
+/**
+ * Sets the data stored in this node.
+ * @param data  The data to store in this node
+ * @return True if successful.
+ */
+bool Node::setData(NodeData data) {
+    
+}
+
+/**
+ * Checks if the right pointer is a "thread", ie. points to a node
+ * that is not a child of this node.
+ * @return True if the right pointer is a thread, false otherwise
+ */
+bool Node::isRightPtrThread() {
+    
+}
+
+/**
+ * Checks if the left pointer is a "thread", ie. points to a node
+ * that is not a child of this node.
+ * @return True if the left pointer is a thread, false otherwise
+ */
+bool Node::isLeftPtrThread() {
+    
+}
+
+/**
+ * Sets whether or not the right child is a "thread"
+ * @param newvalue The new value
+ */
+void Node::setRightPtrIsThread(bool newvalue) {
+    
+}
+
+/**
+ * Sets whether or not the left child is a "thread"
+ * @param newvalue The new value
+ */
+void Node::setLefttPtrIsThread(bool newvalue) {
+    
+}
+
+Node* Node::getRightChildPtr() {
+    return rightChildPtr;
+}
+
+Node* Node::getLeftChildPtr() {
+    return leftChildPtr;
+}
+
+void Node::setRightPtr(Node* newRightNode) {
+    rightChildPtr = newRightNode;
+}
+
+void Node::setLeftPtr(Node* newRightNode) {
+    leftChildPtr = newRightNode;
+}
 
 #endif /* NODE */

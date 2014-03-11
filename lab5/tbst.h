@@ -13,13 +13,13 @@
 using namespace std;
 
 /// A threaded binary search tree
+
 class ThreadedBST {
-    
 public:
 
-    
+
     /*---------CONTSTRUCTORS----------*/
-    
+
     /**
      * A standard constructor, initializes an empty TBST.
      */
@@ -40,8 +40,8 @@ public:
      * @param rightTreePtr
      */
     ThreadedBST(const Node& rootNode,
-                const ThreadedBST* leftTreePtr,
-                const ThreadedBST* rightTreePtr);
+            const ThreadedBST* leftTreePtr,
+            const ThreadedBST* rightTreePtr);
 
     /**
      * Creates a deep copy of another TBST.
@@ -54,13 +54,27 @@ public:
      */
     ~ThreadedBST();
 
-    
-    
-    //-------Public Methods-------//
+
+
+    /*-------PUBLIC METHODS-------*/
+
     /**
+     * Checks to see if the tree is empty.
      * @returns True if the three is empty, False otherwise.
      */
     bool isEmpty();
+
+    /**
+     * Returns the height of the tree.
+     * @return int The height of the tree.
+     */
+    int getHeigh() const;
+
+    /**
+     * Returns the total number of tokens stored in this tree
+     * @return The number of nodes in this tree.
+     */
+    int getNumberOfNodes() const;
 
     /**
      * Inserts a token into the tree, and optionaly frequency for that token
@@ -112,11 +126,6 @@ public:
      */
     bool exists(string token);
 
-    /**
-     * Returns the total number of tokens stored in this tree
-     * @return The number of nodes in this tree.
-     */
-    int getSize();
 
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
@@ -148,23 +157,23 @@ public:
      * @param treePtr           The root of the tree to traverse
      */
     void postorder(void visit(NodeData*), Node* newRootPtr);
-    
+
     void preorderStart(void visit(NodeData*) const);
     void inorderStart(void visit(NodeData*) const);
     void postorderStart(void vist(NodeData*) const);
-    
+
 protected:
-    
+
     Node* copyTree(const Node* treeRootPrt) const;
     void destroyTree(const Node* treeRootPtr);
     int getHeightHelper(Node* subTreePtr) const;
     Node* removeHelper(string token, Node* root);
     Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
-        
+
 private:
     /// The root node
     Node* rootPtr;
-    
+
 };
 
 #endif
