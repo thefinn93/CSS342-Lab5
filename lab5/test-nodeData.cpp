@@ -223,6 +223,16 @@ void testOperators() {
         cout << "PASS";
     }
     cout << endl;
+
+    cout.width(WIDTH);
+    cout << "Assignment (=) operator:";
+    NodeData applesCopy = apples;
+    if(applesCopy == apples) {
+        cout "PASS";
+    } else {
+        cout "FAIL";
+    }
+    cout << endl;
 }
 
 int main(int argc, char** argv) {
