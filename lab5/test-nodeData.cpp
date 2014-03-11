@@ -92,10 +92,67 @@ void testGetters() {
 
 }
 
+void testSetters() {
+    cout << "================= Setters Tests ==================" << endl;
+    NodeData setMyData = NodeData();
+
+    cout.width(WIDTH);
+    cout << "setToken():";
+    setMyData.setToken("loltoken");
+    if(setMyData.getToken().compare("loltoken") == 0) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "setFrequency():";
+    setMyData.setFrequency(5);
+    if(setMyData.getFrequency() == 5) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "setFrequency() invalid:";
+    try {
+        if(setMyData.setFrequency(-3)) {
+            if(setMyData.getFrequency() == -3) {
+                cout << "FAIL (returned true, set invalid frequency)";
+            } else if(setMyData.getFrequency() == 5) {
+                cout << "FAIL (returned true but did not set)";
+            } else {
+                cout << "FAIL (returned true, set frequency to " <<
+                    setMyData.getFrequency();
+            }
+        } else {
+            if(setMyData.getFrequency() == -3) {
+                cout << "FAIL (returned false, but set invalid frequency)";
+            } else if(setMyData.getFrequency() == 5) {
+                cout << "PASS (returned false)";
+            } else {
+                cout << "FAIL (returned false, set frequency to " <<
+                    setMyData.getFrequency();
+            }
+        }
+    } catch (const char* error) {
+        if(strcmp(error, "Invalid frequency") == 0) {
+            cout << "PASS";
+        } else {
+            cout << "FAIL";
+        }
+        cout << "(threw error " << error << ")";
+    }
+    cout << endl;
+}
 
 int main(int argc, char** argv) {
     credits();
     testConstructors();
     testGetters();
+    testSetters();
     return 0;
 }
