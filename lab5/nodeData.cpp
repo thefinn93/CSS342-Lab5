@@ -112,8 +112,13 @@ NodeData::NodeData() {
  * @param newToken      The token data to store in the node.
  */
 NodeData::NodeData(string newToken, int newFrequency) {
-    token = newToken;
-    frequency = newFrequency;
+    if(newFrequency < 0) {
+        /// I'm sure there is a nicer way to do exceptions, but I don't know it
+        throw "Negative frequency";
+    } else {
+        token = newToken;
+        frequency = newFrequency;
+    }
 }
 
 /**
