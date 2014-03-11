@@ -147,6 +147,102 @@ void testSetters() {
         cout << "(threw error " << error << ")";
     }
     cout << endl;
+
+    cout.width(WIDTH);
+    cout << "increaseFrequency default:";
+    setMyData.setFrequency(1);
+    setMyData.increaseFrequency();
+    if(setMyData.getFrequency() == 2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "increaseFrequency non-default:";
+    setMyData.setFrequency(1);
+    setMyData.increaseFrequency(3);
+    if(setMyData.getFrequency() == 4) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "increaseFrequency invalid:";
+    setMyData.setFrequency(3);
+    try {
+        setMyData.increaseFrequency(-1);
+        if(setMyData.getFrequency() == 3) {
+            cout << "PASS (didn't throw anything)";
+        } else if(setMyData.getFrequency() == 2) {
+            cout << "FAIL (decreased frequency when fed negative)";
+        } else {
+            cout << "FAIL (set frequency to " << setMyData.getFrequency()
+                << ")";
+        }
+    } catch(const char* error) {
+        if(strcmp(error, "Cannot increase frequency negatively") == 0) {
+            cout << "PASS";
+        } else {
+            cout << "FAIL";
+        }
+        cout << " (threw " << error << ")";
+    } catch(...) {
+        cout << "FAIL (Threw something other than a const char)";
+    }
+    cout << endl;
+
+    setMyData.setFrequency(3);
+    cout.width(WIDTH);
+    cout << "Decrease frequency:";
+    setMyData.decreseFrequency();
+    if(setMyData.getFrequency() == 2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    setMyData.setFrequency(3);
+    cout.width(WIDTH);
+    cout << "Decrease frequency (non-default):";
+    setMyData.decreaseFrequency(2);
+    if(setMyData.getFrequency() == 1) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    setMyData.setFrequency(3);
+    cout.width(WIDTH);
+    cout << "Decrease frequency (invalid):";
+    try {
+        setMyData.decreaseFrequency(-1);
+        if(setMyData.getFrequency() == 3) {
+            cout << "PASS (didn't throw anything)";
+        } else if(setMyData.getFrequency() == 2) {
+            cout << "FAIL (decreased frequency when fed negative)";
+        } else if(setMyData.getFrequency() == 4) {
+            cout << "FAIL (increased frequency when fed negative)";
+        } else {
+            cout << "FAIL (set frequency to " << setMyData.getFrequency()
+                << ")";
+        }
+    } catch(const char* error) {
+        if(strcmp(error, "Cannot decrease frequency negatively") == 0) {
+            cout << "PASS";
+        } else {
+            cout << "FAIL";
+        }
+        cout << " (threw " << error << ")";
+    } catch(...) {
+        cout << "FAIL (Threw something other than a const char)";
+    }
+    cout << endl;
 }
 
 void testStreams() {
