@@ -68,7 +68,7 @@ public:
      * Returns the height of the tree.
      * @return int The height of the tree.
      */
-    int getHeigh() const;
+    int getHeight() const;
 
     /**
      * Returns the total number of tokens stored in this tree
@@ -77,7 +77,7 @@ public:
     int getNumberOfNodes() const;
 
     /**
-     * Inserts a token into the tree, and optionaly frequency for that token
+     * Inserts a token into the tree, and optionally frequency for that token
      * @param token The token to insert.
      * @param frequency (optional) The frequency of this token. Assumed 1 if
      ** not specified
@@ -86,18 +86,18 @@ public:
     bool insert(string token, int frequency);
 
     /**
-     * Inserts a token if it is not already there, otherwise incriments the
+     * Inserts a token if it is not already there, otherwise increments the
      ** frequency count for that token.
-     * @param token The token to insert or incriment
+     * @param token The token to insert or increment
      * @return True if successful, false otherwise
      */
-    bool insertOrIncriment(string token);
+    bool insertOrIncrement(string token);
 
     /**
-     * Sets the frequency of the specified token, or incriments it if no value
+     * Sets the frequency of the specified token, or increments it if no value
      * is specified
      * @param token     The token to set the frequency for.
-     * @param frequency (optional) The new frequency for the token. Incriments
+     * @param frequency (optional) The new frequency for the token. Increments
      ** the value by 1 if not specified
      * @return True if successful, false otherwise
      */
@@ -169,6 +169,8 @@ protected:
     int getHeightHelper(Node* subTreePtr) const;
     Node* removeHelper(string token, Node* root);
     Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
+    
+    ///TODO - findEntry()
 
 private:
     /// The root node
