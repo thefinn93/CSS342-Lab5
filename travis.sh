@@ -15,7 +15,7 @@ done
 
 echo "Doxygen"
 echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
-doxygen *.cpp *.h | grep "warning\|error"
+doxygen *.cpp *.h
 
 echo "Big lines"
 echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
