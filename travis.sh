@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 which valgrind || sudo apt-get install valgrind > /dev/null
+which doxygen || sudo apt-get install doxygen
 cd lab5
 for testFile in test-*.cpp; do
     echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
@@ -11,7 +12,12 @@ for testFile in test-*.cpp; do
     rm a.out
 done
 
-echo "=== Big lines ==="
+echo "Doxygen"
+echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
+doxygen *.cpp *.h | grep "warning\|error"
+
+echo "Big lines"
+echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
 
 biglines=`awk 'length > 80 {print FILENAME "(" FNR "): " $0}' *.cpp *.h`
 if [ "$biglines" != "" ]; then
