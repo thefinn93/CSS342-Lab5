@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 which valgrind || sudo apt-get install valgrind > /dev/null
-which doxygen || sudo apt-get install doxygen
+which doxygen || sudo apt-get install doxygen > /dev/null
+
 cd lab5
 for testFile in test-*.cpp; do
     echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
