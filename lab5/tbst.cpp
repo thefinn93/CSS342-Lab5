@@ -66,20 +66,7 @@ using namespace std;
     }
 
 
-    /**
-     * A helper function to determine the height of a binary tree. Based
-     * heavily on Frank Carrano's sample code.
-     * @param subTreePtr A pointer to the root of the tree to measure
-     * @return The height of the specified tree
-     */
-    int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
-        if (subTreePtr == NULL) {
-            return 0;   //Height of zero
-        } else {
-            return 1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()),
-                     getHeightHelper(subTreePtr->getRightChildPtr()));
-        }
-    }
+
 
     /**
      * A private function to insert a new node into the tree. Based heavily on
@@ -326,6 +313,11 @@ using namespace std;
         }
     }
     
+
+    /*---------PROTECTED METHODS-----------*/
+    
+    /*HELPTER FUNCTIONS*/
+    
     Node* copyTree(const Node* treeRootPrt) const{
         Node* newRootPtr = NULL;
         if (treeRootPrt != NULL) {
@@ -353,7 +345,21 @@ using namespace std;
             delete treeRootPtr;
         }
     }
-
+    
+    /**
+     * A helper function to determine the height of a binary tree. Based
+     * heavily on Frank Carrano's sample code.
+     * @param subTreePtr A pointer to the root of the tree to measure
+     * @return The height of the specified tree
+     */
+    int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
+        if (subTreePtr == NULL) {
+            return 0;   //Height of zero
+        } else {
+            return 1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()),
+                     getHeightHelper(subTreePtr->getRightChildPtr()));
+        }
+    }
     
 #endif
 
