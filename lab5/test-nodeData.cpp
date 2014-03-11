@@ -198,7 +198,7 @@ void testSetters() {
     setMyData.setFrequency(3);
     cout.width(WIDTH);
     cout << "Decrease frequency:";
-    setMyData.decreseFrequency();
+    setMyData.decreaseFrequency();
     if(setMyData.getFrequency() == 2) {
         cout << "PASS";
     } else {
@@ -324,9 +324,9 @@ void testOperators() {
     cout << "Assignment (=) operator:";
     NodeData applesCopy = apples;
     if(applesCopy == apples) {
-        cout "PASS";
+        cout << "PASS";
     } else {
-        cout "FAIL";
+        cout << "FAIL";
     }
     cout << endl;
 }
