@@ -17,7 +17,7 @@ using namespace std;
 
 /**
  * The ostream operator<< overload.
- * @return A ostream with the token followed by its frequency, separated by a space.
+ * @return An ostream with the token followed by its frequency
  */
 ostream& operator<< (ostream &output, const NodeData &thisNode) {
     //Print NodeData token, followed by NodeData frequency
@@ -29,8 +29,10 @@ ostream& operator<< (ostream &output, const NodeData &thisNode) {
 
 /**
  * The assignment operator= overload.
- * @param rightData The NodeData containing the variables values the left side NodeData is being assigned.
- * @return Reference to a new NodeData that is a copy of the right side NodeData.
+ * @param rightData The NodeData containing the variables values the left side
+ * NodeData is being assigned.
+ * @return Reference to a new NodeData that is a copy of the right side
+ * NodeData.
  */
 NodeData& NodeData::operator=(const NodeData& right) {
     this->token = right.getToken();

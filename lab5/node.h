@@ -18,7 +18,8 @@ public:
     /*-----------Comparison Operators-----------*/
     
     /**
-     * Checks if the value of this Node's data is equal to that of right Node's data
+     * Checks if the value of this Node's data is equal to that of right Node's
+     * data
      * @param right The node to compare to.
      * @return True if the two Node's data are equal, False otherwise.
      */
@@ -65,7 +66,8 @@ public:
      * @param leftIsThread  True if node pointer is a thread.
      * @param rightIsThread True if node pointer is a thread.
      */
-    Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread, bool rightIsThread);
+    Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread,
+            bool rightIsThread);
 
     /**
      * Copy constructor. Copies the data over, leaving the pointers NULL.

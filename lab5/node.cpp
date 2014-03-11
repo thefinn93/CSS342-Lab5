@@ -79,7 +79,8 @@ Node::Node() {
  * @param left          A pointer to this node's left child (may be NULL)
  * @param right         A pointer to this node's right child (may be NULL)
  */
-Node::Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread, bool rightIsThread) {
+Node::Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread,
+        bool rightIsThread) {
     data = newNodeData;
     leftChildPtr = left;
     rightChildPtr = right;
