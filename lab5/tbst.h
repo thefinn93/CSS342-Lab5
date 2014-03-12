@@ -75,22 +75,19 @@ public:
      * @return The number of nodes in this tree.
      */
     int getNumberOfNodes() const;
-
+    
     /**
-     * Inserts a token into the tree, and optionally frequency for that token
-     * @param token The token to insert.
-     * @return True if successful, false otherwise
-     */
+    * Inserts a token into the tree, or increments the token frequency if the
+    * token already exists in the node.
+    * @param token The token to insert.
+    * @return True if successful, false otherwise
+    */   
     bool insert(string token);
     
     bool isTokenInTree(string searchToken);  
     
-    /**
-     * Inserts a token into the tree, or increments the token frequency if the
-     * token already exists in the node.
-     * @param token The token to insert.
-     * @return True if successful, false otherwise
-     */
+
+    
     bool remove(string token);
 
     /**
@@ -151,6 +148,8 @@ protected:
     
     /*Is Token In Tree*/
     bool isTokenInTreeHelper(Node* currentNode, string searchToken);
+
+    Node* nodeWithToken(Node* currentNode, string searchToken);
     
     /*Add Node Helper*/
     /**
@@ -172,7 +171,7 @@ protected:
     bool setFrequency(string token, int frequency);
     
     /*Remove Node Helper*/
-    Node* removeHelper(string token, Node* root);
+    Node* removeHelper(string token, Node* rootPtr);
     
 private:
     /// The root node

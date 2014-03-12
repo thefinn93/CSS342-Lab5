@@ -103,10 +103,11 @@ int ThreadedBST::getNumberOfNodes() const {
  * @return True if successful, false otherwise
  */
 bool ThreadedBST::insert(string token) {
-    Node* current = rootPtr;
     
-    if (isTokenInTree(token)) {
-        getNodeWithToken(token).getDataRefrence.increseFrequency();
+    if (this->isTokenInTree(token)) {
+        ///iterates the frequency by 1
+        nodeWithToken(rootPtr, token)->getDataReference()->increaseFrequency();  
+        
     }
     else {
         Node* newNode = new Node(token);
@@ -119,7 +120,7 @@ bool ThreadedBST::isTokenInTree (string searchForThisToken) {
     if (this->isEmpty()) {
         return false;
     }else {
-        return isTokenInTreeHelper(rootPtr, searchForThisString);
+        return isTokenInTreeHelper(rootPtr, searchForThisToken);
     }
 }
 
@@ -277,13 +278,36 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
 
 /*isTokenInTreeHelper*/
 
-bool isTokenInTreeHelper(Node* currentNode, string searchToken) {
+bool ThreadedBST::isTokenInTreeHelper(Node* currentNode, string searchToken) {
     if (currentNode->getData().getToken() == searchToken) {
-        
+        return true;
     }
-    
+    else {
+        if(currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node* currentNode->getLeftChildPtr(), string searchToken);
+        }
+        if(currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node* currentNode->getRightChildPtr(), string searchToken);
+        }
+        return false;       /// searchToken is never found
+    }
 }
 
+Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
+    if (currentNode->getData().getToken() == searchToken) {
+        return currentNode;
+    }
+    else {
+        if(currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node* currentNode->getLeftChildPtr(), string searchToken);
+        }
+        if(currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node* currentNode->getRightChildPtr(), string searchToken);
+        }
+        /// We already know the node is in the tree. No need to have an
+        /// alternate return.
+    }
+}
 
 /*balancedInsertHelper*/
 
@@ -350,8 +374,8 @@ bool ThreadedBST::setFrequency(string token, int frequency = 1) {
  * @return          The pointer to the removed node, or NULL if it was not
  * found.
  */
-Node* ThreadedBST::removeHelper(string token, Node* root) {
-    if (root != NULL) {
+Node* ThreadedBST::removeHelper(string token, Node* rootPtr) {
+    if (rootPtr != NULL) {
         Node* current = rootPtr;
         Node* parent = NULL;
 
@@ -359,8 +383,8 @@ Node* ThreadedBST::removeHelper(string token, Node* root) {
         /// the parent's left or right child. It is of course passed by
         /// reference
         bool isLeft = false;
-        if (isTokenInTree(token, current, parent, isLeft)) {
-            if (current->isRightPtrThread() && current->isLeftPtrThread())) {
+        if (isTokenInTree(token)) {
+            if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
                 /// We're a leaf node, no children to worry about!
                 if (isLeft) {
                     parent->leftChild = NULL;
