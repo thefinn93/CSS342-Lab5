@@ -125,6 +125,6 @@ void testOperators() {
 int main() {
     credits();
     testConstructors();
-//    testOperators();
+    testOperators();
     return 0;
 }
