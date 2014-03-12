@@ -9,7 +9,7 @@ for testFile in test-*.cpp; do
     echo $testFile
     echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
     g++ -Werror $testFile
-    valgrind ./a.out
+    valgrind --error-exitcode=1 --leak-check=yes ./a.out
     rm a.out
 done
 
