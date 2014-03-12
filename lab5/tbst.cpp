@@ -113,7 +113,8 @@ bool ThreadedBST::insert(string token) {
 }
 
 /**
- * Sets the frequency of the specified token, or increments it if no value is specified.
+ * Sets the frequency of the specified token, or increments it if no value is
+ * specified.
  * @param token     The token to set the frequency for.
  * @param frequency (optional) The new frequency for the token. Increments
  * the value by 1 if not specified

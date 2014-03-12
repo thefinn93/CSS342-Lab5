@@ -78,7 +78,7 @@ public:
      * @param leftIsThread  True if node pointer is a thread.
      * @param rightIsThread True if node pointer is a thread.
      */
-    Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread,
+    Node(NodeData newNodeData, Node* left, Node* right, bool leftIsThread,
             bool rightIsThread);
 
     /**
@@ -91,7 +91,7 @@ public:
      * Retrieves the data element stored in this Node.
      * @return The data stored in this node.
      */
-    NodeData* getData() const;
+    NodeData getData() const;
 
     /**
      * Sets the data stored in this node.
@@ -134,7 +134,7 @@ public:
 private:
 
     /// The information to store in this node
-    NodeData* data;
+    NodeData data;
 
     /// A pointer to this node's left child
     Node* leftChildPtr;
