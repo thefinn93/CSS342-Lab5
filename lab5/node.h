@@ -55,7 +55,9 @@ public:
      * and NULL child pointers
      */
     Node();
-
+    
+    ///TODO - Node constructor that takes a token and a frequency argument
+    
     /**
      * A full constructor, which accepts the full array of data that the node
      * can hold, which are subsequently stored in the node.

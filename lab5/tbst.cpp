@@ -24,12 +24,13 @@ ThreadedBST::ThreadedBST() {
 
 /**
  * A constructor that initializes the TBST from a specified root node
- * @param rootNode  The node to use as the root when initalizing the tree.
+ * @param rootNode  The node to use as the root when initializing the tree.
  */
 ThreadedBST::ThreadedBST(const Node& rootNode) {
     rootPtr = rootNode;
 }
 
+///TODO - DELETE?
 /**
  * Initializes a TBST. At this point we have not determined the purpose of
  * this constructor, but it was in the book and we suspect it may come in
@@ -61,7 +62,6 @@ ThreadedBST::~ThreadedBST() {
 
 /*-------PUBLIC METHODS-------*/
 
-
 /*isEmpty*/
 
 /**
@@ -78,7 +78,7 @@ bool ThreadedBST::isEmpty() {
  * Returns the height of the tree.
  * @return int The height of the tree.
  */
-int ThreadedBST::getHeigh() const {
+int ThreadedBST::getHeight() const {
     return getHeightHelper(rootPtr);
 }
 
@@ -86,7 +86,7 @@ int ThreadedBST::getHeigh() const {
 /*insert*/
 
 /**
- * Inserts a token into the tree, and optionaly frequency for that token
+ * Inserts a token into the tree, and optionally frequency for that token
  * @param token The token to insert.
  * @param frequency (optional) The frequency of this token. Assumed 1 if
  * not specified
@@ -117,7 +117,7 @@ int ThreadedBST::getNumberOfNodes() const {
  * @param token The token to insert or increment
  * @return True if successful, false otherwise
  */
-bool ThreadedBST::insertOrIncriment(string token) {
+bool ThreadedBST::insertOrIncrement(string token) {
 
 }
 
@@ -161,6 +161,8 @@ bool ThreadedBST::remove(string token) {
  */
 int ThreadedBST::getFrequency(string token) {
 }
+
+///TODO - exists() may be implemented with findEntry() check this.
 
 /**
  * Checks if the specified token is in this tree
@@ -217,6 +219,8 @@ void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
     }
 }
 
+///TODO - Recursive inorder
+
 /**
  * Preforms a post-order traversal of the tree, executing the passed method
  *  on each node as it is visited.
@@ -261,6 +265,8 @@ Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
 
 /*destroyTree*/
 
+///TODO - Make sure it doesn't break for threaded.
+
 /**
  * 
  */
@@ -288,6 +294,7 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
     if (subTreePtr == NULL) {
         return 0; //Height of zero
     } else {
+        ///TODO - Max is a function in STD
         return 1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()),
                 getHeightHelper(subTreePtr->getRightChildPtr()));
     }
