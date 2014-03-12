@@ -26,6 +26,8 @@ if [ "$biglines" != "" ]; then
     awk 'length > 80 {print FILENAME "(" FNR "): " $0}' *.cpp *.h
     if [ "$ALLOW_BIG_LINES" != "yup" ]; then
         exit 1;
+    else
+        echo "Big lines found, but ALLOW_BIG_LINES is set. Allowing.";
     fi
 else
     echo "No big lines detected!";
