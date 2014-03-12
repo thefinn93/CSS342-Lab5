@@ -115,8 +115,12 @@ bool ThreadedBST::insert(string token) {
     return true;
 }
 
-bool isTokenInTree (string searchToken) {
-    
+bool ThreadedBST::isTokenInTree (string searchForThisToken) {
+    if (this->isEmpty()) {
+        return false;
+    }else {
+        return isTokenInTreeHelper(rootPtr, searchForThisString);
+    }
 }
 
 /**
@@ -273,8 +277,11 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
 
 /*isTokenInTreeHelper*/
 
-bool isTokenInTreeHelper(Node* currentNode, string searchString) {
-    i
+bool isTokenInTreeHelper(Node* currentNode, string searchToken) {
+    if (currentNode->getData().getToken() == searchToken) {
+        
+    }
+    
 }
 
 
