@@ -1,7 +1,6 @@
 /**
  * @author Nicholas Abel, Finn Herzfeld
  * @date 3/02/2014
- * 
  */
 
 #ifndef NODE_H
@@ -55,20 +54,20 @@ public:
      * and NULL child pointers
      */
     Node();
-    
+
     /**
-     * 
+     * A constructor that takes only a string
      * @param newToken
      */
     Node(string newToken);
-    
+
     /**
-     * 
+     * An empty constructor
      * @param newToken
      * @param newFrequency
      */
     Node(string newToken, int newFrequency);
-    
+
     /**
      * A full constructor, which accepts the full array of data that the node
      * can hold, which are subsequently stored in the node.
@@ -92,6 +91,11 @@ public:
      * @return The data stored in this node.
      */
     NodeData getData() const;
+
+    /**
+     * @return A pointer to this node's data.
+     */
+    NodeData* getDataReference();
 
     /**
      * Sets the data stored in this node.
