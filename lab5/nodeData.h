@@ -133,6 +133,6 @@ private:
     string token;
 };
 
-//#include "nodeData.cpp"
+#include "nodeData.cpp"
 #endif	/* NODEDATA_H */
 
