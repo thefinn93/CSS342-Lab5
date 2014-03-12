@@ -99,7 +99,8 @@ public:
     bool insertOrIncrement(string token);
 
     /**
-     * Sets the frequency of the specified token, or increments it if no value is specified.
+     * Sets the frequency of the specified token, or increments it if no value
+     * is specified.
      * @param token     The token to set the frequency for.
      * @param frequency (optional) The new frequency for the token. Increments
      ** the value by 1 if not specified
@@ -179,7 +180,8 @@ protected:
     /*Add Node Helper*/
 
     /**
-     * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
+     * A private function to insert a new node into the tree. Based heavily on
+     * Frank Carrano's sample code
      * @param subTreePtr    A pointer to the root of the tree the insert is
      * being preformed on.
      * @param newNodePtr    A pointer to the new node that's being inserted.
