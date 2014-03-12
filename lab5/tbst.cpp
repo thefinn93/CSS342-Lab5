@@ -97,13 +97,16 @@ int ThreadedBST::getNumberOfNodes() const {
 /*insert*/
 
 /**
- * Inserts a token into the tree, or increments the token frequency if the token already exists in the node.
+ * Inserts a token into the tree, or increments the token frequency if the
+ * token already exists in the node.
  * @param token The token to insert.
  * @return True if successful, false otherwise
  */
 bool ThreadedBST::insert(string token) {
-    if (threadedIsTokenInTree(token)) {
-        return threadedIncrementHelper(token);
+    Node* current = rootPtr;
+    
+    if (isTokenInTree(token)) {
+        getNodeWithToken(token).getDataRefrence.increseFrequency();
     }
     else {
         Node* newNode = new Node(token);
@@ -112,21 +115,8 @@ bool ThreadedBST::insert(string token) {
     return true;
 }
 
-/**
- * Sets the frequency of the specified token, or increments it if no value is
- * specified.
- * @param token     The token to set the frequency for.
- * @param frequency (optional) The new frequency for the token. Increments
- * the value by 1 if not specified
- * @return True if successful, false otherwise
- */
-bool ThreadedBST::setFrequency(string token, int frequency = 1) {
-    Node* current = rootPtr;
-    if (findInTree(token, current)) {
-        return current->setFrequency(frequency);
-    } else { // Token is not in tree
-        return false;
-    }
+bool isTokenInTree (string searchToken) {
+    
 }
 
 /**
@@ -150,7 +140,7 @@ bool ThreadedBST::remove(string token) {
  * @return The frequency count of the specified token, or 0 if the token
  ** is not in this tree
  */
-int ThreadedBST::getFrequency(string token) {
+int ThreadedBST::getFrequencyOfToken(string token) {
 }
 
 void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
@@ -267,7 +257,7 @@ void ThreadedBST::destroyTree(const Node* treeRootPtr) {
 
 /**
  * A helper function to determine the height of a binary tree. Based
- * heavily on Frank Carrano's sample code.
+ *  heavily on Frank Carrano's sample code.
  * @param subTreePtr A pointer to the root of the tree to measure
  * @return The height of the specified tree
  */
@@ -281,13 +271,20 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
     }
 }
 
+/*isTokenInTreeHelper*/
+
+bool isTokenInTreeHelper(Node* currentNode, string searchString) {
+    i
+}
 
 
 /*balancedInsertHelper*/
 
 /**
- * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
- * @param subTreePtr    A pointer to the root of the tree the insert is being preformed on.
+ * A private function to insert a new node into the tree. Based heavily on 
+ *  Frank Carrano's sample code
+ * @param subTreePtr    A pointer to the root of the tree the insert is 
+ *  being preformed on.
  * @param newNodePtr    A pointer to the new node that's being inserted.
  * @return The root pointer.
  */
@@ -318,6 +315,24 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
         return subTreePtr;
     }
 }
+
+/**
+ * Sets the frequency of the specified token, or increments it if no value is
+ * specified.
+ * @param token     The token to set the frequency for.
+ * @param frequency (optional) The new frequency for the token. Increments
+ * the value by 1 if not specified
+ * @return True if successful, false otherwise
+ */
+bool ThreadedBST::setFrequency(string token, int frequency = 1) {
+    Node* current = rootPtr;
+    if (isTokenInTree(token) {
+        return current->setFrequency(frequency);
+    } else { // Token is not in tree
+        return false;
+    }
+}
+
 /*removeHelper*/
 
 /**
@@ -330,15 +345,15 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
  */
 Node* ThreadedBST::removeHelper(string token, Node* root) {
     if (root != NULL) {
-        Node* current = root;
+        Node* current = rootPtr;
         Node* parent = NULL;
 
-        /// Used in findInTree to report whether the current was taken from
+        /// Used in isTokenInTree to report whether the current was taken from
         /// the parent's left or right child. It is of course passed by
         /// reference
         bool isLeft = false;
-        if (findInTree(token, current, parent, isLeft)) {
-            if (current->rightLeafIsThread() && current->leftLeafIsThread()) {
+        if (isTokenInTree(token, current, parent, isLeft)) {
+            if (current->isRightPtrThread() && current->isLeftPtrThread())) {
                 /// We're a leaf node, no children to worry about!
                 if (isLeft) {
                     parent->leftChild = NULL;
@@ -380,6 +395,8 @@ Node* ThreadedBST::removeHelper(string token, Node* root) {
         return NULL;
     }
 }
+
+
 
 #endif
 
