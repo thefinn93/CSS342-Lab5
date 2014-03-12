@@ -124,15 +124,14 @@ bool ThreadedBST::insertOrIncrement(string token) {
 }
 
 /**
- * Sets the frequency of the specified token, or increments it if no value
- * is specified
+ * Sets the frequency of the specified token, or increments it if no value is specified.
  * @param token     The token to set the frequency for.
  * @param frequency (optional) The new frequency for the token. Increments
  * the value by 1 if not specified
  * @return True if successful, false otherwise
  */
 bool ThreadedBST::setFrequency(string token, int frequency = 1) {
-    current = root;
+    Node* current = rootPtr;
     if (findInTree(token, current)) {
         return current->setFrequency(frequency);
     } else { // Token is not in tree
@@ -317,10 +316,9 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
 Node* ThreadedBST::balancedAddHelper(Node* subTreePtr, Node* leftTail,
         Node* rightTail, Node* newNodePtr) {
     if (subTreePtr == NULL) {
-        newNodePtr->setLeftChildPtr(leftTail);
-        newNodePtr->setLeftPtrIsthread(true);
-
-        newNodePtr->setRightChildPtr(rightTail);
+        newNodePtr->setLeftPtr(leftTail);
+        newNodePtr->setLeftPtrIsThread(true);
+        newNodePtr->setRightPtr(rightTail);
         newNodePtr->setRightPtrIsThread(true);
         return newNodePtr;
     } else {

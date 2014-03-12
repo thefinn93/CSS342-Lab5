@@ -57,6 +57,12 @@ public:
     Node();
     
     ///TODO - Node constructor that takes a token and a frequency argument
+    /**
+     * 
+     * @param newToken
+     * @param newFrequency
+     */
+    Node(string newToken, int newFrequency);
     
     /**
      * A full constructor, which accepts the full array of data that the node
@@ -107,7 +113,7 @@ public:
      * Sets whether or not the left child is a "thread"
      * @param newValue The new value
      */
-    void setLefttPtrIsThread(bool newValue);
+    void setLeftPtrIsThread(bool newValue);
 
     /**
      * Sets whether or not the right child is a "thread"

@@ -144,7 +144,7 @@ bool Node::isRightPtrThread() {
  * Sets whether or not the left child is a "thread"
  * @param newvalue The new value
  */
-void Node::setLefttPtrIsThread(bool newValue) {
+void Node::setLeftPtrIsThread(bool newValue) {
     leftPtrIsThread = newValue;
 }
 
