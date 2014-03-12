@@ -1,1 +1,5 @@
-script: "./travis.sh"
+before_script: travis/installdeps.sh
+script:
+    - travis/biglines.sh
+    - travis/doxygen.sh
+    - travis/integration.sh
