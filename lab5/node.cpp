@@ -114,7 +114,7 @@ NodeData* Node::getData() const {
  * @return True if successful.
  */
 bool Node::setData(const NodeData& newData) {
-    data = newData;
+    data = new NodeData(newData);
     return true;
 }
 
