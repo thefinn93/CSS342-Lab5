@@ -133,6 +133,10 @@ NodeData Node::getData() const {
     return data;
 }
 
+NodeData* Node::getDataReference() {
+    return &data;
+}
+
 /**
  * Sets the data stored in this node.
  * @param data  The data to store in this node

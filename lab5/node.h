@@ -93,6 +93,11 @@ public:
     NodeData getData() const;
 
     /**
+     * @return A pointer to this node's data.
+     */
+    NodeData* getDataReference();
+
+    /**
      * Sets the data stored in this node.
      * @param data  The data to store in this node
      * @return True if successful.
