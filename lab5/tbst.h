@@ -83,23 +83,15 @@ public:
      */
     bool insert(string token);
     
+    bool isTokenInTree(string searchToken);  
+    
     /**
-     * Inserts a token into the tree, or increments the token frequency if the token already exists in the node.
+     * Inserts a token into the tree, or increments the token frequency if the
+     * token already exists in the node.
      * @param token The token to insert.
      * @return True if successful, false otherwise
      */
     bool remove(string token);
-
-    /**
-     * Sets the frequency of the specified token, or increments it if no value is specified.
-     * @param token     The token to set the frequency for.
-     * @param frequency (optional) The new frequency for the token. Increments
-     ** the value by 1 if not specified
-     * @return True if successful, false otherwise
-     */
-    bool setFrequency(string token, int frequency);
-
-
 
     /**
      * Retrieves the frequency of a given token
@@ -107,7 +99,7 @@ public:
      * @return The frequency count of the specified token, or 0 if the token
      ** is not in this tree
      */
-    int getFrequency(string token);
+    int getFrequencyOfToken(string token);    
     
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
@@ -157,8 +149,10 @@ protected:
     /*Get Tree Height Helper*/
     int getHeightHelper(Node* subTreePtr) const;
     
+    /*Is Token In Tree*/
+    bool isTokenInTreeHelper(Node* currentNode, string searchString);
+    
     /*Add Node Helper*/
-
     /**
      * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
      * @param subTreePtr    A pointer to the root of the tree the insert is being preformed on.
@@ -166,15 +160,19 @@ protected:
      * @return The root pointer.
      */
     Node* balancedInsertHelper(Node* subTreePtr, Node* newNodePtr);
-
+    
+    /*Increment Frequency Helper*/
+    /**
+     * Sets the frequency of the specified token, or increments it if no value is specified.
+     * @param token     The token to set the frequency for.
+     * @param frequency (optional) The new frequency for the token. Increments
+     ** the value by 1 if not specified
+     * @return True if successful, false otherwise
+     */
+    bool setFrequency(string token, int frequency);
+    
     /*Remove Node Helper*/
     Node* removeHelper(string token, Node* root);
-
-    /*Is Token In Tree*/
-    bool threadedIsTokenInTree(string token);
-    
-    bool threadedIncrementHelper(Node* subTreePtr, string token);
-    
     
 private:
     /// The root node
