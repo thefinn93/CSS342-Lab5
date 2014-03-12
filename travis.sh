@@ -24,7 +24,9 @@ biglines=`awk 'length > 80 {print FILENAME "(" FNR "): " $0}' *.cpp *.h`
 if [ "$biglines" != "" ]; then
     echo "Big lines detected!"
     awk 'length > 80 {print FILENAME "(" FNR "): " $0}' *.cpp *.h
-    exit 1;
+    if [ "$ALLOW_BIG_LINES" != "yup" ]; then
+        exit 1;
+    fi
 else
     echo "No big lines detected!";
 fi
