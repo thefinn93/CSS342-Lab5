@@ -164,12 +164,31 @@ public:
 
 protected:
 
+    /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;
-    void destroyTree(const Node* treeRootPtr);
+
+    /*Get Tree Height Helper*/
     int getHeightHelper(Node* subTreePtr) const;
+
+    /*Destructor Helper*/
+    void destroyTree(const Node* treeRootPtr);
+
+
+    /*Add Node Helper*/
+
+    /**
+     * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
+     * @param subTreePtr    A pointer to the root of the tree the insert is
+     * being preformed on.
+     * @param newNodePtr    A pointer to the new node that's being inserted.
+     * @return The root pointer.
+     */
+    Node* balancedAddHelper(Node* subTreePtr, Node* newNodePtr);
+
+    /*Remove Node Helper*/
     Node* removeHelper(string token, Node* root);
-    Node* balancedAdd(Node* subTreePtr, Node* newNodePtr);
-    
+
+
     ///TODO - findEntry()
 
 private:
@@ -178,5 +197,6 @@ private:
 
 };
 
+//#include "tbst.cpp"
 #endif
 

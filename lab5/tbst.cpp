@@ -8,6 +8,8 @@
 #define	THREADEDBST_CPP
 
 #include "tbst.h"
+#include "node.h"
+#include "nodeData.h"
 
 using namespace std;
 
@@ -96,7 +98,7 @@ bool ThreadedBST::insert(string token, int frequency) {
 
     //Will this newNode be destroyed at end of insert
     Node* newNode = new Node(token, frequency);
-    rootPtr = balancedAdd(rootPtr, newNode);
+    rootPtr = balancedAddHelper(rootPtr, newNode);
     return true;
 
 }
@@ -300,6 +302,46 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
     }
 }
 
+
+
+/*balancedAddHelper*/
+
+/**
+ * A private function to insert a new node into the tree. Based heavily on
+ * Frank Carrano's sample code
+ * @param subTreePtr    A pointer to the root of the tree the insert is
+ * being preformed on.
+ * @param newNodePtr    A pointer to the new node that's being inserted.
+ * @return The root pointer.
+ */
+Node* ThreadedBST::balancedAddHelper(Node* subTreePtr, Node* leftTail,
+        Node* rightTail, Node* newNodePtr) {
+    if (subTreePtr == NULL) {
+        newNodePtr->setLeftChildPtr(leftTail);
+        newNodePtr->setLeftPtrIsthread(true);
+
+        newNodePtr->setRightChildPtr(rightTail);
+        newNodePtr->setRightPtrIsThread(true);
+        return newNodePtr;
+    } else {
+        Node* leftPtr = subTreePtr->getLeftChildPtr();
+        Node* rightPtr = subTreePtr->getRightChildPtr();
+        if (getHeightHelper(leftPtr) > getHeightHelper(rightPtr)) {
+            // Go right, set the left tail to the current node.
+            rightPtr = balancedAddHelper(rightPtr, subTreePtr, rightTail,
+                    newNodePtr);
+            subTreePtr->setRightChildPtr(rightPtr);
+            subTreePtr->setRightPtrIsThread(false);
+        } else {
+            // Go left, set the right tail to the current node.
+            leftPtr = balancedAddHelper(leftPtr, leftTail, subTreePtr,
+                    newNodePtr);
+            subTreePtr->setLeftChildPtr(leftPtr);
+            subTreePtr->setLeftPtrIsThread(false);
+        }
+        return subTreePtr;
+    }
+}
 /*removeHelper*/
 
 /**
@@ -360,45 +402,6 @@ Node* ThreadedBST::removeHelper(string token, Node* root) {
 
     } else { // Tree is empty, nothing to remove
         return NULL;
-    }
-}
-
-/*balancedAdd*/
-
-/**
- * A private function to insert a new node into the tree. Based heavily on
- * Frank Carrano's sample code
- * @param subTreePtr    A pointer to the root of the tree the insert is
- * being preformed on.
- * @param newNodePtr    A pointer to the new node that's being inserted.
- * @return The root pointer.
- */
-Node* ThreadedBST::balancedAdd(Node* subTreePtr, Node* leftTail,
-        Node* rightTail, Node* newNodePtr) {
-    if (subTreePtr == NULL) {
-        newNodePtr->setLeftChildPtr(leftTail);
-        newNodePtr->setLeftPtrIsthread(true);
-
-        newNodePtr->setRightChildPtr(rightTail);
-        newNodePtr->setRightPtrIsThread(true);
-        return newNodePtr;
-    } else {
-        Node* leftPtr = subTreePtr->getLeftChildPtr();
-        Node* rightPtr = subTreePtr->getRightChildPtr();
-        if (getHeightHelper(leftPtr) > getHeightHelper(rightPtr)) {
-            // Go right, set the left tail to the current node.
-            rightPtr = balancedAdd(rightPtr, subTreePtr, rightTail,
-                    newNodePtr);
-            subTreePtr->setRightChildPtr(rightPtr);
-            subTreePtr->setRightPtrIsThread(false);
-        } else {
-            // Go left, set the right tail to the current node.
-            leftPtr = balancedAdd(leftPtr, leftTail, subTreePtr,
-                    newNodePtr);
-            subTreePtr->setLeftChildPtr(leftPtr);
-            subTreePtr->setLeftPtrIsThread(false);
-        }
-        return subTreePtr;
     }
 }
 
