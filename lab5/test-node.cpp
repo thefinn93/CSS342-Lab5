@@ -216,6 +216,35 @@ void testSetters() {
     }
     cout << endl;
 
+    Node* otherChild = new Node();
+    cout.width(WIDTH);
+    cout << left << "setLeftPtr():";
+    testThreadSetters.setLeftPtr(otherChild);
+    if(testThreadSetters.getLeftChildPtr() == otherChild) {
+        cout << "PASS";
+    } else if(testThreadSetters.getLeftChildPtr() == child) {
+        cout << "FAIL";
+    } else {
+        cout << "FAIL (set pointer to something else)";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << left << "setRightPtr():";
+    testThreadSetters.setRightPtr(otherChild);
+    if(testThreadSetters.getRightChildPtr() == otherChild) {
+        cout << "PASS";
+    } else if(testThreadSetters.getRightChildPtr() == child) {
+        cout << "FAIL";
+    } else {
+        cout << "FAIL (set pointer to something else)";
+    }
+    cout << endl;
+
+
+    delete otherChild;
+    delete child;
+
 }
 
 int main() {
