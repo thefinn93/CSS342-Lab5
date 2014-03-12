@@ -119,6 +119,14 @@ void testOperators() {
     }
     cout << endl;
 
+    cout.width(WIDTH);
+    cout << left << "Assignment (=) operator:";
+    Node nodeBananas2 = nodeBananas;
+    if(nodeBananas2 == nodeBananas) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
 }
 
 void testGetters() {
