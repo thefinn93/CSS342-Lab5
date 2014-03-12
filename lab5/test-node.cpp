@@ -1,6 +1,5 @@
 #include "credits.cpp"
 #include "node.h"
-#include "nodeData.h"
 
 #include <string>
 
@@ -10,9 +9,9 @@ void testConstructors() {
     cout << "============== Constructors =================" << endl;
 
     cout.width(WIDTH);
-    cout << "Empty constructor test:";
+    cout << left << "Empty constructor test:";
     try {
-        Node emptyConstructorTest = Node();
+        Node emptyConstructorTest();
         cout << "PASS (didn't crash)";
     } catch(...) {
         cout << "FAIL (crashed)";
@@ -20,7 +19,7 @@ void testConstructors() {
     cout << endl;
 
     cout.width(WIDTH);
-    cout << "Copy constructor test:";
+    cout <<  left << "Copy constructor test:";
     Node copyMe = Node();
     try {
         Node copiedNode = Node(copyMe);
@@ -31,32 +30,24 @@ void testConstructors() {
     cout << endl;
 
     cout.width(WIDTH);
-    cout << "Full constructor test:";
-    Node *left = new Node();
-    Node *right = new Node();
-    NodeData *data = new NodeData("test", 3);
+    cout <<  left << "Token-only constructor test:";
     try {
-        Node fullConstructor = Node(data, left, right, true, true);
+        Node fullConstructor = Node((string)"test");
         cout << "PASS (didn't crash)";
     } catch(...) {
         cout << "FAIL (crashed)";
     }
-    delete left;
-    delete right;
-    delete data;
+    cout << endl;
+
 }
 
 void testOperators() {
     cout << "===================== Operators Test ===================" << endl;
 
     cout.width(WIDTH);
-    cout << "Less than (<) operator:";
-    NodeData* apples = new NodeData("apples");
-    NodeData* bananas = new NodeData("bananas");
-    Node* left = new Node();
-    Node* right = new Node();
-    Node nodeApples = Node(apples, left, right, true, true);
-    Node nodeBananas = Node(bananas, left, right, true, true);
+    cout <<  left << "Less than (<) operator:";
+    Node nodeApples = Node((string)"apples");
+    Node nodeBananas = Node((string)"bananas");
 
     if(nodeBananas < nodeApples) {
         cout << "PASS";
@@ -66,7 +57,7 @@ void testOperators() {
     cout << endl;
 
     cout.width(WIDTH);
-    cout << "Less than (<) operator negative:";
+    cout <<  left << "Less than (<) operator negative:";
     if(nodeApples < nodeBananas) {
         cout << "FAIL";
     } else {
@@ -75,7 +66,7 @@ void testOperators() {
     cout << endl;
 
     cout.width(WIDTH);
-    cout << "Greater than (>) operator:";
+    cout <<  left << "Greater than (>) operator:";
 
     if(nodeApples > nodeBananas) {
         cout << "PASS";
@@ -85,7 +76,7 @@ void testOperators() {
     cout << endl;
 
     cout.width(WIDTH);
-    cout << "Greater than (>) operator negative:";
+    cout <<  left << "Greater than (>) operator negative:";
     if(nodeBananas > nodeApples) {
         cout << "FAIL";
     } else {
@@ -93,9 +84,9 @@ void testOperators() {
     }
     cout << endl;
 
-    Node nodeApples2 = Node(apples, left, right, true, true);
+    Node nodeApples2 = Node((string)"apples");
     cout.width(WIDTH);
-    cout << "Equality (==) operator:";
+    cout <<  left << "Equality (==) operator:";
 
     if(nodeApples == nodeApples2) {
         cout << "PASS";
@@ -105,7 +96,7 @@ void testOperators() {
     cout << endl;
 
     cout.width(WIDTH);
-    cout << "Equality (==) operator negative:";
+    cout <<  left << "Equality (==) operator negative:";
     if(nodeBananas == nodeApples) {
         cout << "FAIL";
     } else {
@@ -113,16 +104,12 @@ void testOperators() {
     }
     cout << endl;
 
-    delete left;
-    delete right;
-    delete apples;
-    delete bananas;
-
 }
 
 
 int main() {
     credits();
     testConstructors();
+//    testOperators();
     return 0;
 }
