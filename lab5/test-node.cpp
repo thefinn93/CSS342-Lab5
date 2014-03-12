@@ -121,10 +121,68 @@ void testOperators() {
 
 }
 
+void testGetters() {
+    cout << "===================== Getters Test ===================" << endl;
+
+    cout.width(WIDTH);
+    cout << "getData():";
+    NodeData applesNodeData = NodeData("apples", 4);
+    Node applesNode = Node("apples", 4);
+    if(applesNode.getData() == applesNodeData) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "isLeftPtrThread():";
+    Node* child = new Node();
+    Node applesNodeWithThreads = Node(applesNodeData, child, child, true,
+            false);
+    if(applesNodeWithThreads.isLeftPtrThread()) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "isRightPtrThread():";
+    if(applesNodeWithThreads.isRightPtrThread()) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "getLeftChildPtr():";
+    if(applesNodeWithThreads.getLeftChildPtr() == child) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    /// This one really serves no purpose, unless we accidently break one but
+    /// not the other, which seems highly unlikely to happen.
+    cout.width(WIDTH);
+    cout << "getRightChildPtr():";
+    if(applesNodeWithThreads.getRightChildPtr() == child) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    delete child;
+}
 
 int main() {
     credits();
     testConstructors();
     testOperators();
+    testGetters();
     return 0;
 }
