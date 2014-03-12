@@ -138,6 +138,7 @@ void testOperators() {
     } else {
         cout << "FAIL";
     }
+    cout << endl;
 }
 
 void testGetters() {
