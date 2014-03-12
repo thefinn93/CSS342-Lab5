@@ -65,7 +65,7 @@ Node& Node::operator=(const Node& right) {
  * and NULL child pointers
  */
 Node::Node() {
-    data = new NodeData();
+    data = NodeData();
     leftChildPtr = NULL;
     rightChildPtr = NULL;
     leftPtrIsThread = false;
@@ -105,7 +105,7 @@ Node::Node(string newToken, int newFrequency) {
  * @param left          A pointer to this node's left child (may be NULL)
  * @param right         A pointer to this node's right child (may be NULL)
  */
-Node::Node(NodeData* newNodeData, Node* left, Node* right, bool leftIsThread,
+Node::Node(NodeData newNodeData, Node* left, Node* right, bool leftIsThread,
         bool rightIsThread) {
     data = newNodeData;
     leftChildPtr = left;
@@ -130,7 +130,7 @@ Node::Node(const Node& nodeToCopy) {
 /**
  * @return The data stored in this node.
  */
-NodeData* Node::getData() const {
+NodeData Node::getData() const {
     return data;
 }
 
@@ -140,7 +140,7 @@ NodeData* Node::getData() const {
  * @return True if successful.
  */
 bool Node::setData(const NodeData& newData) {
-    data = new NodeData(newData);
+    data = newData;
     return true;
 }
 
