@@ -150,7 +150,7 @@ protected:
     int getHeightHelper(Node* subTreePtr) const;
     
     /*Is Token In Tree*/
-    bool isTokenInTreeHelper(Node* currentNode, string searchString);
+    bool isTokenInTreeHelper(Node* currentNode, string searchToken);
     
     /*Add Node Helper*/
     /**
