@@ -75,6 +75,19 @@ Node::Node() {
 /**
  * 
  * @param newToken
+ */
+Node::Node(string newToken) {
+    data = NodeData(newToken);
+    leftChildPtr = NULL;
+    rightChildPtr = NULL;
+    leftPtrIsThread = false;
+    rightPtrIsThread = false;
+}
+
+
+/**
+ * 
+ * @param newToken
  * @param newFrequency
  */
 Node::Node(string newToken, int newFrequency) {

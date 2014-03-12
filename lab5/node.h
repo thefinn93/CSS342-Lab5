@@ -56,7 +56,12 @@ public:
      */
     Node();
     
-    ///TODO - Node constructor that takes a token and a frequency argument
+    /**
+     * 
+     * @param newToken
+     */
+    Node(string newToken);
+    
     /**
      * 
      * @param newToken

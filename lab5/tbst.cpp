@@ -84,6 +84,15 @@ int ThreadedBST::getHeight() const {
     return getHeightHelper(rootPtr);
 }
 
+/*getNumberofNodes*/
+
+/**
+ * Returns the total number of tokens stored in this tree
+ * @return The number of nodes in this tree.
+ */
+int ThreadedBST::getNumberOfNodes() const {
+
+}
 
 /*insert*/
 
@@ -103,15 +112,6 @@ bool ThreadedBST::insert(string token, int frequency) {
 
 }
 
-/*getNumberofNodes*/
-
-/**
- * Returns the total number of tokens stored in this tree
- * @return The number of nodes in this tree.
- */
-int ThreadedBST::getNumberOfNodes() const {
-
-}
 
 /**
  * Inserts a token if it is not already there, otherwise increments the

@@ -84,7 +84,12 @@ public:
      * @return True if successful, false otherwise
      */
     bool insert(string token, int frequency);
-
+    /**
+     * Removes a node from the tree by token.
+     * @param token The token to remove
+     * @return True if successful, false otherwise
+     */
+    bool remove(string token);
     /**
      * Inserts a token if it is not already there, otherwise increments the
      ** frequency count for that token.
@@ -102,12 +107,7 @@ public:
      */
     bool setFrequency(string token, int frequency);
 
-    /**
-     * Removes a node from the tree by token.
-     * @param token The token to remove
-     * @return True if successful, false otherwise
-     */
-    bool remove(string token);
+
 
     /**
      * Retrieves the frequency of a given token
