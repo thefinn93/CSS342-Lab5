@@ -1,1 +1,7 @@
 script: "./travis.sh"
+notifications:
+  irc:
+    channels:
+      - "seattle.uwirc.net#wat"
+    use_notice: true
+    skip_join: true
