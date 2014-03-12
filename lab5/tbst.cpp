@@ -97,30 +97,19 @@ int ThreadedBST::getNumberOfNodes() const {
 /*insert*/
 
 /**
- * Inserts a token into the tree, and optionally frequency for that token
+ * Inserts a token into the tree, or increments the token frequency if the token already exists in the node.
  * @param token The token to insert.
- * @param frequency (optional) The frequency of this token. Assumed 1 if
- * not specified
  * @return True if successful, false otherwise
  */
-bool ThreadedBST::insert(string token, int frequency) {
-
-    //Will this newNode be destroyed at end of insert
-    Node* newNode = new Node(token, frequency);
-    rootPtr = balancedAddHelper(rootPtr, newNode);
+bool ThreadedBST::insert(string token) {
+    if (threadedIsTokenInTree(token)) {
+        return threadedIncrementHelper(token);
+    }
+    else {
+        Node* newNode = new Node(token);
+        rootPtr = balancedInsertHelper(rootPtr, newNode);        
+    }
     return true;
-
-}
-
-
-/**
- * Inserts a token if it is not already there, otherwise increments the
- * frequency count for that token.
- * @param token The token to insert or increment
- * @return True if successful, false otherwise
- */
-bool ThreadedBST::insertOrIncrement(string token) {
-
 }
 
 /**
@@ -163,16 +152,6 @@ bool ThreadedBST::remove(string token) {
 int ThreadedBST::getFrequency(string token) {
 }
 
-///TODO - exists() may be implemented with findEntry() check this.
-
-/**
- * Checks if the specified token is in this tree
- * @param token The token to search for
- * @return True if the token is in this tree, false otherwise
- */
-bool ThreadedBST::exists(string token) {
-}
-
 void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
     Node* current = rootPtr;
     // Once we've visited every node, this will be set to true
@@ -189,13 +168,13 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
          * times that we need to visit it.
          */
         if (goright || current->isRightPtrThread() ||
-                current->leftChild == NULL) {
+                current->getLeftChildPtr() == NULL) {
             (*visit)(current&);
             /// If this is a right leaf, the next node needs to be visited
             goright = current->isRightPtrThread();
-            current = current->rightChild;
+            current = current->getRightChildPtr();
         } else { /// Otherwise go left
-            current = current->leftChild;
+            current = current->getLeftChildPtr();
         }
         if (current == rootPtr && hasSeenAtLeastOne) {
             done = true;
@@ -213,8 +192,8 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
  */
 void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
     if (treePtr != NULL) {
-        ItemType theItem = treePtr->getItem();
-        (*visit)(theItem);
+        Node* theNode = treePtr->getData();
+        (*visit)(theNode);
         preorder(visit, treePtr->getLeftChildPtr());
         preorder(visit, treePtr->getRightChildPtr());
     }
@@ -232,8 +211,8 @@ void ThreadedBST::postorder(void visit(NodeData*), Node* treePtr) const {
     if (treePtr != NULL) {
         postorder(visit, treePtr->getLeftChildPtr());
         postorder(visit, treePtr->getRightChildPtr());
-        ItemType theItem = treePtr->getItem();
-        (*visit)(theItem);
+        NodeData* theData = treePtr->getData();
+        (*visit)(theData);
     }
 }
 
@@ -303,17 +282,15 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
 
 
 
-/*balancedAddHelper*/
+/*balancedInsertHelper*/
 
 /**
- * A private function to insert a new node into the tree. Based heavily on
- * Frank Carrano's sample code
- * @param subTreePtr    A pointer to the root of the tree the insert is
- * being preformed on.
+ * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
+ * @param subTreePtr    A pointer to the root of the tree the insert is being preformed on.
  * @param newNodePtr    A pointer to the new node that's being inserted.
  * @return The root pointer.
  */
-Node* ThreadedBST::balancedAddHelper(Node* subTreePtr, Node* leftTail,
+Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
         Node* rightTail, Node* newNodePtr) {
     if (subTreePtr == NULL) {
         newNodePtr->setLeftPtr(leftTail);
@@ -326,15 +303,15 @@ Node* ThreadedBST::balancedAddHelper(Node* subTreePtr, Node* leftTail,
         Node* rightPtr = subTreePtr->getRightChildPtr();
         if (getHeightHelper(leftPtr) > getHeightHelper(rightPtr)) {
             // Go right, set the left tail to the current node.
-            rightPtr = balancedAddHelper(rightPtr, subTreePtr, rightTail,
+            rightPtr = balancedInsertHelper(rightPtr, subTreePtr, rightTail,
                     newNodePtr);
-            subTreePtr->setRightChildPtr(rightPtr);
+            subTreePtr->setRightPtr(rightPtr);
             subTreePtr->setRightPtrIsThread(false);
         } else {
             // Go left, set the right tail to the current node.
-            leftPtr = balancedAddHelper(leftPtr, leftTail, subTreePtr,
+            leftPtr = balancedInsertHelper(leftPtr, leftTail, subTreePtr,
                     newNodePtr);
-            subTreePtr->setLeftChildPtr(leftPtr);
+            subTreePtr->setLeftPtr(leftPtr);
             subTreePtr->setLeftPtrIsThread(false);
         }
         return subTreePtr;
