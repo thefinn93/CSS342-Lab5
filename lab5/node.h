@@ -121,10 +121,10 @@ public:
 private:
 
     /// The information to store in this node
-    NodeData* data;
+    Node* data;
 
     /// A pointer to this node's left child
-    NodeData* leftChildPtr;
+    Node* leftChildPtr;
 
     /// A pointer to this node's right child
     NodeData* rightChildPtr;
