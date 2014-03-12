@@ -40,6 +40,17 @@ void testConstructors() {
     cout << endl;
 
     cout.width(WIDTH);
+    cout <<  left << "Token, frequency constructor test:";
+    try {
+        Node fullNodeDataConstructor = Node((string)"test", 3);
+        cout << "PASS (didn't crash)";
+    } catch(...) {
+        cout << "FAIL (crashed)";
+    }
+    cout << endl;
+
+
+    cout.width(WIDTH);
     cout <<  left << "Full constructor test:";
     NodeData fullNodeData = NodeData("testing", 5);
     Node* leftChild = new Node();
