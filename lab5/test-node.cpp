@@ -32,13 +32,28 @@ void testConstructors() {
     cout.width(WIDTH);
     cout <<  left << "Token-only constructor test:";
     try {
-        Node fullConstructor = Node((string)"test");
+        Node tokenConstructor = Node((string)"test");
         cout << "PASS (didn't crash)";
     } catch(...) {
         cout << "FAIL (crashed)";
     }
     cout << endl;
 
+    cout.width(WIDTH);
+    cout <<  left << "Full constructor test:";
+    NodeData fullNodeData = NodeData("testing", 5);
+    Node* leftChild = new Node();
+    Node* rightChild = new Node();
+    try {
+        Node fullConstructor = Node(fullNodeData, leftChild, rightChild, true,
+                true);
+        cout << "PASS (didn't crash)";
+    } catch(...) {
+        cout << "FAIL (crashed)";
+    }
+    cout << endl;
+    delete rightChild;
+    delete leftChild;
 }
 
 void testOperators() {
