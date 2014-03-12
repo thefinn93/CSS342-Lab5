@@ -78,7 +78,7 @@ public:
      * Retrieves the data element stored in this Node.
      * @return The data stored in this node.
      */
-    NodeData getData() const;
+    NodeData* getData() const;
 
     /**
      * Sets the data stored in this node.

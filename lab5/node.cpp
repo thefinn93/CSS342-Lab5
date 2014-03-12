@@ -104,7 +104,7 @@ Node::Node(const Node& nodeToCopy) {
 /**
  * @return The data stored in this node.
  */
-NodeData Node::getData() const {
+NodeData* Node::getData() const {
     return data;
 }
 
