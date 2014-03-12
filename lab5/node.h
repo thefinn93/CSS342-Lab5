@@ -121,13 +121,13 @@ public:
 private:
 
     /// The information to store in this node
-    Node* data;
+    NodeData* data;
 
     /// A pointer to this node's left child
     Node* leftChildPtr;
 
     /// A pointer to this node's right child
-    NodeData* rightChildPtr;
+    Node* rightChildPtr;
 
     /// Whether nor not the left pointer is a thread
     bool leftPtrIsThread;
