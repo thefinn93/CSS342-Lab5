@@ -23,8 +23,8 @@ using namespace std;
  * @param right The node to compare to.
  * @return True if the two Node's data are equal, False otherwise.
  */
-Node& Node::operator==(const Node& right) const {
-    return (this->getData() == right.getData());
+bool Node::operator==(const Node& right) const {
+    return (getData() == right.getData());
 }
 
 /**
@@ -34,8 +34,8 @@ Node& Node::operator==(const Node& right) const {
  * @return  True if this Node's data is less than that of the right
  ** Node's, False otherwise
  */
-Node& Node::operator<(const Node& right) const {
-    return (this->getData() < right.getData());
+bool Node::operator<(const Node& right) const {
+    return (getData() < right.getData());
 }
 
 /**
@@ -45,8 +45,8 @@ Node& Node::operator<(const Node& right) const {
  * @return  True if this Node's data is greater than that of the right
  ** Node's, False otherwise
  */
-Node& Node::operator>(const Node& right) const {
-    return (this->getData() > right.getData());
+bool Node::operator>(const Node& right) const {
+    return (getData() > right.getData());
 }
 
 /**
@@ -98,13 +98,13 @@ Node::Node(const Node& nodeToCopy) {
     leftChildPtr = NULL;
     rightChildPtr = NULL;
     leftPtrIsThread = false;
-    rightPtrIsThread = false;    
+    rightPtrIsThread = false;
 }
 
 /**
  * @return The data stored in this node.
  */
-NodeData Node::getData() {
+NodeData Node::getData() const {
     return data;
 }
 

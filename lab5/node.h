@@ -16,14 +16,13 @@ class Node {
 public:
 
     /*-----------Comparison Operators-----------*/
-    
     /**
      * Checks if the value of this Node's data is equal to that of right Node's
      * data
      * @param right The node to compare to.
      * @return True if the two Node's data are equal, False otherwise.
      */
-    Node& operator==(const Node& right) const;
+    bool operator==(const Node& right) const;
 
     /**
      * Checks if the value of this Node's data is less than that of another
@@ -32,7 +31,7 @@ public:
      * @return  True if this Node's data is less than that of the right
      ** Node's, False otherwise
      */
-    Node& operator<(const Node& right) const;
+    bool operator<(const Node& right) const;
 
     /**
      * Checks if the value of this Node's data is greater than that of
@@ -41,7 +40,7 @@ public:
      * @return  True if this Node's data is greater than that of the right
      ** Node's, False otherwise
      */
-    Node& operator>(const Node& right) const;
+    bool operator>(const Node& right) const;
 
     /**
      * Sets the data in this Node to the same values of the data of another
@@ -79,7 +78,7 @@ public:
      * Retrieves the data element stored in this Node.
      * @return The data stored in this node.
      */
-    NodeData getData();
+    NodeData getData() const;
 
     /**
      * Sets the data stored in this node.
@@ -87,14 +86,14 @@ public:
      * @return True if successful.
      */
     bool setData(const NodeData& newData);
-    
+
     /**
      * Checks if the left pointer is a "thread", ie. points to a node
      * that is not a child of this node.
      * @return True if the left pointer is a thread, false otherwise
      */
     bool isLeftPtrThread();
-    
+
     /**
      * Checks if the right pointer is a "thread", ie. points to a node
      * that is not a child of this node.
@@ -107,13 +106,13 @@ public:
      * @param newValue The new value
      */
     void setLefttPtrIsThread(bool newValue);
-    
+
     /**
      * Sets whether or not the right child is a "thread"
      * @param newValue The new value
      */
     void setRightPtrIsThread(bool newValue);
-    
+
     Node* getLeftChildPtr();
     Node* getRightChildPtr();
     void setLeftPtr(Node* newRightNode);
@@ -138,5 +137,5 @@ private:
 
 };
 
-//#include "node.cpp"
+#include "node.cpp"
 #endif /* NODEDATA_H */
