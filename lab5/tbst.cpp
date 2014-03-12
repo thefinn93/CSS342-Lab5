@@ -33,6 +33,7 @@ ThreadedBST::ThreadedBST(const Node& rootNode) {
 }
 
 ///TODO - DELETE?
+
 /**
  * Initializes a TBST. At this point we have not determined the purpose of
  * this constructor, but it was in the book and we suspect it may come in
@@ -103,23 +104,22 @@ int ThreadedBST::getNumberOfNodes() const {
  * @return True if successful, false otherwise
  */
 bool ThreadedBST::insert(string token) {
-    
+
     if (this->isTokenInTree(token)) {
         ///iterates the frequency by 1
-        nodeWithToken(rootPtr, token)->getDataReference()->increaseFrequency();  
-        
-    }
-    else {
+        nodeWithToken(rootPtr, token)->getDataReference()->increaseFrequency();
+
+    } else {
         Node* newNode = new Node(token);
-        rootPtr = balancedInsertHelper(rootPtr, newNode);        
+        rootPtr = balancedInsertHelper(rootPtr, newNode);
     }
     return true;
 }
 
-bool ThreadedBST::isTokenInTree (string searchForThisToken) {
+bool ThreadedBST::isTokenInTree(string searchForThisToken) {
     if (this->isEmpty()) {
         return false;
-    }else {
+    } else {
         return isTokenInTreeHelper(rootPtr, searchForThisToken);
     }
 }
@@ -130,13 +130,14 @@ bool ThreadedBST::isTokenInTree (string searchForThisToken) {
  * @return True if successful, false otherwise
  */
 bool ThreadedBST::remove(string token) {
-    Node* removed = removeHelper(token, rootPtr);
-    if (removed != NULL) { // Token was found and removed
+    if (isTokenInTree(token)) {
+        Node* removed = removeHelper(token, rootPtr, NULL);
         delete removed;
         return true;
-    } else { // Token not found
-        return false;
+    } else {
+        return false; /// No matching node to remove
     }
+
 }
 
 /**
@@ -146,6 +147,11 @@ bool ThreadedBST::remove(string token) {
  ** is not in this tree
  */
 int ThreadedBST::getFrequencyOfToken(string token) {
+    if (isTokenInTree(token)) {
+        return nodeWithToken(token)->getData().getFrequency();
+    } else {
+        return 0; /// NOT MAGIC, IS THE NUMBER 0
+    }
 }
 
 void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
@@ -281,28 +287,26 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
 bool ThreadedBST::isTokenInTreeHelper(Node* currentNode, string searchToken) {
     if (currentNode->getData().getToken() == searchToken) {
         return true;
-    }
-    else {
-        if(currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node* currentNode->getLeftChildPtr(), string searchToken);
+    } else {
+        if (currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(), string searchToken);
         }
-        if(currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node* currentNode->getRightChildPtr(), string searchToken);
+        if (currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(), string searchToken);
         }
-        return false;       /// searchToken is never found
+        return false; /// searchToken is never found
     }
 }
 
 Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
     if (currentNode->getData().getToken() == searchToken) {
         return currentNode;
-    }
-    else {
-        if(currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node* currentNode->getLeftChildPtr(), string searchToken);
+    } else {
+        if (currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(), string searchToken);
         }
-        if(currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node* currentNode->getRightChildPtr(), string searchToken);
+        if (currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(), string searchToken);
         }
         /// We already know the node is in the tree. No need to have an
         /// alternate return.
@@ -357,9 +361,11 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
  */
 bool ThreadedBST::setFrequency(string token, int frequency = 1) {
     Node* current = rootPtr;
+
     if (isTokenInTree(token) {
-        return current->setFrequency(frequency);
-    } else { // Token is not in tree
+            return current->setFrequency(frequency);
+        } else { // Token is not in tree
+
         return false;
     }
 }
@@ -374,57 +380,56 @@ bool ThreadedBST::setFrequency(string token, int frequency = 1) {
  * @return          The pointer to the removed node, or NULL if it was not
  * found.
  */
-Node* ThreadedBST::removeHelper(string token, Node* rootPtr) {
-    if (rootPtr != NULL) {
-        Node* current = rootPtr;
-        Node* parent = NULL;
+Node* ThreadedBST::removeHelper(string token, Node* subTreeRootNodePtr, Node* parentNodePtr) {
 
-        /// Used in isTokenInTree to report whether the current was taken from
-        /// the parent's left or right child. It is of course passed by
-        /// reference
-        bool isLeft = false;
-        if (isTokenInTree(token)) {
-            if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
-                /// We're a leaf node, no children to worry about!
-                if (isLeft) {
-                    parent->leftChild = NULL;
-                } else {
-                    parent->rightChild = NULL;
-                }
-                /// Fixes the threads on the parent that now has a NULL
-                /// child. Knowledge of current's threads will help.
-                fixThreads(parent, current);
-                return current;
+        Node* current = subTreeRootNodePtr;
+        Node* parent = parentNodePtr;
+
+            /// Used in isTokenInTree to report whether the current was taken from
+            /// the parent's left or right child. It is of course passed by
+            /// reference
+            bool isLeft = false;
+    if (isTokenInTree(token)) {
+        if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
+            /// We're a leaf node, no children to worry about!
+            if (isLeft) {
+                parent->leftChild = NULL;
             } else {
-                // Finds the largest leaf given the root of a tree and removes
-                // it
-                replacementToken = findLargestTokenInTree(current);
-                replacement = remove(replacementToken);
-
-                if (current->leftChild != NULL) {
-                    replacement->leftChild = current->leftChild;
-                    replacement->leftPtrIsThread(current->isLeftPtrThread());
-                }
-
-                if (current->rightChild != NULL) {
-                    replacement->rightChild = current->rightChild;
-                    replacement->rightPtrIsThread(current->isRightPtrThread());
-                }
-
-                if (isLeft) {
-                    parent->leftChild = replacement;
-                } else {
-                    parent->rightChild = replacement;
-                }
-                return current;
+                parent->rightChild = NULL;
             }
-        } else { // token is not in this tree
-            return NULL;
-        }
+            /// Fixes the threads on the parent that now has a NULL
+            /// child. Knowledge of current's threads will help.
+            fixThreads(parent, current);
+            return current;
+        } else {
+            // Finds the largest leaf given the root of a tree and removes it
+            replacementToken = findLargestTokenInTree(current);
+                    replacement = remove(replacementToken);
 
-    } else { // Tree is empty, nothing to remove
+            if (current->leftChild != NULL) {
+                replacement->leftChild = current->leftChild;
+                        replacement->leftPtrIsThread(current->isLeftPtrThread());
+            }
+
+            if (current->rightChild != NULL) {
+                replacement->rightChild = current->rightChild;
+                        replacement->rightPtrIsThread(current->isRightPtrThread());
+            }
+
+            if (isLeft) {
+                parent->leftChild = replacement;
+            } else {
+                parent->rightChild = replacement;
+            }
+            return current;
+        }
+    } else { // token is not in this tree
         return NULL;
     }
+
+} else { // Tree is empty, nothing to remove
+    return NULL;
+}
 }
 
 

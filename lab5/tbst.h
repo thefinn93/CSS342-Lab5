@@ -171,7 +171,7 @@ protected:
     bool setFrequency(string token, int frequency);
     
     /*Remove Node Helper*/
-    Node* removeHelper(string token, Node* rootPtr);
+    Node* removeHelper(string token, Node* subTreeRootNodePtr, Node* parentNodePtr);
     
 private:
     /// The root node
