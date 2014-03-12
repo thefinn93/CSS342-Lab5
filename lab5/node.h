@@ -150,5 +150,5 @@ private:
 
 };
 
-//#include "node.cpp"
+#include "node.cpp"
 #endif /* NODEDATA_H */
