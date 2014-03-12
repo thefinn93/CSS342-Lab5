@@ -179,6 +179,45 @@ void testGetters() {
     delete child;
 }
 
+void testSetters() {
+    cout << "===================== Setters Test ===================" << endl;
+
+    cout.width(WIDTH);
+    cout << "setData():";
+    Node testSetData = Node();
+    NodeData dataToSet = NodeData("OMGTOKEN", 5);
+    testSetData.setData(dataToSet);
+    if(testSetData.getData() == dataToSet) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "setLeftPtrIsThread():";
+    Node* child = new Node();
+    Node testThreadSetters = Node(dataToSet, child, child, false, false);
+    testThreadSetters.setLeftPtrIsThread(true);
+    if(testThreadSetters.isLeftPtrThread()) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << "setRightPtrIsThread():";
+    testThreadSetters.setRightPtrIsThread(true);
+    if(testThreadSetters.isRightPtrThread()) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+}
+
 int main() {
     credits();
     testConstructors();
