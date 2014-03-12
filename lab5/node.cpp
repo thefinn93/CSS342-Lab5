@@ -73,6 +73,19 @@ Node::Node() {
 }
 
 /**
+ * 
+ * @param newToken
+ * @param newFrequency
+ */
+Node::Node(string newToken, int newFrequency) {
+    data = NodeData(newToken, newFrequency);
+    leftChildPtr = NULL;
+    rightChildPtr = NULL;
+    leftPtrIsThread = false;
+    rightPtrIsThread = false;
+}
+
+/**
  * A full constructor, which accepts the full array of data that the node
  * can hold, which are subsequently stored in the node.
  * @param data          The NodeData to store in the node.
