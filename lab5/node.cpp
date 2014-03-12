@@ -112,7 +112,6 @@ Node::Node(NodeData newNodeData, Node* left, Node* right, bool leftIsThread,
     rightChildPtr = right;
     leftPtrIsThread = leftIsThread;
     rightPtrIsThread = rightIsThread;
-
 }
 
 /**

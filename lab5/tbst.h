@@ -79,28 +79,19 @@ public:
     /**
      * Inserts a token into the tree, and optionally frequency for that token
      * @param token The token to insert.
-     * @param frequency (optional) The frequency of this token. Assumed 1 if
-     ** not specified
      * @return True if successful, false otherwise
      */
-    bool insert(string token, int frequency);
+    bool insert(string token);
+    
     /**
-     * Removes a node from the tree by token.
-     * @param token The token to remove
+     * Inserts a token into the tree, or increments the token frequency if the token already exists in the node.
+     * @param token The token to insert.
      * @return True if successful, false otherwise
      */
     bool remove(string token);
-    /**
-     * Inserts a token if it is not already there, otherwise increments the
-     ** frequency count for that token.
-     * @param token The token to insert or increment
-     * @return True if successful, false otherwise
-     */
-    bool insertOrIncrement(string token);
 
     /**
-     * Sets the frequency of the specified token, or increments it if no value
-     * is specified.
+     * Sets the frequency of the specified token, or increments it if no value is specified.
      * @param token     The token to set the frequency for.
      * @param frequency (optional) The new frequency for the token. Increments
      ** the value by 1 if not specified
@@ -117,16 +108,7 @@ public:
      ** is not in this tree
      */
     int getFrequency(string token);
-
-
-    /**
-     * Checks if the specified token is in this tree
-     * @param token The token to search for
-     * @return True if the token is in this tree, false otherwise
-     */
-    bool exists(string token);
-
-
+    
     /**
      * Preforms an in-order traversal of the tree, executing the passed method
      *  on each node as it is visited. This version uses an iterative algorithm
@@ -164,36 +146,34 @@ public:
 
 protected:
     
-    /*Is Token In Tree*/
-    bool isTokenInTree(string token);
+
 
     /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;
-
-    /*Get Tree Height Helper*/
-    int getHeightHelper(Node* subTreePtr) const;
-
+    
     /*Destructor Helper*/
     void destroyTree(const Node* treeRootPtr);
-
-
+    
+    /*Get Tree Height Helper*/
+    int getHeightHelper(Node* subTreePtr) const;
+    
     /*Add Node Helper*/
 
     /**
-     * A private function to insert a new node into the tree. Based heavily on
-     * Frank Carrano's sample code
-     * @param subTreePtr    A pointer to the root of the tree the insert is
-     * being preformed on.
+     * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
+     * @param subTreePtr    A pointer to the root of the tree the insert is being preformed on.
      * @param newNodePtr    A pointer to the new node that's being inserted.
      * @return The root pointer.
      */
-    Node* balancedAddHelper(Node* subTreePtr, Node* newNodePtr);
+    Node* balancedInsertHelper(Node* subTreePtr, Node* newNodePtr);
 
     /*Remove Node Helper*/
     Node* removeHelper(string token, Node* root);
 
-
-    ///TODO - findEntry()
+    /*Is Token In Tree*/
+    bool threadedIsTokenInTree(string token);
+    
+    bool threadedIncrementHelper(Node* subTreePtr, string token);
     
     
 private:
