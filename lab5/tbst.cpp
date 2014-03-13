@@ -386,8 +386,8 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
 bool ThreadedBST::setFrequency(string token, int frequency = 1) {
     Node* current = rootPtr;
 
-    if (isTokenInTree(token) {
-            return current->setFrequency(frequency);
+    if (isTokenInTree(token)) {
+            return current->getDataReference()->setFrequency(1);
         } else { // Token is not in tree
 
         return false;
