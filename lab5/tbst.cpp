@@ -92,7 +92,7 @@ int ThreadedBST::getHeight() const {
  * @return The number of nodes in this tree.
  */
 int ThreadedBST::getNumberOfNodes() const {
-
+    
 }
 
 /*insert*/
@@ -380,15 +380,17 @@ bool ThreadedBST::setFrequency(string token, int frequency = 1) {
  * @return          The pointer to the removed node, or NULL if it was not
  * found.
  */
-Node* ThreadedBST::removeHelper(string token, Node* subTreeRootNodePtr, Node* parentNodePtr) {
+Node* ThreadedBST::removeHelper(string token, Node* subTreeRootNodePtr,
+        Node* parentNodePtr) {
 
-        Node* current = subTreeRootNodePtr;
-        Node* parent = parentNodePtr;
+    Node* current = subTreeRootNodePtr;
+    Node* parent = parentNodePtr;
 
-            /// Used in isTokenInTree to report whether the current was taken from
-            /// the parent's left or right child. It is of course passed by
-            /// reference
-            bool isLeft = false;
+    /// Used in isTokenInTree to report whether the current was taken from
+    /// the parent's left or right child. It is of course passed by
+    /// reference
+    bool isLeft = false;
+    
     if (isTokenInTree(token)) {
         if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
             /// We're a leaf node, no children to worry about!
