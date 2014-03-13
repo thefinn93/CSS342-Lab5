@@ -71,7 +71,7 @@ ThreadedBST::~ThreadedBST() {
  * Checks to see if the tree is empty.
  * @returns True if the three is empty, False otherwise.
  */
-bool ThreadedBST::isEmpty() {
+bool ThreadedBST::isEmpty() const {
     return rootPtr == NULL;
 }
 

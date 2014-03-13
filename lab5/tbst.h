@@ -63,7 +63,7 @@ public:
      * Checks to see if the tree is empty.
      * @returns True if the three is empty, False otherwise.
      */
-    bool isEmpty();
+    bool isEmpty() const;
 
     /**
      * Returns the height of the tree.
@@ -76,7 +76,7 @@ public:
      * @return The number of nodes in this tree.
      */
     int getNumberOfNodes() const;
-    
+
     /**
     * Inserts a token into the tree, or increments the token frequency if the
     * token already exists in the node.
@@ -84,11 +84,9 @@ public:
     * @return True if successful, false otherwise
     */   
     bool insert(string token);
-    
-    bool isTokenInTree(string searchToken);  
-    
 
-    
+    bool isTokenInTree(string searchToken);
+
     bool remove(string token);
 
     /**
@@ -97,8 +95,8 @@ public:
      * @return The frequency count of the specified token, or 0 if the token
      ** is not in this tree
      */
-    int getFrequencyOfToken(string token);    
-    
+    int getFrequencyOfToken(string token);
+
     /**
      * Preforms an in-order traversal of the tree, 
      * executing the passed method
@@ -139,27 +137,25 @@ public:
     void postorderStart(void vist(NodeData*));
 
 protected:
-    
-
 
     /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;
-    
+
     /*Destructor Helper*/
     void destroyTree(const Node* treeRootPtr);
-    
+
     /*Get Tree Height Helper*/
     int getHeightHelper(Node* subTreePtr) const;
-    
+
     /*Is Token In Tree*/
     bool isTokenInTreeHelper(Node* currentNode, string searchToken);
-    
+
     bool isNodeALeaf(Node* currentNode);
 
     Node* nodeWithToken(Node* currentNode, string searchToken);
-    
+
     Node* previousNodeInThread(Node* subTreePtr, Node* pointsToThisNode);
-    
+
     /*Add Node Helper*/
     /**
      * A private function to insert a new node into the tree. 
@@ -170,7 +166,7 @@ protected:
      * @return The root pointer.
      */
     Node* balancedInsertHelper(Node* subTreePtr, Node* newNodePtr);
-    
+
     /*Increment Frequency Helper*/
     /**
      * Sets the frequency of the specified token, or increments 
@@ -182,14 +178,14 @@ protected:
      * @return True if successful, false otherwise
      */
     bool setFrequency(string token, int frequency);
-    
+
     /*Remove Node Helper*/
     Node* removeHelper(string token, Node* treeRootPtr);
-    
+
     Node* removeLeafAndRelink(Node* leafToRemove);
-    
+
     Node* findLeftSidePredecessor(Node* targetNodePtr, Node* subTreePtr);
-    
+
 private:
     /// The root node
     Node* rootPtr;
