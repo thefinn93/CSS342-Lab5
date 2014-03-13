@@ -28,7 +28,7 @@ ThreadedBST::ThreadedBST() {
  * A constructor that initializes the TBST from a specified root node
  * @param rootNode  The node to use as the root when initializing the tree.
  */
-ThreadedBST::ThreadedBST(const Node& rootNode) {
+ThreadedBST::ThreadedBST(Node* rootNode) {
     rootPtr = rootNode;
 }
 

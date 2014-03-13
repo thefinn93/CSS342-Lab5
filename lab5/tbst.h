@@ -29,7 +29,7 @@ public:
      * A constructor that initializes the TBST from a specified root node
      * @param rootNode  The node to use as the root when intitializing the tree.
      */
-    ThreadedBST(const Node& rootNode);
+    ThreadedBST(Node* rootNode);
 
     /**
      * Initializes a TBST. At this point we have not determined the purpose of
@@ -129,9 +129,9 @@ public:
      */
     void postorder(void visit(NodeData*), Node* newRootPtr);
 
-    void preorderStart(void visit(NodeData*) const);
-    void inorderStart(void visit(NodeData*) const);
-    void postorderStart(void vist(NodeData*) const);
+    void preorderStart(void visit(NodeData*));
+    void inorderStart(void visit(NodeData*));
+    void postorderStart(void vist(NodeData*));
 
 protected:
     
