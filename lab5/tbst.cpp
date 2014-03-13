@@ -404,24 +404,19 @@ bool ThreadedBST::setFrequency(string token, int frequency = 1) {
  * @return          The pointer to the removed node, or NULL if it was not
  * found.
  */
-Node* ThreadedBST::removeHelper(string token, Node* subTreeRootNodePtr,
-        Node* parentNodePtr) {
-
-    Node* currentNode = subTreeRootNodePtr;
-    Node* parentNode = parentNodePtr;
+Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
 
     /// Used in isTokenInTree to report whether the current was taken from
     /// the parent's left or right child. It is of course passed by
     /// reference
+    Node* nodeToRemove = nodeWithToken(treeRootPtr, token);
     
-    if (this->isNodeALeaf(currentNode)){
+    if (this->isNodeALeaf(nodeToRemove)){
         /// We're a leaf node, no children to worry about!
-        removeLeafAndRelink(currentNode);
+        removeLeafAndRelink(nodeToRemove);
+    } else {
+        
     }
-    
-    bool isLeft = false;
-    
-    Node* nodeToMove;
     
     if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
         
@@ -462,16 +457,24 @@ Node* ThreadedBST::removeHelper(string token, Node* subTreeRootNodePtr,
 ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
     if (leafToRemove->isLeftPtrThread() && leafToRemove->isRightPtrThread()) {
         if (leafToRemove->getLeftChildPtr()->getRightChildPtr() == leafToRemove) {
+            leafToRemove->getLeftChildPtr()->setRightPtrIsThread(true);
             leafToRemove->getLeftChildPtr()->setRightPtr(leafToRemove->getRightChildPtr());
-            
+            delete leafToRemove;
+        }
+        else {
+            leafToRemove->getRightChildPtr()->setLeftPtrIsThread(true);
+            leafToRemove->getRightChildPtr()->setLeftPtr(leafToRemove->getLeftChildPtr());
+            delete leafToRemove;            
         }
     }
     else if (!leafToRemove->isLeftPtrThread() && leafToRemove->isRightPtrThread()) {
+        leafToRemove->getRightChildPtr()->setLeftPtr(NULL);
+        delete leafToRemove;
     }
     else if (leafToRemove->isLeftPtrThread() && !leafToRemove->isRightPtrThread()) {
-        
+        leafToRemove->getLeftChildPtr()->setRightPtr(NULL);
+        delete leafToRemove;
     }
-    
 }
 
 
