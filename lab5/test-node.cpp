@@ -32,7 +32,7 @@ void testConstructors() {
     cout.width(WIDTH);
     cout <<  left << "Token-only constructor test:";
     try {
-        Node tokenConstructor = Node((string)"test");
+        Node tokenConstructor = Node("test");
         cout << "PASS (didn't crash)";
     } catch(...) {
         cout << "FAIL (crashed)";
@@ -42,7 +42,7 @@ void testConstructors() {
     cout.width(WIDTH);
     cout <<  left << "Token, frequency constructor test:";
     try {
-        Node fullNodeDataConstructor = Node((string)"test", 3);
+        Node fullNodeDataConstructor = Node("test", 3);
         cout << "PASS (didn't crash)";
     } catch(...) {
         cout << "FAIL (crashed)";
@@ -72,8 +72,8 @@ void testOperators() {
 
     cout.width(WIDTH);
     cout <<  left << "Less than (<) operator:";
-    Node nodeApples = Node((string)"apples");
-    Node nodeBananas = Node((string)"bananas");
+    Node nodeApples = Node("apples");
+    Node nodeBananas = Node("bananas");
 
     if(nodeBananas < nodeApples) {
         cout << "PASS";
@@ -110,7 +110,7 @@ void testOperators() {
     }
     cout << endl;
 
-    Node nodeApples2 = Node((string)"apples");
+    Node nodeApples2 = Node("apples");
     cout.width(WIDTH);
     cout <<  left << "Equality (==) operator:";
 
