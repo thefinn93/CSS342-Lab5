@@ -137,7 +137,7 @@ bool ThreadedBST::isTokenInTree(string searchForThisToken) {
  */
 bool ThreadedBST::remove(string token) {
     if (isTokenInTree(token)) {
-        Node* removed = removeHelper(token, rootPtr, NULL);
+        Node* removed = removeHelper(token, rootPtr);
         delete removed;
         return true;
     } else {
@@ -154,7 +154,7 @@ bool ThreadedBST::remove(string token) {
  */
 int ThreadedBST::getFrequencyOfToken(string token) {
     if (isTokenInTree(token)) {
-        return nodeWithToken(token)->getData().getFrequency();
+        return nodeWithToken(rootPtr, token)->getData().getFrequency();
     } else {
         return 0; /// NOT MAGIC, IS THE NUMBER 0
     }
@@ -177,7 +177,7 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
          */
         if (goright || current->isRightPtrThread() ||
                 current->getLeftChildPtr() == NULL) {
-            (*visit)(current&);
+            visit(current->getDataReference());
             /// If this is a right leaf, the next node needs to be visited
             goright = current->isRightPtrThread();
             current = current->getRightChildPtr();
@@ -198,10 +198,10 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
  * @param (*visit)(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
+void ThreadedBST::preorder(void (*visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
-        Node* theNode = treePtr->getData();
-        (*visit)(theNode);
+        Node* theNode = treePtr;
+        visit(theNode->getDataReference());
         preorder(visit, treePtr->getLeftChildPtr());
         preorder(visit, treePtr->getRightChildPtr());
     }
@@ -209,11 +209,11 @@ void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
 
 ///TODO - Recursive inorder
 
-void ThreadedBST::inorder(void visit(NodeData*), Node* treePtr) const {
+void ThreadedBST::inorder(void (*visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
-        Node* theNode = treePtr->getData();
+        Node* theNode = treePtr;
         preorder(visit, treePtr->getLeftChildPtr());
-        *visit(theNode);
+        visit(theNode->getDataReference());
         preorder(visit, treePtr->getRightChildPtr());
     }
 }
@@ -224,12 +224,12 @@ void ThreadedBST::inorder(void visit(NodeData*), Node* treePtr) const {
  * @param (*visit)(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::postorder(void visit(NodeData*), Node* treePtr) const {
+void ThreadedBST::postorder(void (*visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
         postorder(visit, treePtr->getLeftChildPtr());
         postorder(visit, treePtr->getRightChildPtr());
-        NodeData* theData = treePtr->getData();
-        (*visit)(theData);
+//        NodeData* theData = treePtr->getData();
+        visit(treePtr->getDataReference());
     }
 }
 

@@ -121,7 +121,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void vist(NodeData*), Node* newRootPtr);
+    void preorder(void (*vist)(NodeData*), Node* treePtr);
 
     /**
      * Preforms a post-order traversal of the tree, 
