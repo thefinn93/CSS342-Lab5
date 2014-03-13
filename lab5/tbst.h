@@ -27,7 +27,8 @@ public:
 
     /**
      * A constructor that initializes the TBST from a specified root node
-     * @param rootNode  The node to use as the root when intitializing the tree.
+     * @param rootNode  The node to use as the root 
+     * when intitializing the tree.
      */
     ThreadedBST(Node* rootNode);
 
@@ -99,14 +100,16 @@ public:
     int getFrequencyOfToken(string token);    
     
     /**
-     * Preforms an in-order traversal of the tree, executing the passed method
+     * Preforms an in-order traversal of the tree, 
+     * executing the passed method
      *  on each node as it is visited. This version uses an iterative algorithm
      * @param (*visit)(nodeData&)  The function to execute on the node.
      */
     void iterativeInorder(void visit(NodeData*));
 
     /**
-     * Preforms an in-order traversal of the tree, executing the passed method
+     * Preforms an in-order traversal of the tree, 
+     * executing the passed method
      *  on each node as it is visited.
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
@@ -114,7 +117,8 @@ public:
     void inorder(void visit(NodeData*), Node* newRootPtr);
 
     /**
-     * Preforms a pre-order traversal of the tree, executing the passed method
+     * Preforms a pre-order traversal of the tree, 
+     * executing the passed method
      *  on each node as it is visited.
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
@@ -122,7 +126,8 @@ public:
     void preorder(void vist(NodeData*), Node* newRootPtr);
 
     /**
-     * Preforms a post-order traversal of the tree, executing the passed method
+     * Preforms a post-order traversal of the tree, 
+     * executing the passed method
      *  on each node as it is visited.
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
@@ -157,8 +162,10 @@ protected:
     
     /*Add Node Helper*/
     /**
-     * A private function to insert a new node into the tree. Based heavily on Frank Carrano's sample code
-     * @param subTreePtr    A pointer to the root of the tree the insert is being preformed on.
+     * A private function to insert a new node into the tree. 
+     * Based heavily on Frank Carrano's sample code
+     * @param subTreePtr    A pointer to the root of the tree 
+     * the insert is being preformed on.
      * @param newNodePtr    A pointer to the new node that's being inserted.
      * @return The root pointer.
      */
@@ -166,9 +173,11 @@ protected:
     
     /*Increment Frequency Helper*/
     /**
-     * Sets the frequency of the specified token, or increments it if no value is specified.
+     * Sets the frequency of the specified token, or increments 
+     * it if no value is specified.
      * @param token     The token to set the frequency for.
-     * @param frequency (optional) The new frequency for the token. Increments
+     * @param frequency (optional) The new frequency for the token. 
+     * Increments
      ** the value by 1 if not specified
      * @return True if successful, false otherwise
      */
