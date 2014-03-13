@@ -112,7 +112,8 @@ bool ThreadedBST::insert(string token) {
 
     if (this->isTokenInTree(token)) {
         ///iterates the frequency by 1
-        nodeWithToken(rootPtr, token)->getDataReference()->increaseFrequency();
+        nodeWithToken(rootPtr, token)->getDataReference()->
+                increaseFrequency();
 
     } else {
         Node* newNode = new Node(token);
@@ -298,26 +299,28 @@ int ThreadedBST::getHeightHelper(Node* subTreePtr) const {
 
 /*isTokenInTreeHelper*/
 
-bool ThreadedBST::isTokenInTreeHelper(Node* currentNode, string searchToken) {
+bool ThreadedBST::isTokenInTreeHelper(Node* currentNode,
+        string searchToken) {
     if (currentNode->getData().getToken() == searchToken) {
         return true;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(), string searchToken);
+            isTokenInTreeHelper(currentNode->getLeftChildPtr(),
+                    string searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(), string searchToken);
+            isTokenInTreeHelper(currentNode->getRightChildPtr(),
+                    string searchToken);
         }
         return false; /// searchToken is never found
     }
 }
 
 bool ThreadedBST::isNodeALeaf(Node* currentNode) {
-    if ((currentNode->isLeftPtrThread() || NULL) && 
+    if ((currentNode->isLeftPtrThread() || NULL) &&
             (currentNode->isRightPtrThread() || NULL)) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -327,10 +330,12 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
         return currentNode;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(), string searchToken);
+            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(),
+                    string searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(), string searchToken);
+            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(),
+                    string searchToken);
         }
         /// We already know the node is in the tree. No need to have an
         /// alternate return.
@@ -410,81 +415,116 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
     /// the parent's left or right child. It is of course passed by
     /// reference
     Node* nodeToRemove = nodeWithToken(treeRootPtr, token);
-    
-    if (this->isNodeALeaf(nodeToRemove)){
+    Node* leftSideThreadPredecessor = NULL;
+
+    if (isNodeALeaf(nodeToRemove)) {
         /// We're a leaf node, no children to worry about!
-        removeLeafAndRelink(nodeToRemove);
+        return removeLeafAndRelink(nodeToRemove);
     } else {
-        Node* leftThreadPredecessor = findLeftThreadPredecessor(nodeToRemove, treeRootPtr);
+        leftSideThreadPredecessor =
+                findLeftSidePredecessor(nodeToRemove, treeRootPtr);
     }
-    
-    if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
-        
-        if (isLeft) {
-            parent->leftChild = NULL;
-        } else {
-            parent->rightChild = NULL;
-        }
-        /// Fixes the threads on the parent that now has a NULL
-        /// child. Knowledge of current's threads will help.
-        fixThreads(parent, current);
-        return current;
+    //    if (!(leftThreadPredecessor->isLeftPtrThread())) {        
+    ///just in case the line below doesn't work
+    if (!isNodeALeaf(leftSideThreadPredecessor)) {
+        //        if (leftThreadPredecessor->getLeftChildPtr() != NULL) {       
+        ///just in case
+        findLeftSidePredecessor(leftSideThreadPredecessor)->
+                setLeftPtr(leftSideThreadPredecessor->getRightChildPtr());
+        //        }
     }
-    else {
-        // Finds the largest leaf given the root of a tree and removes it
-        replacementToken = findLargestTokenInTree(current);
-                replacement = remove(replacementToken);
-
-        if (current->leftChild != NULL) {
-            replacement->leftChild = current->leftChild;
-                    replacement->leftPtrIsThread(current->isLeftPtrThread());
-        }
-
-        if (current->rightChild != NULL) {
-            replacement->rightChild = current->rightChild;
-                    replacement->rightPtrIsThread(current->isRightPtrThread());
-        }
-
-        if (isLeft) {
-            parent->leftChild = replacement;
-        } else {
-            parent->rightChild = replacement;
-        }
-        return current;
+    if (nodeToRemove->isLeftPtrThread()) {
+        leftSideThreadPredecessor->setLeftPtrIsThread(true);
     }
+    leftSideThreadPredecessor->setLeftPtr(nodeToRemove->getLeftChildPtr());
+    if (nodeToRemove->isRightPtrThread()) {
+        leftSideThreadPredecessor->setRightPtrIsThread(true);
+    }
+    leftSideThreadPredecessor->setRightPtr(nodeToRemove->getRightChildPtr());
+
+    return nodeToRemove;
+
+    //    if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
+    //        
+    //        if (isLeft) {
+    //            parent->leftChild = NULL;
+    //        } else {
+    //            parent->rightChild = NULL;
+    //        }
+    //        /// Fixes the threads on the parent that now has a NULL
+    //        /// child. Knowledge of current's threads will help.
+    //        fixThreads(parent, current);
+    //        return current;
+    //    }
+    //    else {
+    //        // Finds the largest leaf given the root of a tree and removes it
+    //        replacementToken = findLargestTokenInTree(current);
+    //                replacement = remove(replacementToken);
+    //
+    //        if (current->leftChild != NULL) {
+    //            replacement->leftChild = current->leftChild;
+    //                    replacement->leftPtrIsThread(current->isLeftPtrThread());
+    //        }
+    //
+    //        if (current->rightChild != NULL) {
+    //            replacement->rightChild = current->rightChild;
+    //                    replacement->rightPtrIsThread(current->isRightPtrThread());
+    //        }
+    //
+    //        if (isLeft) {
+    //            parent->leftChild = replacement;
+    //        } else {
+    //            parent->rightChild = replacement;
+    //        }
+    //        return current;
+    //    }
 }
 
 ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
-    if (leafToRemove->isLeftPtrThread() && leafToRemove->isRightPtrThread()) {
-        if (leafToRemove->getLeftChildPtr()->getRightChildPtr() == leafToRemove) {
+    if (leafToRemove->isLeftPtrThread() && leafToRemove->
+            isRightPtrThread()) {
+        if (leafToRemove->getLeftChildPtr()->getRightChildPtr() ==
+                leafToRemove) {
             leafToRemove->getLeftChildPtr()->setRightPtrIsThread(true);
-            leafToRemove->getLeftChildPtr()->setRightPtr(leafToRemove->getRightChildPtr());
-            delete leafToRemove;
-        }
-        else {
+            leafToRemove->getLeftChildPtr()->setRightPtr(leafToRemove->
+                    getRightChildPtr());
+            return leafToRemove;
+        } else {
             leafToRemove->getRightChildPtr()->setLeftPtrIsThread(true);
-            leafToRemove->getRightChildPtr()->setLeftPtr(leafToRemove->getLeftChildPtr());
-            delete leafToRemove;            
+            leafToRemove->getRightChildPtr()->setLeftPtr(leafToRemove->
+                    getLeftChildPtr());
+            return leafToRemove;
+        }
+    } else if (!leafToRemove->isLeftPtrThread() && leafToRemove->
+            isRightPtrThread()) {
+        leafToRemove->getRightChildPtr()->setLeftPtr(NULL);
+        return leafToRemove;
+    } else if (leafToRemove->isLeftPtrThread() && !leafToRemove->
+            isRightPtrThread()) {
+        leafToRemove->getLeftChildPtr()->setRightPtr(NULL);
+        return leafToRemove;
+    }
+}
+
+Node* ThreadedBST::findLeftSidePredecessor(Node* targetNodePtr,
+        Node* subTreePtr) {
+    if (subTreePtr->getLeftChildPtr() != NULL) {
+        if (*(subTreePtr->getLeftChildPtr()) == *targetNodePtr) {
+            return subTreePtr;
+        } else {
+            findLeftSidePredecessor(targetNodePtr,
+                    subTreePtr->getLeftChildPtr());
         }
     }
-    else if (!leafToRemove->isLeftPtrThread() && leafToRemove->isRightPtrThread()) {
-        leafToRemove->getRightChildPtr()->setLeftPtr(NULL);
-        delete leafToRemove;
-    }
-    else if (leafToRemove->isLeftPtrThread() && !leafToRemove->isRightPtrThread()) {
-        leafToRemove->getLeftChildPtr()->setRightPtr(NULL);
-        delete leafToRemove;
-    }
-}
-
-Node* ThreadedBST::findLeftThreadPredecessor(Node* currentNodePtr, Node* subTreePtr) {
-    if (subTreePtr == currentNodePtr) {
-        return 
+    if (subTreePtr->getRightChildPtr() != NULL) {
+        if (*(subTreePtr->getRightChildPtr()) == *targetNodePtr) {
+            return subTreePtr;
+        } else {
+            findLeftSidePredecessor(targetNodePtr,
+                    subTreePtr->getRightChildPtr());
+        }
     }
 }
-
-
-
 
 #endif
 
