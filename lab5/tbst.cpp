@@ -383,16 +383,16 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
  * the value by 1 if not specified
  * @return True if successful, false otherwise
  */
-bool ThreadedBST::setFrequency(string token, int frequency = 1) {
-    Node* current = rootPtr;
-
-    if (isTokenInTree(token)) {
-            return current->getDataReference()->setFrequency(1);
-        } else { // Token is not in tree
-
-        return false;
-    }
-}
+//bool ThreadedBST::setFrequency(string token, int frequency = 1) {
+//    Node* current = rootPtr;
+//
+//    if (isTokenInTree(token)) {
+//            return current->getDataReference()->setFrequency(1);
+//        } else { // Token is not in tree
+//
+//        return false;
+//    }
+//}
 
 /*removeHelper*/
 
@@ -415,7 +415,7 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
         /// We're a leaf node, no children to worry about!
         removeLeafAndRelink(nodeToRemove);
     } else {
-        
+        Node* leftThreadPredecessor = findLeftThreadPredecessor(nodeToRemove, treeRootPtr);
     }
     
     if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
@@ -474,6 +474,12 @@ ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
     else if (leafToRemove->isLeftPtrThread() && !leafToRemove->isRightPtrThread()) {
         leafToRemove->getLeftChildPtr()->setRightPtr(NULL);
         delete leafToRemove;
+    }
+}
+
+Node* ThreadedBST::findLeftThreadPredecessor(Node* currentNodePtr, Node* subTreePtr) {
+    if (subTreePtr == currentNodePtr) {
+        return 
     }
 }
 

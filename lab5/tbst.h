@@ -179,6 +179,7 @@ protected:
     
     Node* removeLeafAndRelink(Node* leafToRemove);
     
+    Node* findLeftThreadPredecessor(Node* currentNodePtr, Node* subTreePtr);
     
 private:
     /// The root node
