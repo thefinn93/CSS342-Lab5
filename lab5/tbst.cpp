@@ -478,7 +478,7 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
     //    }
 }
 
-ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
+Node* ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
     if (leafToRemove->isLeftPtrThread() && leafToRemove->
             isRightPtrThread()) {
         if (leafToRemove->getLeftChildPtr()->getRightChildPtr() ==
