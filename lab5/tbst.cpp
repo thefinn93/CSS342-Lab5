@@ -248,11 +248,11 @@ Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
     if (treeRootPrt != NULL) {
 
         ///the top root ptr is a new node with the copied data
-        newRootPtr = new Node(treeRootPrt->getData(), NULL, NULL);
+        newRootPtr = new Node(treeRootPrt->getData(), NULL, NULL, true, true);
 
         ///Recursively call the copy tree for each child ptr
-        newRootPtr.setLeftPtr(copyTree(treeRootPrt->getLeftChildPtr()));
-        newRootPtr.setRightPtr(copyTree(treeRootPrt->getRightChildPtr()));
+        newRootPtr->setLeftPtr(copyTree(treeRootPrt->getLeftChildPtr()));
+        newRootPtr->setRightPtr(copyTree(treeRootPrt->getRightChildPtr()));
     }
 
     //
@@ -305,12 +305,10 @@ bool ThreadedBST::isTokenInTreeHelper(Node* currentNode,
         return true;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(currentNode->getLeftChildPtr(),
-                    string searchToken);
+            isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(currentNode->getRightChildPtr(),
-                    string searchToken);
+            isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         return false; /// searchToken is never found
     }
@@ -330,12 +328,10 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
         return currentNode;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(),
-                    string searchToken);
+            isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(),
-                    string searchToken);
+            isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         /// We already know the node is in the tree. No need to have an
         /// alternate return.
