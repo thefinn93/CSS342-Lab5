@@ -463,12 +463,14 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
     //
     //        if (current->leftChild != NULL) {
     //            replacement->leftChild = current->leftChild;
-    //                    replacement->leftPtrIsThread(current->isLeftPtrThread());
+    //                    replacement->leftPtrIsThread(current->
+    //isLeftPtrThread());
     //        }
     //
     //        if (current->rightChild != NULL) {
     //            replacement->rightChild = current->rightChild;
-    //                    replacement->rightPtrIsThread(current->isRightPtrThread());
+    //                    replacement->rightPtrIsThread(current->
+    //isRightPtrThread());
     //        }
     //
     //        if (isLeft) {
