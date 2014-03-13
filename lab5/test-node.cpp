@@ -3,7 +3,7 @@
 
 #include <string>
 
-int WIDTH = 30;
+int WIDTH = 35;
 
 void testConstructors() {
     cout << "============== Constructors =================" << endl;
@@ -75,7 +75,7 @@ void testOperators() {
     Node nodeApples = Node("apples");
     Node nodeBananas = Node("bananas");
 
-    if(nodeBananas < nodeApples) {
+    if(nodeApples < nodeBananas) {
         cout << "PASS";
     } else {
         cout << "FAIL";
@@ -84,7 +84,7 @@ void testOperators() {
 
     cout.width(WIDTH);
     cout <<  left << "Less than (<) operator negative:";
-    if(nodeApples < nodeBananas) {
+    if(nodeBananas < nodeApples) {
         cout << "FAIL";
     } else {
         cout << "PASS";
@@ -94,7 +94,7 @@ void testOperators() {
     cout.width(WIDTH);
     cout <<  left << "Greater than (>) operator:";
 
-    if(nodeApples > nodeBananas) {
+    if(nodeBananas > nodeApples) {
         cout << "PASS";
     } else {
         cout << "FAIL";
@@ -103,7 +103,7 @@ void testOperators() {
 
     cout.width(WIDTH);
     cout <<  left << "Greater than (>) operator negative:";
-    if(nodeBananas > nodeApples) {
+    if(nodeApples > nodeBananas) {
         cout << "FAIL";
     } else {
         cout << "PASS";
