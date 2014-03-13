@@ -470,7 +470,7 @@ ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
 
     }
     if (leafToRemove->isRightPtrThread()) {
-        if ()
+        
     }
 
     }
