@@ -460,22 +460,16 @@ Node* ThreadedBST::removeHelper(string token, Node* subTreeRootNodePtr,
 }
 
 ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
-    if (leafToRemove->isLeftPtrThread()) {
-        if (leafToRemove->isRightPtrThread()) {
-                leafToRemove->getLeftChildPtr()->setRightPtr(leafToRemove->getRightChildPtr());
+    if (leafToRemove->isLeftPtrThread() && leafToRemove->isRightPtrThread()) {
+        if (leafToRemove->getLeftChildPtr()->getRightChildPtr() == leafToRemove) {
+            leafToRemove->getLeftChildPtr()->setRightPtr(leafToRemove->getRightChildPtr());
+            
         }
-        else {
     }
-    else {
-
+    else if (!leafToRemove->isLeftPtrThread() && leafToRemove->isRightPtrThread()) {
     }
-    if (leafToRemove->isRightPtrThread()) {
+    else if (leafToRemove->isLeftPtrThread() && !leafToRemove->isRightPtrThread()) {
         
-    }
-
-    }
-    else {
-
     }
     
 }
