@@ -148,8 +148,12 @@ protected:
     
     /*Is Token In Tree*/
     bool isTokenInTreeHelper(Node* currentNode, string searchToken);
+    
+    bool isNodeALeaf(Node* currentNode);
 
     Node* nodeWithToken(Node* currentNode, string searchToken);
+    
+    Node* previousNodeInThread(Node* subTreePtr, Node* pointsToThisNode);
     
     /*Add Node Helper*/
     /**
@@ -172,6 +176,9 @@ protected:
     
     /*Remove Node Helper*/
     Node* removeHelper(string token, Node* subTreeRootNodePtr, Node* parentNodePtr);
+    
+    Node* removeLeafAndRelink(Node* leafToRemove);
+    
     
 private:
     /// The root node
