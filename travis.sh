@@ -4,7 +4,7 @@ which valgrind || sudo apt-get install valgrind > /dev/null
 which doxygen || sudo apt-get install doxygen > /dev/null
 
 cd lab5
-for testFile in test-*.cpp; do
+for testFile in test-*.cpp lab5main.cpp; do
     echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
     echo $testFile
     echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
