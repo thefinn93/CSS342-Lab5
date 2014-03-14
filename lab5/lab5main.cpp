@@ -7,6 +7,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include "tbst.h"
 
 using namespace std;
@@ -18,16 +19,31 @@ char const DEFAULT_FILE[] = "hamlet.txt";
  */
 int main(int argc, char** argv) {
     
-    ifstream& infile(DEFAULT_FILE);
+    cout << "START";
     
-    ThreadedBST tokenTree();
+    ifstream infile(DEFAULT_FILE);
     
-    char currentToken[];
+    if (!infile) {
+        cerr << "NO FILE OPEN" << endl;
+    }
+    
+    
+    ThreadedBST tokenTree;
+    
+    char currentToken[99];
+    
+    
+    
+    cout << infile.eof();
     
     while (!infile.eof()) {
-        infile = infile.getline(currentToken, 99, ' ');
+        cout << char(infile.peek());
+        infile.getline(currentToken, 99, ' ');
+        cout << currentToken;
         tokenTree.insert(currentToken);
     }
+    
+    cout << tokenTree.getNumberOfNodes();
 
     return 0;
 }
