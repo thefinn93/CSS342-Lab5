@@ -14,9 +14,6 @@ using namespace std;
 
 char const DEFAULT_FILE[] = "hamlet.txt";
 
-/*
- * 
- */
 int main(int argc, char** argv) {
     
     cout << "START";
