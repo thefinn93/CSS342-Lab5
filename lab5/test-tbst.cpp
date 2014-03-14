@@ -4,22 +4,33 @@
 int WIDTH = 30;
 
 void testConstructors() {
-    cout << "================== Testing Constructors =====================" << endl;
+    cout << "=============== Testing Constructors ==================" << endl;
     cout << "no tests yet defined" << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Empty constructor:";
+    ThreadedBST empty = ThreadedBST();
+    cout << "PASS (didn't crash)" << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Constructor with a root node:";
+    Node* root = new Node();
+    ThreadedBST constructorTest2 = ThreadedBST(root);
+    delete root;
 }
 
 void testInsertion() {
-    cout << "================== Testing Insertion =====================" << endl;
+    cout << "================= Testing Insertion ====================" << endl;
     cout << "no tests yet defined" << endl;
 }
 
 void testTraversal() {
-    cout << "================== Testing Traversals =====================" << endl;
+    cout << "================ Testing Traversals ====================" << endl;
     cout << "no tests yet defined" << endl;
 }
 
 void testRemove() {
-    cout << "================== Testing Removing =====================" << endl;
+    cout << "================== Testing Removing ====================" << endl;
     cout << "no tests yet defined" << endl;
 }
 
