@@ -117,7 +117,7 @@ bool ThreadedBST::insert(string token) {
 
     } else {
         Node* newNode = new Node(token);
-        rootPtr = balancedInsertHelper(rootPtr, newNode);
+        rootPtr = balancedInsertHelper(rootPtr, NULL, NULL, newNode);
     }
     return true;
 }
