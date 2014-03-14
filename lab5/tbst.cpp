@@ -305,10 +305,10 @@ bool ThreadedBST::isTokenInTreeHelper(Node* currentNode,
     if (currentNode->getData().getToken() == searchToken) {
         return true;
     } else {
-        if (currentNode->getLeftChildPtr() != NULL) {
+        if ((currentNode->getLeftChildPtr() != NULL) && !(currentNode->isLeftPtrThread())) {
             isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
-        if (currentNode->getLeftChildPtr() != NULL) {
+        if ((currentNode->getRightChildPtr() != NULL) && !(currentNode->isRightPtrThread())) {
             isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         return false; /// searchToken is never found
@@ -353,14 +353,22 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
         Node* rightTail, Node* newNodePtr) {
     if (subTreePtr == NULL) {
         newNodePtr->setLeftPtr(leftTail);
-        newNodePtr->setLeftPtrIsThread(true);
+        if (newNodePtr->getLeftChildPtr() == rootPtr) {
+            newNodePtr->setLeftPtrIsThread(false);
+        } else {
+            newNodePtr->setLeftPtrIsThread(true);
+        }
         newNodePtr->setRightPtr(rightTail);
-        newNodePtr->setRightPtrIsThread(true);
+        if (newNodePtr->getRightChildPtr() == rootPtr) {
+            newNodePtr->setRightPtrIsThread(false);
+        } else {
+            newNodePtr->setLeftPtrIsThread(true);
+        }
         return newNodePtr;
     } else {
         Node* leftPtr = subTreePtr->getLeftChildPtr();
         Node* rightPtr = subTreePtr->getRightChildPtr();
-        if (getHeightHelper(leftPtr) > getHeightHelper(rightPtr)) {
+        if (newNodePtr->getData() > subTreePtr->getData()) {
             // Go right, set the left tail to the current node.
             rightPtr = balancedInsertHelper(rightPtr, subTreePtr, rightTail,
                     newNodePtr);

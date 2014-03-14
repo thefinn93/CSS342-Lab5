@@ -31,15 +31,20 @@ int main(int argc, char** argv) {
     ThreadedBST tokenTree;
     
     char currentToken[99];
+    char checkForSkipChar[1];
     
     
     
     cout << infile.eof();
     
     while (!infile.eof()) {
-        cout << char(infile.peek());
+        cout << infile.peek();
+        while (char(infile.peek()) == '\n' || char(infile.peek()) == '\t') {
+            infile.ignore(1);
+            cout << infile.peek() << endl;
+        }
         infile.getline(currentToken, 99, ' ');
-        cout << currentToken;
+        cout << currentToken << endl;
         tokenTree.insert(currentToken);
     }
     
