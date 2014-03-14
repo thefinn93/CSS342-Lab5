@@ -69,7 +69,7 @@ ThreadedBST::~ThreadedBST() {
  * Checks to see if the tree is empty.
  * @returns True if the three is empty, False otherwise.
  */
-bool ThreadedBST::isEmpty() {
+bool ThreadedBST::isEmpty() const {
     return rootPtr == NULL;
 }
 
@@ -152,7 +152,11 @@ bool ThreadedBST::remove(string token) {
  */
 int ThreadedBST::getFrequencyOfToken(string token) {
     if (isTokenInTree(token)) {
+<<<<<<< HEAD
         return ((nodeWithToken(token))->getData().getFrequency());
+=======
+        return nodeWithToken(rootPtr, token)->getData().getFrequency();
+>>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
     } else {
         return 0; /// NOT MAGIC, IS THE NUMBER 0
     }
@@ -175,7 +179,7 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
          */
         if (goright || current->isRightPtrThread() ||
                 current->getLeftChildPtr() == NULL) {
-            (*visit)(current&);
+            visit(current->getDataReference());
             /// If this is a right leaf, the next node needs to be visited
             goright = current->isRightPtrThread();
             current = current->getRightChildPtr();
@@ -196,10 +200,10 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
  * @param (*visit)(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
+void ThreadedBST::preorder(void (*visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
-        Node* theNode = treePtr->getData();
-        (*visit)(theNode);
+        Node* theNode = treePtr;
+        visit(theNode->getDataReference());
         preorder(visit, treePtr->getLeftChildPtr());
         preorder(visit, treePtr->getRightChildPtr());
     }
@@ -207,11 +211,11 @@ void ThreadedBST::preorder(void visit(NodeData*), Node* treePtr) const {
 
 ///TODO - Recursive inorder
 
-void ThreadedBST::inorder(void visit(NodeData*), Node* treePtr) const {
+void ThreadedBST::inorder(void (*visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
-        Node* theNode = treePtr->getData();
+        Node* theNode = treePtr;
         preorder(visit, treePtr->getLeftChildPtr());
-        *visit(theNode);
+        visit(theNode->getDataReference());
         preorder(visit, treePtr->getRightChildPtr());
     }
 }
@@ -222,12 +226,12 @@ void ThreadedBST::inorder(void visit(NodeData*), Node* treePtr) const {
  * @param (*visit)(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::postorder(void visit(NodeData*), Node* treePtr) const {
+void ThreadedBST::postorder(void (*visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
         postorder(visit, treePtr->getLeftChildPtr());
         postorder(visit, treePtr->getRightChildPtr());
-        NodeData* theData = treePtr->getData();
-        (*visit)(theData);
+//        NodeData* theData = treePtr->getData();
+        visit(treePtr->getDataReference());
     }
 }
 
@@ -246,11 +250,11 @@ Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
     if (treeRootPrt != NULL) {
 
         ///the top root ptr is a new node with the copied data
-        newRootPtr = new Node(treeRootPrt->getData(), NULL, NULL);
+        newRootPtr = new Node(treeRootPrt->getData(), NULL, NULL, true, true);
 
         ///Recursively call the copy tree for each child ptr
-        newRootPtr.setLeftPtr(copyTree(treeRootPrt->getLeftChildPtr()));
-        newRootPtr.setRightPtr(copyTree(treeRootPrt->getRightChildPtr()));
+        newRootPtr->setLeftPtr(copyTree(treeRootPrt->getLeftChildPtr()));
+        newRootPtr->setRightPtr(copyTree(treeRootPrt->getRightChildPtr()));
     }
 
     //
@@ -303,12 +307,10 @@ bool ThreadedBST::isTokenInTreeHelper(Node* currentNode,
         return true;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(currentNode->getLeftChildPtr(),
-                    string searchToken);
+            isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(currentNode->getRightChildPtr(),
-                    string searchToken);
+            isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         return false; /// searchToken is never found
     }
@@ -328,12 +330,19 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
         return currentNode;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
+<<<<<<< HEAD
             isTokenInTreeHelper(currentNode->getLeftChildPtr(),
                     string searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
             isTokenInTreeHelper(currentNode->getRightChildPtr(),
                     string searchToken);
+=======
+            isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
+        }
+        if (currentNode->getLeftChildPtr() != NULL) {
+            isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
+>>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
         }
         /// We already know the node is in the tree. No need to have an
         /// alternate return.

@@ -63,7 +63,7 @@ public:
      * Checks to see if the tree is empty.
      * @returns True if the three is empty, False otherwise.
      */
-    bool isEmpty();
+    bool isEmpty() const;
 
     /**
      * Returns the height of the tree.
@@ -75,7 +75,11 @@ public:
      * Returns the total number of tokens stored in this tree
      * @return The number of nodes in this tree.
      */
+<<<<<<< HEAD
     int getNumberOfNodes();
+=======
+    int getNumberOfNodes() const;
+>>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
 
     /**
      * Inserts a token into the tree, or increments the token frequency if the
@@ -121,7 +125,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void vist(NodeData*), Node* newRootPtr);
+    void preorder(void (*vist)(NodeData*), Node* treePtr);
 
     /**
      * Preforms a post-order traversal of the tree,
@@ -137,8 +141,11 @@ public:
     void postorderStart(void vist(NodeData*));
 
 protected:
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
 
     /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;

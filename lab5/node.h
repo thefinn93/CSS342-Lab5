@@ -130,8 +130,8 @@ public:
      */
     void setRightPtrIsThread(bool newValue);
 
-    Node* getLeftChildPtr();
-    Node* getRightChildPtr();
+    Node* getLeftChildPtr() const;
+    Node* getRightChildPtr() const;
     void setLeftPtr(Node* newRightNode);
     void setRightPtr(Node* newRightNode);
 

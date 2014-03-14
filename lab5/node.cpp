@@ -185,11 +185,11 @@ void Node::setRightPtrIsThread(bool newValue) {
     rightPtrIsThread = newValue;
 }
 
-Node* Node::getLeftChildPtr() {
+Node* Node::getLeftChildPtr() const {
     return leftChildPtr;
 }
 
-Node* Node::getRightChildPtr() {
+Node* Node::getRightChildPtr() const {
     return rightChildPtr;
 }
 
