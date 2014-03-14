@@ -178,7 +178,7 @@ void ThreadedBST::iterativeInorder(void (&visit)(NodeData)) {
          */
         if (goright || current->isRightPtrThread() ||
                 current->getLeftChildPtr() == NULL) {
-            visit(current->getDataReference());
+            visit(current->getData());
             /// If this is a right leaf, the next node needs to be visited
             goright = current->isRightPtrThread();
             current = current->getRightChildPtr();
@@ -230,18 +230,28 @@ void ThreadedBST::preorderHelper(void (&visit)(NodeData), Node* treePtr) const {
 
 
 
+void ThreadedBST::inorder(void (&visit)(NodeData), Node* treePtr) {
+    if (treePtr != NULL) {
+        Node* theNode = treePtr;
+        inorder(visit, treePtr->getLeftChildPtr());
+        visit(theNode->getData());
+        inorder(visit, treePtr->getRightChildPtr());
+    }
+}
+
+
 /**
  * Preforms a post-order traversal of the tree, executing the passed method
  *  on each node as it is visited.
  * @param (*visit)(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::postorder(void (*visit)(NodeData*), Node* treePtr) {
+void ThreadedBST::postorder(void (&visit)(NodeData), Node* treePtr) {
     if (treePtr != NULL) {
         postorder(visit, treePtr->getLeftChildPtr());
         postorder(visit, treePtr->getRightChildPtr());
 //        NodeData* theData = treePtr->getData();
-        visit(treePtr->getDataReference());
+        visit(treePtr->getData());
     }
 }
 

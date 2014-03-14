@@ -760,6 +760,8 @@ void testTBSTMisc() {
 
 int main(int argc, char** argv) {
     credits();
+    cout << "This program tests and validates all classes and their functions"
+        << endl;
     testNodeDataConstructors();
     testNodeDataGetters();
     testNodeDataSetters();
