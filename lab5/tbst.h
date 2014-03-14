@@ -121,7 +121,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void preorder(void vist(NodeData&), Node* treePtr);
+    void preorder(void (&)(NodeData)) const;
 
     /**
      * Preforms a post-order traversal of the tree,
@@ -179,6 +179,8 @@ protected:
      * @return True if successful, false otherwise
      */
     bool setFrequency(string token, int frequency);
+
+    void preorderHelper(void (&visit)(NodeData), Node* treePtr) const;
 
     /*Remove Node Helper*/
     Node* removeHelper(string token, Node* treeRootPtr);

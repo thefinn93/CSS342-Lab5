@@ -52,15 +52,17 @@ void testConstructors() {
     cout << "PASS (didn't crash)" << endl;
 }
 
-const char* frequencyToToken(int frequency) {
+char* frequencyToToken(int frequency) {
     if(frequency < ALPHABET_SIZE*2 && frequency < 0) {
         if(frequency < ALPHABET_SIZE) {
             char* character;
             character[0] = char(frequency + INTTOCHAR_CAPS_START);
+            cerr << "Character for " << frequency << " is " << character << endl;
             return character;
         } else {
             char* character;
             character[0] = char(frequency + INTTOCHAR_LOWER_START);
+            cerr << "Character for " << frequency << " is " << character << endl;
             return character;
         }
     } else {
@@ -74,20 +76,20 @@ ThreadedBST testInsertion(int testSize) {
     cout << "Insert just token";
     ThreadedBST tokenOnly = ThreadedBST();
     for(int treeSize = 0; treeSize < testSize; treeSize++) {
-        tokenOnly.insert(string(frequencyToToken(treeSize))); //, treeSize);
+        cerr << "Inserted node #" << treeSize << endl;
+        tokenOnly.insert(frequencyToToken(treeSize)); //, treeSize);
     }
     cout << "PASS (didn't crash, see traversal tests to actually verify "
         << "insertion" << endl;
     return tokenOnly;
 }
-void visitAndPrint(NodeData* data) {
+void visitAndPrint(NodeData data) {
     cout << " * " << data << endl;
 }
 
 void testTraversal(ThreadedBST traverseMe) {
     cout << "================ Testing Traversals ====================" << endl;
-//    void (*visit)(NodeData*);
-//    visit = visitAndPrint;
+//    void (visit)(NodeData) = visitAndPrint;
     traverseMe.preorder(visitAndPrint);
 }
 

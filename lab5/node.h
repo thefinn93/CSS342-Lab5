@@ -95,7 +95,7 @@ public:
     /**
      * @return A pointer to this node's data.
      */
-    NodeData& getDataReference();
+    NodeData* getDataReference();
 
     /**
      * Sets the data stored in this node.
