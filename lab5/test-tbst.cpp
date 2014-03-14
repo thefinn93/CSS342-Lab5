@@ -24,11 +24,11 @@ int getTestSize(int argc, char** argv) {
     if(argc > 1) {
         testSize = atoi(argv[1]);
     }
-    if(testSize < 0) {
-        cerr << "Test size may *not* be negative!" << endl;
+    if(testSize < 1) {
+        cerr << "Test size may *not* be negative or 0!" << endl;
         exit(1);
     }
-    return testSize;
+    return testSize--;
 }
 
 void testConstructors() {
@@ -52,18 +52,17 @@ void testConstructors() {
     cout << "PASS (didn't crash)" << endl;
 }
 
-char* frequencyToToken(int frequency) {
-    if(frequency < ALPHABET_SIZE*2 && frequency < 0) {
+string frequencyToToken(int frequency) {
+    frequency++;
+    if(frequency < ALPHABET_SIZE*2 && frequency > 0) {
         if(frequency < ALPHABET_SIZE) {
-            char* character;
-            character[0] = char(frequency + INTTOCHAR_CAPS_START);
-            cerr << "Character for " << frequency << " is " << character << endl;
-            return character;
+            char character(frequency + INTTOCHAR_CAPS_START);
+            string characterAsString(1, character);
+            return characterAsString;
         } else {
-            char* character;
-            character[0] = char(frequency + INTTOCHAR_LOWER_START);
-            cerr << "Character for " << frequency << " is " << character << endl;
-            return character;
+            char character(frequency + INTTOCHAR_LOWER_START);
+            string characterAsString(1, character);
+            return characterAsString;
         }
     } else {
         throw("Can't stringify that int");
@@ -76,8 +75,8 @@ ThreadedBST testInsertion(int testSize) {
     cout << "Insert just token";
     ThreadedBST tokenOnly = ThreadedBST();
     for(int treeSize = 0; treeSize < testSize; treeSize++) {
-        cerr << "Inserted node #" << treeSize << endl;
-        tokenOnly.insert(frequencyToToken(treeSize)); //, treeSize);
+        string tokenToInsert = frequencyToToken(treeSize);
+        tokenOnly.insert(tokenToInsert); //, treeSize);
     }
     cout << "PASS (didn't crash, see traversal tests to actually verify "
         << "insertion" << endl;
@@ -88,19 +87,88 @@ void visitAndPrint(NodeData data) {
 }
 
 void testTraversal(ThreadedBST traverseMe) {
-    cout << "================ Testing Traversals ====================" << endl;
-//    void (visit)(NodeData) = visitAndPrint;
-    traverseMe.preorder(visitAndPrint);
+    cout << "================ Traversals ====================" << endl;
+    cout << "Iterative in order:" << endl;
+    traverseMe.inorder(visitAndPrint);
 }
 
 void testRemove() {
     cout << "================== Testing Removing ====================" << endl;
-    cout << "no tests yet defined" << endl;
+    ThreadedBST removeTest = ThreadedBST();
+    removeTest.insert("remove this token");
+
+    cout.width(WIDTH);
+    cout << "Remove:";
+    removeTest.remove("remove this token");
+    if(removeTest.isEmpty()) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
 }
 
 void testMisc() {
     cout << "=============== Testing Misc. Functions =================" << endl;
-    cout << "no tests yet defined" << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Testing isEmpty (positive):";
+    ThreadedBST emptyBST = ThreadedBST();
+    if(emptyBST.isEmpty()) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Testing isEmpty (negative):";
+    ThreadedBST notSoEmptyBST = ThreadedBST();
+    notSoEmptyBST.insert("nodes");
+    notSoEmptyBST.insert("moreNodes");
+    if(notSoEmptyBST.isEmpty()) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Test getNumberOfNodes:";
+    if(notSoEmptyBST.getNumberOfNodes() == 2) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Test isTokenInTree:";
+    if(notSoEmptyBST.isTokenInTree("nodes")) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Test isTokenInTree (negative):";
+    if(notSoEmptyBST.isTokenInTree("this token does not exist")) {
+        cout << "FAIL";
+    } else {
+        cout << "PASS";
+    }
+    cout << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Test getFrequencyOfToken:";
+    if(notSoEmptyBST.getFrequencyOfToken("nodes") == 1) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
 }
 
 int main(int argc, char** argv) {
