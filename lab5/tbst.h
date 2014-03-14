@@ -34,18 +34,6 @@ public:
     ThreadedBST(Node* rootNode);
 
     /**
-     * Initializes a TBST. At this point we have not determined the purpose of
-     * this constructor, but it was in the book and we suspect it may come in
-     * hand later
-     * @param rootNode  The root node
-     * @param leftTreePtr
-     * @param rightTreePtr
-     */
-    ThreadedBST(const Node& rootNode,
-            const ThreadedBST* leftTreePtr,
-            const ThreadedBST* rightTreePtr);
-
-    /**
      * Creates a deep copy of another TBST.
      * @param treeToCopy    The TBST to copy
      */
@@ -55,7 +43,6 @@ public:
      * A destructor. Deletes all the nodes in this tree.
      */
     ~ThreadedBST();
-
 
 
     /*-------PUBLIC METHODS-------*/
@@ -86,8 +73,18 @@ public:
      */
     bool insert(string token);
 
+    /**
+     * Checks if a token is in a tree
+     * @param Looks for this string token
+     * @return True if token is in string, false otherwise
+     */
     bool isTokenInTree(string searchToken);
-
+    
+    /**
+    * Removes a node from the tree by token.
+    * @param token The token to remove
+    * @return True if successful, false otherwise
+    */
     bool remove(string token);
 
     /**
@@ -108,9 +105,8 @@ public:
 
     /**
      * Preforms an in-order traversal of the tree,
-     * executing the passed method
-     *  on each node as it is visited.
-     * @param (*visit)(nodeData&)  The function to execute on the node.
+     * executing the passed method on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
     void inorder(void visit(NodeData*), Node* newRootPtr);
@@ -128,13 +124,27 @@ public:
      * Preforms a post-order traversal of the tree,
      * executing the passed method
      *  on each node as it is visited.
-     * @param (*visit)(nodeData&)  The function to execute on the node.
+     * @param visit(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
     void postorder(void visit(NodeData*), Node* newRootPtr);
-
+    
+    /**
+     * 
+     * @param visit
+     */
     void preorderStart(void visit(NodeData*));
+    
+    /**
+     * 
+     * @param visit
+     */
     void inorderStart(void visit(NodeData*));
+    
+    /**
+     * 
+     * @param vist
+     */
     void postorderStart(void vist(NodeData*));
 
 protected:
