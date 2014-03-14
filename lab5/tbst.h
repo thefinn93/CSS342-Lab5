@@ -12,8 +12,9 @@
 
 using namespace std;
 
-/// A threaded binary search tree
-
+/**
+ * A ThreadedBST
+ */
 class ThreadedBST {
 public:
 
@@ -36,7 +37,7 @@ public:
      * Initializes a TBST. At this point we have not determined the purpose of
      * this constructor, but it was in the book and we suspect it may come in
      * hand later
-     * @param rootNode
+     * @param rootNode  The root node
      * @param leftTreePtr
      * @param rightTreePtr
      */
@@ -166,7 +167,7 @@ protected:
      * @return The root pointer.
      */
     Node* balancedInsertHelper(Node* subTreePtr, Node* leftTail,
-            Node* rightTail, Node* newNodePtr);
+            Node* rightTail, Node* newNodePtr, int leftOrRight);
 
     /*Increment Frequency Helper*/
     /**
