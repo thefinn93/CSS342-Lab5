@@ -174,7 +174,8 @@ protected:
      * @param newNodePtr    A pointer to the new node that's being inserted.
      * @return The root pointer.
      */
-    Node* balancedInsertHelper(Node* subTreePtr, Node* newNodePtr);
+    Node* balancedInsertHelper(Node* subTreePtr, Node* leftTail,
+            Node* rightTail, Node* newNodePtr);
 
     /*Increment Frequency Helper*/
     /**

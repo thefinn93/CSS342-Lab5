@@ -115,7 +115,7 @@ bool ThreadedBST::insert(string token) {
 
     } else {
         Node* newNode = new Node(token);
-        rootPtr = balancedInsertHelper(rootPtr, newNode);
+        rootPtr = balancedInsertHelper(rootPtr, NULL, NULL, newNode);
     }
     return true;
 }
@@ -489,7 +489,7 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
     //    }
 }
 
-ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
+Node* ThreadedBST::removeLeafAndRelink(Node* leafToRemove) {
     if (leafToRemove->isLeftPtrThread() && leafToRemove->
             isRightPtrThread()) {
         if (leafToRemove->getLeftChildPtr()->getRightChildPtr() ==
