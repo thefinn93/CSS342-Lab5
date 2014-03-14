@@ -3,6 +3,9 @@
 
 int WIDTH = 30;
 
+int getTestSize(int argc, char** argv) {
+    return 13;
+}
 void testConstructors() {
     cout << "=============== Testing Constructors ==================" << endl;
     cout << "no tests yet defined" << endl;
@@ -18,9 +21,10 @@ void testConstructors() {
     ThreadedBST constructorTest2 = ThreadedBST(root);
 }
 
-void testInsertion() {
+void testInsertion(int testSize) {
     cout << "================= Testing Insertion ====================" << endl;
-    cout << "no tests yet defined" << endl;
+    cout << "no tests yet defined. Would be inserting " << testSize
+        << " nodes into a tree" << endl;
 }
 
 void testTraversal() {
@@ -33,10 +37,11 @@ void testRemove() {
     cout << "no tests yet defined" << endl;
 }
 
-int main() {
+int main(int argc, char** argv) {
     credits();
     testConstructors();
-    testInsertion();
+    int testSize = getTestSize(argc, argv);
+    testInsertion(testSize);
     testTraversal();
     testRemove();
     return 0;
