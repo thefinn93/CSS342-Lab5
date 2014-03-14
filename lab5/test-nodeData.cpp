@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int WIDTH = 30;
+int WIDTH = 35;
 
 void testConstructors() {
     cout << "================= Constructors Tests ==================" << endl;
