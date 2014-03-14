@@ -16,7 +16,6 @@ void testConstructors() {
     cout << left << "Constructor with a root node:";
     Node* root = new Node();
     ThreadedBST constructorTest2 = ThreadedBST(root);
-    delete root;
 }
 
 void testInsertion() {
