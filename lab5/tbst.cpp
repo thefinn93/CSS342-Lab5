@@ -1,15 +1,13 @@
 /**
  * @author Nicholas Abel, Finn Herzfeld
  * @date 3/02/2014
- * 
+ *
  */
 
 #ifndef THREADEDBST_CPP
 #define	THREADEDBST_CPP
 
 #include "tbst.h"
-#include "node.h"
-#include "nodeData.h"
 
 using namespace std;
 
@@ -91,9 +89,9 @@ int ThreadedBST::getHeight() const {
  * Returns the total number of tokens stored in this tree
  * @return The number of nodes in this tree.
  */
-int ThreadedBST::getNumberOfNodes() const {
+int ThreadedBST::getNumberOfNodes() {
     int nodeCount = 0;
-    if (this->isEmpty()) {
+    if (isEmpty()) {
         return nodeCount;
     } else {
 
@@ -137,7 +135,7 @@ bool ThreadedBST::isTokenInTree(string searchForThisToken) {
  */
 bool ThreadedBST::remove(string token) {
     if (isTokenInTree(token)) {
-        Node* removed = removeHelper(token, rootPtr, NULL);
+        Node* removed = removeHelper(token, rootPtr);
         delete removed;
         return true;
     } else {
@@ -154,7 +152,7 @@ bool ThreadedBST::remove(string token) {
  */
 int ThreadedBST::getFrequencyOfToken(string token) {
     if (isTokenInTree(token)) {
-        return nodeWithToken(token)->getData().getFrequency();
+        return ((nodeWithToken(token))->getData().getFrequency());
     } else {
         return 0; /// NOT MAGIC, IS THE NUMBER 0
     }
@@ -241,7 +239,7 @@ void ThreadedBST::postorder(void visit(NodeData*), Node* treePtr) const {
 /*copyTree*/
 
 /**
- * 
+ *
  */
 Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
     Node* newRootPtr = NULL;
@@ -265,7 +263,7 @@ Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
 ///TODO - Make sure it doesn't break for threaded.
 
 /**
- * 
+ *
  */
 void ThreadedBST::destroyTree(const Node* treeRootPtr) {
     if (treeRootPtr != NULL) {
@@ -330,11 +328,11 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
         return currentNode;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getLeftChildPtr(),
+            isTokenInTreeHelper(currentNode->getLeftChildPtr(),
                     string searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(Node * currentNode->getRightChildPtr(),
+            isTokenInTreeHelper(currentNode->getRightChildPtr(),
                     string searchToken);
         }
         /// We already know the node is in the tree. No need to have an
@@ -345,9 +343,9 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
 /*balancedInsertHelper*/
 
 /**
- * A private function to insert a new node into the tree. Based heavily on 
+ * A private function to insert a new node into the tree. Based heavily on
  *  Frank Carrano's sample code
- * @param subTreePtr    A pointer to the root of the tree the insert is 
+ * @param subTreePtr    A pointer to the root of the tree the insert is
  *  being preformed on.
  * @param newNodePtr    A pointer to the new node that's being inserted.
  * @return The root pointer.
@@ -424,10 +422,10 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
         leftSideThreadPredecessor =
                 findLeftSidePredecessor(nodeToRemove, treeRootPtr);
     }
-    //    if (!(leftThreadPredecessor->isLeftPtrThread())) {        
+    //    if (!(leftThreadPredecessor->isLeftPtrThread())) {
     ///just in case the line below doesn't work
     if (!isNodeALeaf(leftSideThreadPredecessor)) {
-        //        if (leftThreadPredecessor->getLeftChildPtr() != NULL) {       
+        //        if (leftThreadPredecessor->getLeftChildPtr() != NULL) {
         ///just in case
         findLeftSidePredecessor(leftSideThreadPredecessor)->
                 setLeftPtr(leftSideThreadPredecessor->getRightChildPtr());
@@ -445,7 +443,7 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
     return nodeToRemove;
 
     //    if (current->isLeftPtrThread() && current->isLeftPtrThread()) {
-    //        
+    //
     //        if (isLeft) {
     //            parent->leftChild = NULL;
     //        } else {

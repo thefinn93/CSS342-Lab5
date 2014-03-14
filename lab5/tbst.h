@@ -1,7 +1,7 @@
 /**
  * @author Nicholas Abel, Finn Herzfeld
  * @date 3/02/2014
- * 
+ *
  */
 
 #ifndef THREADEDBST_H
@@ -27,7 +27,7 @@ public:
 
     /**
      * A constructor that initializes the TBST from a specified root node
-     * @param rootNode  The node to use as the root 
+     * @param rootNode  The node to use as the root
      * when intitializing the tree.
      */
     ThreadedBST(Node* rootNode);
@@ -75,20 +75,18 @@ public:
      * Returns the total number of tokens stored in this tree
      * @return The number of nodes in this tree.
      */
-    int getNumberOfNodes() const;
-    
-    /**
-    * Inserts a token into the tree, or increments the token frequency if the
-    * token already exists in the node.
-    * @param token The token to insert.
-    * @return True if successful, false otherwise
-    */   
-    bool insert(string token);
-    
-    bool isTokenInTree(string searchToken);  
-    
+    int getNumberOfNodes();
 
-    
+    /**
+     * Inserts a token into the tree, or increments the token frequency if the
+     * token already exists in the node.
+     * @param token The token to insert.
+     * @return True if successful, false otherwise
+     */
+    bool insert(string token);
+
+    bool isTokenInTree(string searchToken);
+
     bool remove(string token);
 
     /**
@@ -97,10 +95,10 @@ public:
      * @return The frequency count of the specified token, or 0 if the token
      ** is not in this tree
      */
-    int getFrequencyOfToken(string token);    
-    
+    int getFrequencyOfToken(string token);
+
     /**
-     * Preforms an in-order traversal of the tree, 
+     * Preforms an in-order traversal of the tree,
      * executing the passed method
      *  on each node as it is visited. This version uses an iterative algorithm
      * @param (*visit)(nodeData&)  The function to execute on the node.
@@ -108,7 +106,7 @@ public:
     void iterativeInorder(void visit(NodeData*));
 
     /**
-     * Preforms an in-order traversal of the tree, 
+     * Preforms an in-order traversal of the tree,
      * executing the passed method
      *  on each node as it is visited.
      * @param (*visit)(nodeData&)  The function to execute on the node.
@@ -117,7 +115,7 @@ public:
     void inorder(void visit(NodeData*), Node* newRootPtr);
 
     /**
-     * Preforms a pre-order traversal of the tree, 
+     * Preforms a pre-order traversal of the tree,
      * executing the passed method
      *  on each node as it is visited.
      * @param (*visit)(nodeData&)  The function to execute on the node.
@@ -126,7 +124,7 @@ public:
     void preorder(void vist(NodeData*), Node* newRootPtr);
 
     /**
-     * Preforms a post-order traversal of the tree, 
+     * Preforms a post-order traversal of the tree,
      * executing the passed method
      *  on each node as it is visited.
      * @param (*visit)(nodeData&)  The function to execute on the node.
@@ -139,57 +137,57 @@ public:
     void postorderStart(void vist(NodeData*));
 
 protected:
-    
+
 
 
     /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;
-    
+
     /*Destructor Helper*/
     void destroyTree(const Node* treeRootPtr);
-    
+
     /*Get Tree Height Helper*/
     int getHeightHelper(Node* subTreePtr) const;
-    
+
     /*Is Token In Tree*/
     bool isTokenInTreeHelper(Node* currentNode, string searchToken);
-    
+
     bool isNodeALeaf(Node* currentNode);
 
     Node* nodeWithToken(Node* currentNode, string searchToken);
-    
+
     Node* previousNodeInThread(Node* subTreePtr, Node* pointsToThisNode);
-    
+
     /*Add Node Helper*/
     /**
-     * A private function to insert a new node into the tree. 
+     * A private function to insert a new node into the tree.
      * Based heavily on Frank Carrano's sample code
-     * @param subTreePtr    A pointer to the root of the tree 
+     * @param subTreePtr    A pointer to the root of the tree
      * the insert is being preformed on.
      * @param newNodePtr    A pointer to the new node that's being inserted.
      * @return The root pointer.
      */
     Node* balancedInsertHelper(Node* subTreePtr, Node* newNodePtr);
-    
+
     /*Increment Frequency Helper*/
     /**
-     * Sets the frequency of the specified token, or increments 
+     * Sets the frequency of the specified token, or increments
      * it if no value is specified.
      * @param token     The token to set the frequency for.
-     * @param frequency (optional) The new frequency for the token. 
+     * @param frequency (optional) The new frequency for the token.
      * Increments
      ** the value by 1 if not specified
      * @return True if successful, false otherwise
      */
     bool setFrequency(string token, int frequency);
-    
+
     /*Remove Node Helper*/
     Node* removeHelper(string token, Node* treeRootPtr);
-    
+
     Node* removeLeafAndRelink(Node* leafToRemove);
-    
+
     Node* findLeftSidePredecessor(Node* targetNodePtr, Node* subTreePtr);
-    
+
 private:
     /// The root node
     Node* rootPtr;
