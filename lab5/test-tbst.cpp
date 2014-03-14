@@ -160,6 +160,15 @@ void testMisc() {
     }
     cout << endl;
 
+    cout.width(WIDTH);
+    cout << left << "Test getFrequencyOfToken:";
+    if(notSoEmptyBST.getFrequencyOfToken("nodes") == 1) {
+        cout << "PASS";
+    } else {
+        cout << "FAIL";
+    }
+    cout << endl;
+
 }
 
 int main(int argc, char** argv) {
