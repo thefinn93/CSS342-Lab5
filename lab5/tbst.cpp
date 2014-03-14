@@ -201,8 +201,7 @@ void ThreadedBST::iterativeInorder(void (&visit)(NodeData)) {
  * @param visit(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::inorder(void (&visit)(NodeData), 
-        Node* treePtr) {
+void ThreadedBST::inorder(void (visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
         Node* theNode = treePtr;
         preorder(visit, treePtr->getLeftChildPtr());
@@ -221,8 +220,7 @@ void ThreadedBST::preorder(void (&visit)(NodeData)) const {
     preorderHelper(visit, rootPtr);
 }
 
-void ThreadedBST::preorderHelper(void (&visit)(NodeData), 
-        Node* treePtr) const {
+void ThreadedBST::preorderHelper(void (&visit)(NodeData), Node* treePtr) const {
     if (treePtr != NULL) {
         visit(treePtr->getData());
         preorderHelper(visit, treePtr->getLeftChildPtr());
@@ -264,6 +262,9 @@ void ThreadedBST::postorder(void (&visit)(NodeData), Node* treePtr) {
 
 /*copyTree*/
 
+/**
+ *
+ */
 Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
     Node* newRootPtr = NULL;
     if (treeRootPrt != NULL) {
@@ -283,6 +284,11 @@ Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
 
 /*destroyTree*/
 
+///TODO - Make sure it doesn't break for threaded.
+
+/**
+ *
+ */
 void ThreadedBST::destroyTree(const Node* treeRootPtr) {
     if (treeRootPtr != NULL) {
 
@@ -320,12 +326,10 @@ bool ThreadedBST::isTokenInTreeHelper(Node* currentNode,
     if (currentNode->getData().getToken() == searchToken) {
         return true;
     } else {
-        if ((currentNode->getLeftChildPtr() != NULL) && 
-                !(currentNode->isLeftPtrThread())) {
+        if ((currentNode->getLeftChildPtr() != NULL) && !(currentNode->isLeftPtrThread())) {
             isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
-        if ((currentNode->getRightChildPtr() != NULL) && 
-                !(currentNode->isRightPtrThread())) {
+        if ((currentNode->getRightChildPtr() != NULL) && !(currentNode->isRightPtrThread())) {
             isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         return false; /// searchToken is never found

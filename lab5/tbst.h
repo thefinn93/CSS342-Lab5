@@ -127,60 +127,49 @@ public:
      * @param visit(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
+
+    void postorder(void visit(NodeData*), Node* newRootPtr);
+    
+    /**
+     * 
+     * @param visit
+     */
+
     void postorder(void (&)(NodeData), Node* newRootPtr);
+
+
+    void preorderStart(void visit(NodeData*));
+    
+    /**
+     * 
+     * @param visit
+     */
+    void inorderStart(void visit(NodeData*));
+    
+    /**
+     * 
+     * @param vist
+     */
+    void postorderStart(void vist(NodeData*));
 
 protected:
 
-    /**
-     * A copy tree helper, copies each node of the tree
-     * @param treeRootPrt the root ptr of the subtree to delete
-     * @return a node ptr to the 
-     */
+    /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;
 
-    /**
-     * 
-     * @param treeRootPtr
-     */
+    /*Destructor Helper*/
     void destroyTree(const Node* treeRootPtr);
-    
-    /**
-     * A helper function to determine the height of a binary tree. Based
-     *  heavily on Frank Carrano's sample code.
-     * @param subTreePtr A pointer to the root of the tree to measure
-     * @return The height of the specified tree
-     */
+
+    /*Get Tree Height Helper*/
     int getHeightHelper(Node* subTreePtr) const;
 
-    /**
-     * 
-     * @param currentNode
-     * @param searchToken
-     * @return 
-     */
+    /*Is Token In Tree*/
     bool isTokenInTreeHelper(Node* currentNode, string searchToken);
-    
-    /**
-     * 
-     * @param currentNode
-     * @return 
-     */
+
     bool isNodeALeaf(Node* currentNode);
-    
-    /**
-     * 
-     * @param currentNode
-     * @param searchToken
-     * @return 
-     */
+
     Node* nodeWithToken(Node* currentNode, string searchToken);
-    
-    /**
-     * 
-     * @param subTreePtr
-     * @param pointsToThisNode
-     * @return 
-     */
+
     Node* previousNodeInThread(Node* subTreePtr, Node* pointsToThisNode);
 
     /*Add Node Helper*/
@@ -206,39 +195,17 @@ protected:
      * @return True if successful, false otherwise
      */
     bool setFrequency(string token, int frequency);
-    
-    /**
-     * 
-     * @param visit
-     * @param treePtr
-     */
+
     void preorderHelper(void (&visit)(NodeData), Node* treePtr) const;
 
-    /**
-     * 
-     * @param token
-     * @param treeRootPtr
-     * @return 
-     */
+    /*Remove Node Helper*/
     Node* removeHelper(string token, Node* treeRootPtr);
-    
-    /**
-     * 
-     * @param leafToRemove
-     * @return 
-     */
+
     Node* removeLeafAndRelink(Node* leafToRemove);
-    
-    /**
-     * 
-     * @param targetNodePtr
-     * @param subTreePtr
-     * @return 
-     */
+
     Node* findLeftSidePredecessor(Node* targetNodePtr, Node* subTreePtr);
 
 private:
-    
     /// The root node
     Node* rootPtr;
 
