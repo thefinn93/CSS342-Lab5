@@ -133,6 +133,7 @@ NodeData Node::getData() const {
     return data;
 }
 
+
 NodeData* Node::getDataReference() {
     return &data;
 }
