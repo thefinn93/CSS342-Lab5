@@ -4,7 +4,15 @@
 int WIDTH = 30;
 
 int getTestSize(int argc, char** argv) {
-    return 13;
+    int testSize = 13;
+    if(argc > 1) {
+        testSize = atoi(argv[1]);
+    }
+    if(testSize < 0) {
+        cerr << "Test size may *not* be negative!" << endl;
+        exit(1);
+    }
+    return testSize;
 }
 void testConstructors() {
     cout << "=============== Testing Constructors ==================" << endl;
@@ -19,6 +27,7 @@ void testConstructors() {
     cout << left << "Constructor with a root node:";
     Node* root = new Node();
     ThreadedBST constructorTest2 = ThreadedBST(root);
+    cout << "PASS (didn't crash)" << endl;
 }
 
 void testInsertion(int testSize) {
