@@ -196,7 +196,7 @@ void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
  * @param (*visit)(nodeData&)  The function to execute on the node.
  * @param treePtr           The root of the tree to traverse
  */
-void ThreadedBST::preorder(void (*visit)(NodeData*), Node* treePtr) {
+void ThreadedBST::preorder(void visit(NodeData&), Node* treePtr) {
     if (treePtr != NULL) {
         Node* theNode = treePtr;
         visit(theNode->getDataReference());
@@ -206,8 +206,8 @@ void ThreadedBST::preorder(void (*visit)(NodeData*), Node* treePtr) {
 }
 
 ///TODO - Recursive inorder
-
-void ThreadedBST::inorder(void (*visit)(NodeData*), Node* treePtr) {
+/*
+void ThreadedBST::inorder(void (visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
         Node* theNode = treePtr;
         preorder(visit, treePtr->getLeftChildPtr());
@@ -215,7 +215,7 @@ void ThreadedBST::inorder(void (*visit)(NodeData*), Node* treePtr) {
         preorder(visit, treePtr->getRightChildPtr());
     }
 }
-
+*/
 /**
  * Preforms a post-order traversal of the tree, executing the passed method
  *  on each node as it is visited.

@@ -1,10 +1,26 @@
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
 #include "credits.cpp"
 #include "tbst.h"
 
-int WIDTH = 30;
+
+using namespace std;
+
+int const WIDTH = 30;
+int const DEFAULT_TEST_SIZE = 13;
+
+/// The int value that, when cast as a char, becomes a capital A
+int const INTTOCHAR_CAPS_START = 65;
+
+/// The int value that, when cast as a char, becomes a lower case a
+int const INTTOCHAR_LOWER_START = 97;
+
+/// The size of the alphabet
+int const ALPHABET_SIZE = 26;
 
 int getTestSize(int argc, char** argv) {
-    int testSize = 13;
+    int testSize = DEFAULT_TEST_SIZE;
     if(argc > 1) {
         testSize = atoi(argv[1]);
     }
@@ -14,6 +30,7 @@ int getTestSize(int argc, char** argv) {
     }
     return testSize;
 }
+
 void testConstructors() {
     cout << "=============== Testing Constructors ==================" << endl;
     cout << "no tests yet defined" << endl;
@@ -28,17 +45,50 @@ void testConstructors() {
     Node* root = new Node();
     ThreadedBST constructorTest2 = ThreadedBST(root);
     cout << "PASS (didn't crash)" << endl;
+
+    cout.width(WIDTH);
+    cout << left << "Copy constructor:";
+    ThreadedBST copy = ThreadedBST(constructorTest2);
+    cout << "PASS (didn't crash)" << endl;
 }
 
-void testInsertion(int testSize) {
+const char* frequencyToToken(int frequency) {
+    if(frequency < ALPHABET_SIZE*2 && frequency < 0) {
+        if(frequency < ALPHABET_SIZE) {
+            char* character;
+            character[0] = char(frequency + INTTOCHAR_CAPS_START);
+            return character;
+        } else {
+            char* character;
+            character[0] = char(frequency + INTTOCHAR_LOWER_START);
+            return character;
+        }
+    } else {
+        throw("Can't stringify that int");
+    }
+}
+
+ThreadedBST testInsertion(int testSize) {
     cout << "================= Testing Insertion ====================" << endl;
-    cout << "no tests yet defined. Would be inserting " << testSize
-        << " nodes into a tree" << endl;
+    cout.width(WIDTH);
+    cout << "Insert just token";
+    ThreadedBST tokenOnly = ThreadedBST();
+    for(int treeSize = 0; treeSize < testSize; treeSize++) {
+        tokenOnly.insert(string(frequencyToToken(treeSize))); //, treeSize);
+    }
+    cout << "PASS (didn't crash, see traversal tests to actually verify "
+        << "insertion" << endl;
+    return tokenOnly;
+}
+void visitAndPrint(NodeData* data) {
+    cout << " * " << data << endl;
 }
 
-void testTraversal() {
+void testTraversal(ThreadedBST traverseMe) {
     cout << "================ Testing Traversals ====================" << endl;
-    cout << "no tests yet defined" << endl;
+//    void (*visit)(NodeData*);
+//    visit = visitAndPrint;
+    traverseMe.preorder(visitAndPrint);
 }
 
 void testRemove() {
@@ -46,12 +96,18 @@ void testRemove() {
     cout << "no tests yet defined" << endl;
 }
 
+void testMisc() {
+    cout << "=============== Testing Misc. Functions =================" << endl;
+    cout << "no tests yet defined" << endl;
+}
+
 int main(int argc, char** argv) {
     credits();
     testConstructors();
     int testSize = getTestSize(argc, argv);
-    testInsertion(testSize);
-    testTraversal();
+    ThreadedBST traverseMe = testInsertion(testSize);
+    testTraversal(traverseMe);
     testRemove();
+    testMisc();
     return 0;
 }
