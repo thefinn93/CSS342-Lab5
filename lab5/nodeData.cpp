@@ -62,18 +62,23 @@ bool NodeData::operator==(const NodeData& right) const {
  */
 bool NodeData::operator< (const NodeData& right) const {
     string rightToken = right.getToken();
-    for(int character = 0; character < (int)token.size() &&
-            character < (int)rightToken.size(); character++) {
-        // Compare the ASCII values of the two characters
-        if(token[character] < rightToken[character]) {
-            return true;
-        } else if(token[character] > rightToken[character]) {
-            return false;
-        }
+//    for(int character = 0; character < (int)token.size() &&
+//            character < (int)rightToken.size(); character++) {
+//        // Compare the ASCII values of the two characters
+//        if(token[character] < rightToken[character]) {
+//            return true;
+//        } else if(token[character] > rightToken[character]) {
+//            return false;
+//        }
+//    }
+    if (token.compare(rightToken) < 0) {
+        return true;
+    } else {
+        return false;
     }
-    // At this point, the two strings are equal up to the length of the shorter
-    // one. If right is longer, we say it's greater
-    return token.size() < rightToken.size();
+//    // At this point, the two strings are equal up to the length of the shorter
+//    // one. If right is longer, we say it's greater
+//    return token.size() < rightToken.size();
 }
 
 /**
@@ -84,18 +89,23 @@ bool NodeData::operator< (const NodeData& right) const {
  */
 bool NodeData::operator>(const NodeData& right) const {
     string rightToken = right.getToken();
-    for(int character = 0; character < (int)token.size() &&
-            character < (int)rightToken.size(); character++) {
-        // Compare the ASCII values of the two characters
-        if(token[character] < rightToken[character]) {
-            return false;
-        } else if(token[character] > rightToken[character]) {
-            return true;
-        }
+//    for(int character = 0; character < (int)token.size() &&
+//            character < (int)rightToken.size(); character++) {
+//        // Compare the ASCII values of the two characters
+//        if(token[character] < rightToken[character]) {
+//            return false;
+//        } else if(token[character] > rightToken[character]) {
+//            return true;
+//        }
+//    }
+    if (token.compare(rightToken) > 0) {
+        return true;
+    } else {
+        return false;
     }
-    // At this point, the two strings are equal up to the length of the shorter
-    // one. If right is longer, we say it's greater
-    return token.size() > rightToken.size();
+//    // At this point, the two strings are equal up to the length of the shorter
+//    // one. If right is longer, we say it's greater
+//    return token.size() > rightToken.size();
 }
 /*-------Constructors-------*/
 

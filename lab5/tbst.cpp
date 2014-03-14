@@ -115,7 +115,7 @@ bool ThreadedBST::insert(string token) {
 
     } else {
         Node* newNode = new Node(token);
-        rootPtr = balancedInsertHelper(rootPtr, NULL, NULL, newNode);
+        rootPtr = balancedInsertHelper(rootPtr, NULL, NULL, newNode, 0);
     }
     return true;
 }
@@ -350,17 +350,25 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
  * @return The root pointer.
  */
 Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
-        Node* rightTail, Node* newNodePtr) {
+        Node* rightTail, Node* newNodePtr, int leftOrRight) {
     if (subTreePtr == NULL) {
         newNodePtr->setLeftPtr(leftTail);
         if (newNodePtr->getLeftChildPtr() == rootPtr) {
-            newNodePtr->setLeftPtrIsThread(false);
+            if (leftOrRight == 1) {
+                newNodePtr->setRightPtrIsThread(true);
+            } else {
+                newNodePtr->setLeftPtrIsThread(false);
+            }
         } else {
             newNodePtr->setLeftPtrIsThread(true);
         }
         newNodePtr->setRightPtr(rightTail);
         if (newNodePtr->getRightChildPtr() == rootPtr) {
-            newNodePtr->setRightPtrIsThread(false);
+            if (leftOrRight == -1) {
+                newNodePtr->setRightPtrIsThread(true);
+            } else {
+                newNodePtr->setRightPtrIsThread(false);
+            }
         } else {
             newNodePtr->setLeftPtrIsThread(true);
         }
@@ -371,13 +379,13 @@ Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
         if (newNodePtr->getData() > subTreePtr->getData()) {
             // Go right, set the left tail to the current node.
             rightPtr = balancedInsertHelper(rightPtr, subTreePtr, rightTail,
-                    newNodePtr);
+                    newNodePtr, 1);
             subTreePtr->setRightPtr(rightPtr);
             subTreePtr->setRightPtrIsThread(false);
         } else {
             // Go left, set the right tail to the current node.
             leftPtr = balancedInsertHelper(leftPtr, leftTail, subTreePtr,
-                    newNodePtr);
+                    newNodePtr, -1);
             subTreePtr->setLeftPtr(leftPtr);
             subTreePtr->setLeftPtrIsThread(false);
         }
