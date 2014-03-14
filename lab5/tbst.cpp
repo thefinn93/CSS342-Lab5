@@ -30,22 +30,6 @@ ThreadedBST::ThreadedBST(Node* rootNode) {
     rootPtr = rootNode;
 }
 
-///TODO - DELETE?
-
-/**
- * Initializes a TBST. At this point we have not determined the purpose of
- * this constructor, but it was in the book and we suspect it may come in
- * hand later
- * @param rootNode
- * @param leftTreePtr
- * @param rightTreePtr
- */
-ThreadedBST::ThreadedBST(const Node& rootNode,
-        const ThreadedBST* leftTreePtr,
-        const ThreadedBST* rightTreePtr) {
-    /// Why would we use this?
-}
-
 /**
  * Creates a deep copy of another TBST.
  * @param treeToCopy    The TBST to copy
@@ -120,6 +104,13 @@ bool ThreadedBST::insert(string token) {
     return true;
 }
 
+/*isTokenInTree*/
+
+/**
+ * Checks if a token is in a tree
+ * @param Looks for this string token
+ * @return True if token is in string, false otherwise
+ */
 bool ThreadedBST::isTokenInTree(string searchForThisToken) {
     if (this->isEmpty()) {
         return false;
@@ -127,6 +118,8 @@ bool ThreadedBST::isTokenInTree(string searchForThisToken) {
         return isTokenInTreeHelper(rootPtr, searchForThisToken);
     }
 }
+
+/*remove*/
 
 /**
  * Removes a node from the tree by token.
@@ -144,6 +137,8 @@ bool ThreadedBST::remove(string token) {
 
 }
 
+/*getFrequencyOfToken*/
+
 /**
  * Retrieves the frequency of a given token
  * @param token The token to search for
@@ -158,6 +153,14 @@ int ThreadedBST::getFrequencyOfToken(string token) {
     }
 }
 
+/*iterativeInOrder*/
+
+/**
+ * Preforms an in-order traversal of the tree,
+ * executing the passed method
+ *  on each node as it is visited. This version uses an iterative algorithm
+ * @param (*visit)(nodeData&)  The function to execute on the node.
+ */
 void ThreadedBST::iterativeInorder(void (&visit)(NodeData)) {
     Node* current = rootPtr;
     // Once we've visited every node, this will be set to true
@@ -190,6 +193,24 @@ void ThreadedBST::iterativeInorder(void (&visit)(NodeData)) {
     }
 }
 
+/*inorder*/
+
+/**
+ * Preforms an in-order traversal of the tree,
+ * executing the passed method on each node as it is visited.
+ * @param visit(nodeData&)  The function to execute on the node.
+ * @param treePtr           The root of the tree to traverse
+ */
+void ThreadedBST::inorder(void (&visit)(NodeData), 
+        Node* treePtr) {
+    if (treePtr != NULL) {
+        Node* theNode = treePtr;
+        preorder(visit, treePtr->getLeftChildPtr());
+        visit(theNode->getDataReference());
+        preorder(visit, treePtr->getRightChildPtr());
+    }
+}
+
 /**
  * Preforms a pre-order traversal of the tree, executing the passed method
  *  on each node as it is visited. This method is recursive
@@ -200,13 +221,15 @@ void ThreadedBST::preorder(void (&visit)(NodeData)) const {
     preorderHelper(visit, rootPtr);
 }
 
-void ThreadedBST::preorderHelper(void (&visit)(NodeData), Node* treePtr) const {
+void ThreadedBST::preorderHelper(void (&visit)(NodeData), 
+        Node* treePtr) const {
     if (treePtr != NULL) {
         visit(treePtr->getData());
         preorderHelper(visit, treePtr->getLeftChildPtr());
         preorderHelper(visit, treePtr->getRightChildPtr());
     }
 }
+
 
 
 void ThreadedBST::inorder(void (&visit)(NodeData), Node* treePtr) {
@@ -217,6 +240,7 @@ void ThreadedBST::inorder(void (&visit)(NodeData), Node* treePtr) {
         inorder(visit, treePtr->getRightChildPtr());
     }
 }
+
 
 /**
  * Preforms a post-order traversal of the tree, executing the passed method
@@ -240,9 +264,6 @@ void ThreadedBST::postorder(void (&visit)(NodeData), Node* treePtr) {
 
 /*copyTree*/
 
-/**
- *
- */
 Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
     Node* newRootPtr = NULL;
     if (treeRootPrt != NULL) {
@@ -262,11 +283,6 @@ Node* ThreadedBST::copyTree(const Node* treeRootPrt) const {
 
 /*destroyTree*/
 
-///TODO - Make sure it doesn't break for threaded.
-
-/**
- *
- */
 void ThreadedBST::destroyTree(const Node* treeRootPtr) {
     if (treeRootPtr != NULL) {
 
@@ -304,10 +320,12 @@ bool ThreadedBST::isTokenInTreeHelper(Node* currentNode,
     if (currentNode->getData().getToken() == searchToken) {
         return true;
     } else {
-        if ((currentNode->getLeftChildPtr() != NULL) && !(currentNode->isLeftPtrThread())) {
+        if ((currentNode->getLeftChildPtr() != NULL) && 
+                !(currentNode->isLeftPtrThread())) {
             isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
-        if ((currentNode->getRightChildPtr() != NULL) && !(currentNode->isRightPtrThread())) {
+        if ((currentNode->getRightChildPtr() != NULL) && 
+                !(currentNode->isRightPtrThread())) {
             isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         return false; /// searchToken is never found

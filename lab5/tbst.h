@@ -34,18 +34,6 @@ public:
     ThreadedBST(Node* rootNode);
 
     /**
-     * Initializes a TBST. At this point we have not determined the purpose of
-     * this constructor, but it was in the book and we suspect it may come in
-     * hand later
-     * @param rootNode  The root node
-     * @param leftTreePtr
-     * @param rightTreePtr
-     */
-    ThreadedBST(const Node& rootNode,
-            const ThreadedBST* leftTreePtr,
-            const ThreadedBST* rightTreePtr);
-
-    /**
      * Creates a deep copy of another TBST.
      * @param treeToCopy    The TBST to copy
      */
@@ -55,7 +43,6 @@ public:
      * A destructor. Deletes all the nodes in this tree.
      */
     ~ThreadedBST();
-
 
 
     /*-------PUBLIC METHODS-------*/
@@ -86,8 +73,18 @@ public:
      */
     bool insert(string token);
 
+    /**
+     * Checks if a token is in a tree
+     * @param Looks for this string token
+     * @return True if token is in string, false otherwise
+     */
     bool isTokenInTree(string searchToken);
-
+    
+    /**
+    * Removes a node from the tree by token.
+    * @param token The token to remove
+    * @return True if successful, false otherwise
+    */
     bool remove(string token);
 
     /**
@@ -108,9 +105,8 @@ public:
 
     /**
      * Preforms an in-order traversal of the tree,
-     * executing the passed method
-     *  on each node as it is visited.
-     * @param (*visit)(nodeData&)  The function to execute on the node.
+     * executing the passed method on each node as it is visited.
+     * @param visit(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
     void inorder(void (&)(NodeData), Node* newRootPtr);
@@ -128,33 +124,63 @@ public:
      * Preforms a post-order traversal of the tree,
      * executing the passed method
      *  on each node as it is visited.
-     * @param (*visit)(nodeData&)  The function to execute on the node.
+     * @param visit(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
     void postorder(void (&)(NodeData), Node* newRootPtr);
 
-    void preorderStart(void visit(NodeData*));
-    void inorderStart(void visit(NodeData*));
-    void postorderStart(void vist(NodeData*));
-
 protected:
 
-    /*Copy Tree Helper*/
+    /**
+     * A copy tree helper, copies each node of the tree
+     * @param treeRootPrt the root ptr of the subtree to delete
+     * @return a node ptr to the 
+     */
     Node* copyTree(const Node* treeRootPrt) const;
 
-    /*Destructor Helper*/
+    /**
+     * 
+     * @param treeRootPtr
+     */
     void destroyTree(const Node* treeRootPtr);
-
-    /*Get Tree Height Helper*/
+    
+    /**
+     * A helper function to determine the height of a binary tree. Based
+     *  heavily on Frank Carrano's sample code.
+     * @param subTreePtr A pointer to the root of the tree to measure
+     * @return The height of the specified tree
+     */
     int getHeightHelper(Node* subTreePtr) const;
 
-    /*Is Token In Tree*/
+    /**
+     * 
+     * @param currentNode
+     * @param searchToken
+     * @return 
+     */
     bool isTokenInTreeHelper(Node* currentNode, string searchToken);
-
+    
+    /**
+     * 
+     * @param currentNode
+     * @return 
+     */
     bool isNodeALeaf(Node* currentNode);
-
+    
+    /**
+     * 
+     * @param currentNode
+     * @param searchToken
+     * @return 
+     */
     Node* nodeWithToken(Node* currentNode, string searchToken);
-
+    
+    /**
+     * 
+     * @param subTreePtr
+     * @param pointsToThisNode
+     * @return 
+     */
     Node* previousNodeInThread(Node* subTreePtr, Node* pointsToThisNode);
 
     /*Add Node Helper*/
@@ -180,17 +206,39 @@ protected:
      * @return True if successful, false otherwise
      */
     bool setFrequency(string token, int frequency);
-
+    
+    /**
+     * 
+     * @param visit
+     * @param treePtr
+     */
     void preorderHelper(void (&visit)(NodeData), Node* treePtr) const;
 
-    /*Remove Node Helper*/
+    /**
+     * 
+     * @param token
+     * @param treeRootPtr
+     * @return 
+     */
     Node* removeHelper(string token, Node* treeRootPtr);
-
+    
+    /**
+     * 
+     * @param leafToRemove
+     * @return 
+     */
     Node* removeLeafAndRelink(Node* leafToRemove);
-
+    
+    /**
+     * 
+     * @param targetNodePtr
+     * @param subTreePtr
+     * @return 
+     */
     Node* findLeftSidePredecessor(Node* targetNodePtr, Node* subTreePtr);
 
 private:
+    
     /// The root node
     Node* rootPtr;
 
