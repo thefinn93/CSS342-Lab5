@@ -158,7 +158,7 @@ int ThreadedBST::getFrequencyOfToken(string token) {
     }
 }
 
-void ThreadedBST::iterativeInorder(void visit(NodeData*)) {
+void ThreadedBST::iterativeInorder(void (&visit)(NodeData)) {
     Node* current = rootPtr;
     // Once we've visited every node, this will be set to true
     bool done = false;
@@ -209,7 +209,7 @@ void ThreadedBST::preorderHelper(void (&visit)(NodeData), Node* treePtr) const {
 }
 
 ///TODO - Recursive inorder
-/*
+
 void ThreadedBST::inorder(void (visit)(NodeData*), Node* treePtr) {
     if (treePtr != NULL) {
         Node* theNode = treePtr;
@@ -218,7 +218,7 @@ void ThreadedBST::inorder(void (visit)(NodeData*), Node* treePtr) {
         preorder(visit, treePtr->getRightChildPtr());
     }
 }
-*/
+
 /**
  * Preforms a post-order traversal of the tree, executing the passed method
  *  on each node as it is visited.

@@ -103,7 +103,7 @@ public:
      *  on each node as it is visited. This version uses an iterative algorithm
      * @param (*visit)(nodeData&)  The function to execute on the node.
      */
-    void iterativeInorder(void visit(NodeData*));
+    void iterativeInorder(void (&)(NodeData));
 
     /**
      * Preforms an in-order traversal of the tree,
@@ -112,7 +112,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-//    void inorder(void visit(NodeData*), Node* newRootPtr);
+    void inorder(void visit(NodeData*), Node* newRootPtr);
 
     /**
      * Preforms a pre-order traversal of the tree,
