@@ -413,6 +413,7 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
 
     if (isNodeALeaf(nodeToRemove)) {
         /// We're a leaf node, no children to worry about!
+        /// unlink the node from the tree, relink the tree
         return removeLeafAndRelink(nodeToRemove);
     } else {
         leftSideThreadPredecessor =
@@ -423,7 +424,7 @@ Node* ThreadedBST::removeHelper(string token, Node* treeRootPtr) {
     if (!isNodeALeaf(leftSideThreadPredecessor)) {
         //        if (leftThreadPredecessor->getLeftChildPtr() != NULL) {
         ///just in case
-        findLeftSidePredecessor(leftSideThreadPredecessor)->
+        findLeftSidePredecessor(leftSideThreadPredecessor, treeRootPtr)->
                 setLeftPtr(leftSideThreadPredecessor->getRightChildPtr());
         //        }
     }
