@@ -87,9 +87,9 @@ void visitAndPrint(NodeData data) {
 }
 
 void testTraversal(ThreadedBST traverseMe) {
-    cout << "================ Testing Traversals ====================" << endl;
-    cout << "Pre-order:" << endl;
-    traverseMe.preorder(visitAndPrint);
+    cout << "================ Traversals ====================" << endl;
+    cout << "Iterative in order:" << endl;
+    traverseMe.inorder(visitAndPrint);
 }
 
 void testRemove() {
