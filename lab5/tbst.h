@@ -112,7 +112,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void inorder(void visit(NodeData*), Node* newRootPtr);
+    void inorder(void (&)(NodeData), Node* newRootPtr);
 
     /**
      * Preforms a pre-order traversal of the tree,
@@ -130,7 +130,7 @@ public:
      * @param (*visit)(nodeData&)  The function to execute on the node.
      * @param treePtr           The root of the tree to traverse
      */
-    void postorder(void visit(NodeData*), Node* newRootPtr);
+    void postorder(void (&)(NodeData), Node* newRootPtr);
 
     void preorderStart(void visit(NodeData*));
     void inorderStart(void visit(NodeData*));
