@@ -75,11 +75,7 @@ public:
      * Returns the total number of tokens stored in this tree
      * @return The number of nodes in this tree.
      */
-<<<<<<< HEAD
     int getNumberOfNodes();
-=======
-    int getNumberOfNodes() const;
->>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
 
     /**
      * Inserts a token into the tree, or increments the token frequency if the
@@ -141,11 +137,6 @@ public:
     void postorderStart(void vist(NodeData*));
 
 protected:
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
 
     /*Copy Tree Helper*/
     Node* copyTree(const Node* treeRootPrt) const;

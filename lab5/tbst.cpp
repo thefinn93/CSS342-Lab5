@@ -152,11 +152,7 @@ bool ThreadedBST::remove(string token) {
  */
 int ThreadedBST::getFrequencyOfToken(string token) {
     if (isTokenInTree(token)) {
-<<<<<<< HEAD
-        return ((nodeWithToken(token))->getData().getFrequency());
-=======
         return nodeWithToken(rootPtr, token)->getData().getFrequency();
->>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
     } else {
         return 0; /// NOT MAGIC, IS THE NUMBER 0
     }
@@ -330,19 +326,10 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
         return currentNode;
     } else {
         if (currentNode->getLeftChildPtr() != NULL) {
-<<<<<<< HEAD
-            isTokenInTreeHelper(currentNode->getLeftChildPtr(),
-                    string searchToken);
-        }
-        if (currentNode->getLeftChildPtr() != NULL) {
-            isTokenInTreeHelper(currentNode->getRightChildPtr(),
-                    string searchToken);
-=======
             isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
         if (currentNode->getLeftChildPtr() != NULL) {
             isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
->>>>>>> 9b52a9fefaf0ea02cf74cbb6fac1bd11f6c4363e
         }
         /// We already know the node is in the tree. No need to have an
         /// alternate return.
