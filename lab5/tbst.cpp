@@ -95,7 +95,7 @@ bool ThreadedBST::insert(string token) {
     if (this->isTokenInTree(token)) {
         ///iterates the frequency by 1
         nodeWithToken(rootPtr, token)->getDataReference()->
-                increaseFrequency();
+                increaseFrequency(1);
 
     } else {
         Node* newNode = new Node(token);
@@ -373,41 +373,76 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
 Node* ThreadedBST::balancedInsertHelper(Node* subTreePtr, Node* leftTail,
         Node* rightTail, Node* newNodePtr, int leftOrRight) {
     if (subTreePtr == NULL) {
+        cout << "INSERTING: FOUND: newNodePtr, token: " << newNodePtr->getData().getToken() << endl;
+        cout << "INSERTING: FOUND: Found Null subTreePtr, setting newNodePtr leftChildPtr to leftTail, is NULL: " << (leftTail == NULL) << endl;
         newNodePtr->setLeftPtr(leftTail);
         if (newNodePtr->getLeftChildPtr() == rootPtr) {
+            cout << "INSERTING: FOUND: On newNodePtr, leftChildPtr is rootPtr" << endl;
             if (leftOrRight == 1) {
-                newNodePtr->setRightPtrIsThread(true);
+                cout << "INSERTING: FOUND: Came from the left" << endl;
+                cout << "INSERTING: FOUND: On newNodePtr, leftChildPtr is a Thread" << endl;
+                newNodePtr->setLeftPtrIsThread(true);
+            } else if (leftOrRight == -1) {
+                cout << "INSERTING: FOUND: Came from the right" << endl;
+                cout << "INSERTING: FOUND: On newNodePtr, leftChildPtr is a Non-Thread" << endl;
+                newNodePtr->setLeftPtrIsThread(false);
             } else {
+                cout << "INSERTING: FOUND: Is rootPtr" << endl;
+                cout << "INSERTING: FOUND: On newNodePtr, leftChildPtr is a Non-Thread" << endl;
                 newNodePtr->setLeftPtrIsThread(false);
             }
         } else {
+            cout << "INSERTING: FOUND: On newNodePtr, leftChildPtr is Thread" << endl;
             newNodePtr->setLeftPtrIsThread(true);
         }
+        cout << "INSERTING: FOUND: Found Null subTreePtr, setting newNodePtr rightChildPtr to rightTail, is NULL: " << (rightTail == NULL) << endl;
         newNodePtr->setRightPtr(rightTail);
         if (newNodePtr->getRightChildPtr() == rootPtr) {
+            cout << "INSERTING: FOUND: On newNodePtr, rightChildPtr is rootPtr" << endl;
             if (leftOrRight == -1) {
+                cout << "INSERTING: FOUND: Came from the right" << endl;
+                cout << "INSERTING: FOUND: On newNodePtr, rightChildPtr is a Thread" << endl;
                 newNodePtr->setRightPtrIsThread(true);
+            } else if (leftOrRight == 1) {
+                cout << "INSERTING: FOUND: Came from the left" << endl;
+                cout << "INSERTING: FOUND: On newNodePtr, rightChildPtr is a Non-Thread" << endl;   
+                newNodePtr->setRightPtrIsThread(false);
             } else {
+                cout << "INSERTING: FOUND: Is rootPtr" << endl;
+                cout << "INSERTING: FOUND: On newNodePtr, rightChildPtr is a Non-Thread" << endl; 
                 newNodePtr->setRightPtrIsThread(false);
             }
         } else {
-            newNodePtr->setLeftPtrIsThread(true);
+            cout << "INSERTING: FOUND: On newNodePtr, leftChildPtr is Thread" << endl;
+            newNodePtr->setRightPtrIsThread(true);
         }
+        cout << "INSERTING: FOUND: Done, returning newNodePtr, token: " << newNodePtr->getData().getToken() << endl;
         return newNodePtr;
     } else {
+        cout << "INSERTING: LOOKING: Current Node not NULL, subTreePtr, token: " << subTreePtr->getData().getToken() << endl;
+        cout << "INSERTING: LOOKING: Setting leftPtr to leftChildPtr, token: " << endl;
         Node* leftPtr = subTreePtr->getLeftChildPtr();
+        cout << "INSERTING: LOOKING: Setting rightPtr to rightChildPtr, token: " << endl;
         Node* rightPtr = subTreePtr->getRightChildPtr();
         if (newNodePtr->getData() > subTreePtr->getData()) {
+            cout << "INSERTING: LOOKING: newNode is greater than currentNode, go Right" << endl;
+            cout << "INSERTING: LOOKING: rightPtr = balancedInsertHelper(rightPtr, subTreePtr, rightTail, newNodePtr, 1)" << endl;
             // Go right, set the left tail to the current node.
             rightPtr = balancedInsertHelper(rightPtr, subTreePtr, rightTail,
                     newNodePtr, 1);
+            cout << "INSERTING: LOOKING: rightPtr returned, current subTreePtr rightChildPtr is set to rightPtr" << endl;
             subTreePtr->setRightPtr(rightPtr);
+            cout << "INSERTING: LOOKING: current subTreePtr rightChildPtr is a non-thread" << endl;
             subTreePtr->setRightPtrIsThread(false);
         } else {
+            cout << "INSERTING: LOOKING: newNode is less than than currentNode, go left" << endl;
+            cout << "INSERTING: LOOKING: leftPtr = balancedInsertHelper(leftPtr, leftTail, subTreePtr, newNodePtr, -1)" << endl;
             // Go left, set the right tail to the current node.
             leftPtr = balancedInsertHelper(leftPtr, leftTail, subTreePtr,
                     newNodePtr, -1);
+            cout << "INSERTING: LOOKING: leftPtr returned, current subTreePtr leftChildPtr is set to leftPtr" << endl;
             subTreePtr->setLeftPtr(leftPtr);
+            cout << "INSERTING: LOOKING: current subTreePtr leftChildPtr is a non-thread" << endl;
             subTreePtr->setLeftPtrIsThread(false);
         }
         return subTreePtr;

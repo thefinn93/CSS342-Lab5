@@ -186,7 +186,7 @@ bool NodeData::increaseFrequency(int amount = 1) {
 
 /**
  * Decrement frequency. Should not be needed.
- * @param amount    The amonut to decrease the frequency by. Defaults to 1.
+ * @param amount    The amount to decrease the frequency by. Defaults to 1.
  * @pre Assumes frequency >= 1
  * @return True if decrement successful.
  */

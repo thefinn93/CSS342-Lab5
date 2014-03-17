@@ -7,7 +7,7 @@
 #ifndef THREADEDBST_H
 #define	THREADEDBST_H
 
-#include "nodeData.h"
+//#include "nodeData.h"
 #include "node.h"
 
 using namespace std;
@@ -211,6 +211,6 @@ private:
 
 };
 
-#include "tbst.cpp"
+//#include "tbst.cpp"
 #endif
 
