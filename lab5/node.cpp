@@ -194,8 +194,8 @@ Node* Node::getRightChildPtr() const {
     return rightChildPtr;
 }
 
-void Node::setLeftPtr(Node* newRightNode) {
-    leftChildPtr = newRightNode;
+void Node::setLeftPtr(Node* newLeftNode) {
+    leftChildPtr = newLeftNode;
 }
 
 void Node::setRightPtr(Node* newRightNode) {
