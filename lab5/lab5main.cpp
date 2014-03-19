@@ -13,7 +13,7 @@
 
 using namespace std;
 
-char const DEFAULT_FILE[] = "hamlet.txt";
+char const DEFAULT_FILE[] = "testtext.txt";
 
 /*
  * 
