@@ -349,10 +349,10 @@ Node* ThreadedBST::nodeWithToken(Node* currentNode, string searchToken) {
     if (currentNode->getData().getToken() == searchToken) {
         return currentNode;
     } else {
-        if (currentNode->getLeftChildPtr() != NULL) {
+        if (currentNode->getLeftChildPtr() != NULL && !currentNode->isLeftPtrThread()) {
             isTokenInTreeHelper(currentNode->getLeftChildPtr(), searchToken);
         }
-        if (currentNode->getLeftChildPtr() != NULL) {
+        if (currentNode->getLeftChildPtr() != NULL && !currentNode->isRightPtrThread()) {
             isTokenInTreeHelper(currentNode->getRightChildPtr(), searchToken);
         }
         /// We already know the node is in the tree. No need to have an
